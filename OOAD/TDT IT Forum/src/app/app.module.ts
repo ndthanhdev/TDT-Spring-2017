@@ -3,19 +3,19 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { AppComponent } from './app.component';
-
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { AppNavBarComponent } from './app-nav-bar/app-nav-bar.component';
-import { AppTeamComponent } from './app-team/app-team.component';
+
+import { AppComponent } from './app.component';
 import { TopContentComponent } from './top-content/top-content.component';
+import { TeamComponent } from './team/team.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AppNavBarComponent,
-    AppTeamComponent,
-    TopContentComponent
+    TopContentComponent,
+    TeamComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
