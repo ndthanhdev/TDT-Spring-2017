@@ -6,8 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app-nav-bar.component.css']
 })
 export class AppNavBarComponent implements OnInit {
+  public isCollapsed = true;
 
-  constructor() { }
+  constructor() {
+
+  }
 
   ngOnInit() {
   }

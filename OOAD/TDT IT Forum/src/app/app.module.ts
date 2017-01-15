@@ -7,11 +7,15 @@ import { AppComponent } from './app.component';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppNavBarComponent } from './app-nav-bar/app-nav-bar.component';
+import { AppTeamComponent } from './app-team/app-team.component';
+import { TopContentComponent } from './top-content/top-content.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AppNavBarComponent
+    AppNavBarComponent,
+    AppTeamComponent,
+    TopContentComponent
   ],
   imports: [
     BrowserModule,
