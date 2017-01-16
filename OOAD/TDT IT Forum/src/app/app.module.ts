@@ -9,13 +9,17 @@ import { AppComponent } from './app.component';
 import { TopContentComponent } from './top-content/top-content.component';
 import { TeamComponent } from './team/team.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { FooterComponent } from './footer/footer.component';
+import { QuickViewComponent } from './quick-view/quick-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopContentComponent,
     TeamComponent,
-    NavBarComponent
+    NavBarComponent,
+    FooterComponent,
+    QuickViewComponent
   ],
   imports: [
     BrowserModule,
