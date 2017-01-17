@@ -13,3 +13,7 @@ section {
 .bg-light-gray {
     background-color: lightgray;
 }
+
+.full-height {
+    height: 100vh;
+}
