@@ -11,8 +11,12 @@
     border: none;
 }
 
+.navbar-brand {
+    font-family: 'Pacifico', cursive;
+}
+
 #mainNav .navbar-brand {
-    font-size: 1.75em;    
+    font-size: 1.75em;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;

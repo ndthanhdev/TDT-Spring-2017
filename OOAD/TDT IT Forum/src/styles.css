@@ -2,7 +2,8 @@
 
 body,
 header,
-section {
+section,
+.full-height {
     min-height: 100vh;
 }
 
@@ -12,8 +13,4 @@ section {
 
 .bg-light-gray {
     background-color: lightgray;
-}
-
-.full-height {
-    height: 100vh;
 }
