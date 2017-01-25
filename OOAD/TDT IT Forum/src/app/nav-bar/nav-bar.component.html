@@ -1,28 +1,29 @@
-<nav class="navbar fixed-top navbar-toggleable-md navbar-inverse bg-inverse">
-    <a class="navbar-brand"> <img style="background: transparent;" src="/img/logo.svg" width="128" height="36" class="d-inline-block align-cen" alt="">TDT IT Forum</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarToggler">
-    <span class="navbar-toggler-icon"></span>
+<nav id="mainNav" class="navbar fixed-top navbar-toggleable-md navbar-inverse" [ngClass]=" { 'bg-inverse navbar-shrink': isShrink} ">
+<div class="container"></div>
+    <a class="navbar-brand ">TDT IT Forum</a>
+    <button class="navbar-toggler navbar-toggler-right " type="button " (click)="isCollapsed=! isCollapsed " [attr.aria-expanded]="!isCollapsed " aria-controls="navbarToggler ">
+    <span class="navbar-toggler-icon "></span>
   </button>
-    <div class="navbar-collapse" [ngbCollapse]="isCollapsed" id="navbarToggler">
-        <div class="container">
-            <ul class="navbar-nav float-md-right">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Computer Science</a>
+    <div class="navbar-collapse " [ngbCollapse]="isCollapsed " id="navbarToggler ">
+        <div class="container ">
+            <ul class="navbar-nav float-md-right ">
+                <li class="nav-item ">
+                    <a class="nav-link " href="# ">Computer Science</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Operations</a>
+                <li class="nav-item ">
+                    <a class="nav-link " href="# ">Operations</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Security</a>
+                <li class="nav-item ">
+                    <a class="nav-link " href="# ">Security</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Software Engineering</a>
+                <li class="nav-item active ">
+                    <a class="nav-link " href="# ">Software Engineering</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                <li class="nav-item ">
+                    <a class="nav-link " href="# ">About</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Team</a>
+                <li class="nav-item ">
+                    <a class="nav-link " href="# ">Team</a>
                 </li>
             </ul>
         </div>
