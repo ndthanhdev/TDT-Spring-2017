@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app works!';
-  constructor(){
+  constructor(router: Router) {
+    router.events.subscribe((url: any) => console.log(url));
   }
 }

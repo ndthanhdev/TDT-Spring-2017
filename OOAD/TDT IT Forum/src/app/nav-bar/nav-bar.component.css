@@ -3,12 +3,12 @@
 }
 
 #mainNav {
-    background-color: transparent;
-    padding: 25px 0;
+    padding: 0.5em 0;
     -webkit-transition: padding 0.3s;
     -moz-transition: padding 0.3s;
     transition: padding 0.3s;
     border: none;
+    background-color: #222222;
 }
 
 .navbar-brand {
@@ -16,7 +16,7 @@
 }
 
 #mainNav .navbar-brand {
-    font-size: 1.75em;
+    font-size: 1.25em;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
@@ -28,10 +28,22 @@
 
 #mainNav.navbar-shrink {
     background-color: #222222;
-    padding: 5px 0;
+    padding: 0.25em 0;
 }
 
 #mainNav.navbar-shrink .navbar-brand {
     padding: 0.65em 0;
-    font-size: 1.25em;
+    font-size: 1em;
+}
+
+@media (min-width: 768px) {
+    /*#mainNav {
+        background-color: transparent;
+    }*/
+    #mainNav .navbar-brand {
+        font-size: 1.5em;
+    }
+    #mainNav.navbar-shrink .navbar-brand {
+        font-size: 1.25em;
+    }
 }
