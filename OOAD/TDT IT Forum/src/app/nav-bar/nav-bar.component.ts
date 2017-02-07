@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   host: { '(window:scroll)': 'track($event)' }
 })
 export class NavBarComponent implements OnInit {
+
+  @Input() isAuthorized: boolean;
+
   public isShrink = false;
   public isCollapsed = true;
 
@@ -15,7 +18,6 @@ export class NavBarComponent implements OnInit {
   track(number: any) {
     this.isShrink = document.body.scrollTop > 55;
   }
-
   ngOnInit() {
   }
 
