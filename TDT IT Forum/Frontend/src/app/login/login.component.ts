@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -7,15 +8,17 @@ import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  @Output() triedLoginEventHandler = new EventEmitter<void>();
+  authenticationService: AuthenticationService;
 
-  constructor() { }
+  constructor(authenticationService: AuthenticationService) {
+    this.authenticationService = authenticationService;
+  }
 
   ngOnInit() {
   }
 
   login(): void {
-    this.triedLoginEventHandler.emit();
+    this.authenticationService.authenticate();
   }
 
 }

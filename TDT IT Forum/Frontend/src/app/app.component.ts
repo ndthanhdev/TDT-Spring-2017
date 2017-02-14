@@ -6,15 +6,20 @@ import { AuthenticationService } from "./services/authentication.service"
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [AuthenticationService]
+  providers: []
 })
 export class AppComponent {
-  title = 'app works!';
 
   isAuthorized: boolean = false;
 
-  constructor(router: Router, authenticationService: AuthenticationService) {
+
+  constructor(router: Router, private authenticationService: AuthenticationService) {
     router.events.subscribe((url: any) => console.log(url));
-    authenticationService.getStatus().then(value => this.isAuthorized = value);
+    authenticationService.authenticated$.subscribe(value => this.updateAuthorization());
   }
+
+  private updateAuthorization(): void {
+    this.authenticationService.getStatus().then(value => this.isAuthorized = value);
+  }
+
 }
