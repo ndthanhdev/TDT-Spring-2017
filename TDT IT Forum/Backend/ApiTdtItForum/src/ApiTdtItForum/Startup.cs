@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using ApiTdtItForum.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.Sqlite;
 
 namespace ApiTdtItForum
 {
@@ -29,6 +32,10 @@ namespace ApiTdtItForum
         {
             // Add framework services.
             services.AddMvc();
+            var connectionStringBuilder = new SqliteConnectionStringBuilder { DataSource = @"C:\Users\thanh\Desktop\DbForum.db" };
+            var connectionString = connectionStringBuilder.ToString();
+            var connection = new SqliteConnection(connectionString);
+            services.AddEntityFrameworkSqlite().AddDbContext<DataContext>(options => options.UseSqlite(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
