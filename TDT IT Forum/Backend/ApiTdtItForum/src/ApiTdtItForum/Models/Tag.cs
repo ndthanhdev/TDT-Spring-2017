@@ -10,5 +10,9 @@ namespace ApiTdtItForum.Models
         public string TagId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+
+        public List<ContainerTag> ContainerTags { get; set; }
+
+        public List<UserTag> UserTags { get; set; }
     }
 }

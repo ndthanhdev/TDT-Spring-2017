@@ -9,5 +9,7 @@ namespace ApiTdtItForum.Models
     {
         public string RoleId { get; set; }
         public string RoleName { get; set; }
+
+        public List<UserRole> Users { get; set; }
     }
 }

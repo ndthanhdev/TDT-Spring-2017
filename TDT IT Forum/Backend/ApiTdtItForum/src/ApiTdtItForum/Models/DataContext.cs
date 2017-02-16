@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using ApiTdtItForum.Models;
 
-namespace ApiTdtItForum.Models
+namespace ApiTdtItForum
 {
     public class DataContext : DbContext
     {
@@ -13,6 +14,10 @@ namespace ApiTdtItForum.Models
         public DbSet<Post> Posts { get; set; }
         public DbSet<Point> Points { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Container> Containers { get; set; }
+
+
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
@@ -23,8 +28,21 @@ namespace ApiTdtItForum.Models
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Point>()
+            modelBuilder.Entity<Point>()                
                 .HasKey(model => new {model.PostId, model.UserId });
+
+            // many-to-many Container and Tag
+            modelBuilder.Entity<ContainerTag>()
+                .HasKey(model => new { model.ContainerId, model.TagId });
+
+            // many-to-many User and Role
+            modelBuilder.Entity<UserRole>()
+                .HasKey(model => new { model.UserId, model.RoleId });
+
+            // many-to-many User and Tag
+            modelBuilder.Entity<UserTag>()
+                .HasKey(model => new { model.UserId, model.TagId });
+
         }
     }
 }
