@@ -10,11 +10,15 @@ using Microsoft.Extensions.Logging;
 using ApiTdtItForum.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.Sqlite;
+using System.IdentityModel.Tokens.Jwt;
+using ApiTdtItForum.Security;
 
 namespace ApiTdtItForum
 {
     public class Startup
     {
+        private readonly IConfigurationSection _jwtConfigurationSection;
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -23,6 +27,8 @@ namespace ApiTdtItForum
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
+
+            _jwtConfigurationSection = Configuration.GetSection(nameof(Jwt));
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -32,10 +38,16 @@ namespace ApiTdtItForum
         {
             // Add framework services.
             services.AddMvc();
+
             var connectionStringBuilder = new SqliteConnectionStringBuilder { DataSource = @"C:\Users\thanh\Desktop\DbForum.db" };
             var connectionString = connectionStringBuilder.ToString();
             var connection = new SqliteConnection(connectionString);
             services.AddEntityFrameworkSqlite().AddDbContext<DataContext>(options => options.UseSqlite(connection));
+
+            services.AddJwt(_jwtConfigurationSection[nameof(Jwt.Issuer)],
+                _jwtConfigurationSection[nameof(Jwt.Audience)],
+                _jwtConfigurationSection["Secret"]);
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
