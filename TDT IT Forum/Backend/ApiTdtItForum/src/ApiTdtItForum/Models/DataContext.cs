@@ -21,7 +21,6 @@ namespace ApiTdtItForum
 
 
         // Mapping two one to many
-        //public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<UserTag> UserTags { get; set; }
         public DbSet<ContainerTag> ContainerTags { get; set; }
 
@@ -42,10 +41,6 @@ namespace ApiTdtItForum
             modelBuilder.Entity<ContainerTag>()
                 .HasKey(model => new { model.ContainerId, model.TagId });
 
-            // many-to-many User and Role
-            modelBuilder.Entity<UserRole>()
-                .HasKey(model => new { model.UserId, model.RoleId });
-
             // many-to-many User and Tag
             modelBuilder.Entity<UserTag>()
                 .HasKey(model => new { model.UserId, model.TagId });
@@ -55,11 +50,4 @@ namespace ApiTdtItForum
 
     }
 
-    public static class DataContextExtensions
-    {
-        //public static Task<Role> GetRole(this DataContext context, int id)
-        //{
-        //    return Task.FromResult(context.Roles.FirstOrDefault(model => model.RoleId == id));
-        //}
-    }
 }

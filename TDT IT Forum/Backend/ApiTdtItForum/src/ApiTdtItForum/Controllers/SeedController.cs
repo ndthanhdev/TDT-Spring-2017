@@ -30,31 +30,6 @@ namespace ApiTdtItForum.Controllers
             return Ok("Done");
         }
 
-        private async Task SeedRoles()
-        {
-            var registeredRoles = Enum.GetValues(typeof(RegisteredRoles)).Cast<int>();
-
-            List<Task> jobs = new List<Task>();
-            //Role instance;
-            //foreach (var role in registeredRoles)
-            //{
-            //    instance = _db.Roles.FirstOrDefault(model => model.RoleId == role);
-            //    if (instance == null)
-            //    {
-            //        jobs.Add(_db.Roles.AddAsync(new Role()
-            //        {
-            //            RoleId = role,
-            //            RoleName = Enum.GetName(typeof(RegisteredRoles), role)
-            //        }));
-            //    }
-            //}
-            //await Task.WhenAll(jobs);
-            //await _db.SaveChangesAsync();
-        }
-
-
-
-
         private async Task SeedUser()
         {
             if (_db.Users.FirstOrDefault(model => model.UserName == "admin") == null)
@@ -62,7 +37,7 @@ namespace ApiTdtItForum.Controllers
                 var admin = new User()
                 {
                     UserName = "admin",
-                    Password = "21232f297a57a5a743894a0e4a801fc3",
+                    PasswordHash = "21232f297a57a5a743894a0e4a801fc3",
                     FullName = "Adminstrator",
                     Faculty = "Information Technology",
                     AdmissionYear = 2014,
