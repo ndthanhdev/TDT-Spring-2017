@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace ApiTdtItForum.Models
 {
-    public class UserRole
-    {
-        public string UserId { get; set; }
+    //public class UserRole
+    //{
+    //    public string UserId { get; set; }
 
-        [ForeignKey(nameof(UserId))]
-        public User User { get; set; }
+    //    [ForeignKey(nameof(UserId))]
+    //    public User User { get; set; }
 
-        public string RoleId { get; set; }
+    //    public int RoleId { get; set; }
         
-        [ForeignKey(nameof(RoleId))]
-        public Role Role { get; set; }
-    }
+    //    [ForeignKey(nameof(RoleId))]
+    //    public Role Role { get; set; }
+    //}
 }

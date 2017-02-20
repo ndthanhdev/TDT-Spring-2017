@@ -9,27 +9,34 @@ namespace ApiTdtItForum
 {
     public class DataContext : DbContext
     {
+
         public DbSet<User> Users { get; set; }
-        public DbSet<Role> Roles { get; set; }
+        //public DbSet<Role> Roles { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Point> Points { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Container> Containers { get; set; }
+        public DbSet<UserClaim> UserClaims { get; set; }
 
+
+        // Mapping two one to many
+        //public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<UserTag> UserTags { get; set; }
+        public DbSet<ContainerTag> ContainerTags { get; set; }
 
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
-
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Point>()                
-                .HasKey(model => new {model.PostId, model.UserId });
+            modelBuilder.Entity<Point>()
+                .HasKey(model => new { model.PostId, model.UserId });
 
             // many-to-many Container and Tag
             modelBuilder.Entity<ContainerTag>()
@@ -44,5 +51,15 @@ namespace ApiTdtItForum
                 .HasKey(model => new { model.UserId, model.TagId });
 
         }
+
+
+    }
+
+    public static class DataContextExtensions
+    {
+        //public static Task<Role> GetRole(this DataContext context, int id)
+        //{
+        //    return Task.FromResult(context.Roles.FirstOrDefault(model => model.RoleId == id));
+        //}
     }
 }

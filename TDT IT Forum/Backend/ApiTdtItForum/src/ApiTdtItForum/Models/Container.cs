@@ -11,6 +11,8 @@ namespace ApiTdtItForum.Models
     {
         public string ContainerId { get; set; }
 
+        public string Title { get; set; }
+
         public string PostId { get; set; }
 
         [Required]
