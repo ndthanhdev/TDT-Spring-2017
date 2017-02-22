@@ -84,6 +84,7 @@ namespace ApiTdtItForum
                 AutomaticChallenge = true,
                 TokenValidationParameters = tokenValidationParameters
             });
+
             app.UseMvc();
         }
     }

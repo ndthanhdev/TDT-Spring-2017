@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0",
-    "signature": "f1813df555163595856f6e68d0f7c1480a6d6ff2"
+    "signature": "278071ffd82111363296313366ce6f21fcb55a8c"
   },
   "compilationOptions": {
     "defines": [
@@ -34,7 +34,8 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
           "Microsoft.EntityFrameworkCore.Tools": "1.0.0-preview4-final",
           "Microsoft.NETCore.App": "1.0.0",
-          "System.IdentityModel.Tokens.Jwt": "5.1.2"
+          "System.IdentityModel.Tokens.Jwt": "5.1.2",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "1.1.0"
         },
         "runtime": {
           "ApiTdtItForum.dll": {}
@@ -96,6 +97,36 @@
         },
         "compile": {
           "lib/netstandard1.3/Microsoft.AspNetCore.Antiforgery.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Authentication/1.1.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.DataProtection": "1.1.0",
+          "Microsoft.AspNetCore.Http": "1.1.0",
+          "Microsoft.AspNetCore.Http.Extensions": "1.1.0",
+          "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
+          "Microsoft.Extensions.Options": "1.1.0",
+          "Microsoft.Extensions.WebEncoders": "1.1.0",
+          "NETStandard.Library": "1.6.1"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.AspNetCore.Authentication.dll": {}
+        },
+        "compile": {
+          "lib/netstandard1.3/Microsoft.AspNetCore.Authentication.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Authentication.JwtBearer/1.1.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Authentication": "1.1.0",
+          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "2.1.0",
+          "NETStandard.Library": "1.6.1"
+        },
+        "runtime": {
+          "lib/netstandard1.4/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {}
+        },
+        "compile": {
+          "lib/netstandard1.4/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {}
         }
       },
       "Microsoft.AspNetCore.Authorization/1.1.0": {
@@ -1203,6 +1234,32 @@
           "lib/netstandard1.4/Microsoft.IdentityModel.Logging.dll": {}
         }
       },
+      "Microsoft.IdentityModel.Protocols/2.1.0": {
+        "dependencies": {
+          "System.Collections.Specialized": "4.3.0",
+          "System.Diagnostics.Contracts": "4.3.0",
+          "System.IdentityModel.Tokens.Jwt": "5.1.2",
+          "System.Net.Http": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.4/Microsoft.IdentityModel.Protocols.dll": {}
+        },
+        "compile": {
+          "lib/netstandard1.4/Microsoft.IdentityModel.Protocols.dll": {}
+        }
+      },
+      "Microsoft.IdentityModel.Protocols.OpenIdConnect/2.1.0": {
+        "dependencies": {
+          "Microsoft.IdentityModel.Protocols": "2.1.0",
+          "System.Dynamic.Runtime": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.4/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll": {}
+        },
+        "compile": {
+          "lib/netstandard1.4/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll": {}
+        }
+      },
       "Microsoft.IdentityModel.Tokens/5.1.2": {
         "dependencies": {
           "Microsoft.IdentityModel.Logging": "1.1.2",
@@ -1655,6 +1712,9 @@
         },
         "runtime": {
           "lib/netstandard1.3/System.Collections.Specialized.dll": {}
+        },
+        "compile": {
+          "ref/netstandard1.3/System.Collections.Specialized.dll": {}
         }
       },
       "System.ComponentModel/4.3.0": {
@@ -3516,6 +3576,16 @@
       "serviceable": true,
       "sha512": "sha512-6HM8/rsSGAQybSZ9sNP2f0Xqh507OJu3kvqRksXeHUXV72yuwFpnauGkfIMSt+gwPSvyk8qGqZB2m4sKCUomhA=="
     },
+    "Microsoft.AspNetCore.Authentication/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zapEpMe6NM7S2pNYtR1OMQSHLrDPjRASIt7lktBTt6w6+0ocSxwiIoNyRiBys1VbhGJQnE9jNWjj5VpMJbnB9A=="
+    },
+    "Microsoft.AspNetCore.Authentication.JwtBearer/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DDfKB5gvUG01/Za5/2h8VMle1VYVC4doV4vADy/pM+yIqadY8V2YohzJRPkjVPnj4skir1Sv8/YyskCC6/lq1g=="
+    },
     "Microsoft.AspNetCore.Authorization/1.1.0": {
       "type": "package",
       "serviceable": true,
@@ -3900,6 +3970,16 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-QPMFfRVnRkCzGpEQz/YEPsbwUjAp5R1W2dpaXHlJJNA7fp9gV4m4TDKvvXhQnqdEL0a0luNrYFZrbz7NRI1rXQ=="
+    },
+    "Microsoft.IdentityModel.Protocols/2.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-yi7uK5JL5JL66Srnj96vMge7ZMCUM2rTVC6P43cORSCaY+3/motXH+3/8o/T/Xpirv7gAOkRPxGwgARcsuRWPw=="
+    },
+    "Microsoft.IdentityModel.Protocols.OpenIdConnect/2.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ZqlqwWZ3ce1v/ivSnfMSTfSlZqM6lZbN6BhnwF92ZNvtFMWKp5cpymlzxEx0h7qzGHf15fEQZGWe7rLHx//tQw=="
     },
     "Microsoft.IdentityModel.Tokens/5.1.2": {
       "type": "package",

@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using ApiTdtItForum.Security;
 
 namespace ApiTdtItForum.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize(Policy = RegisteredPolicys.User)]
     public class ValuesController : Controller
     {
         // GET api/values

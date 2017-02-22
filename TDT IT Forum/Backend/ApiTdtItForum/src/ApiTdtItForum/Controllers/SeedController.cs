@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ApiTdtItForum.Models;
 using ApiTdtItForum;
-using ApiTdtItForum.Models.Claims;
 using System.Security.Claims;
+using ApiTdtItForum.Security;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
