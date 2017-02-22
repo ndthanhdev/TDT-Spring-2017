@@ -21,6 +21,7 @@ namespace ApiTdtItForum
     public class Startup
     {
         private readonly IConfigurationSection _jwtConfigurationSection;
+        private readonly string _connectionString;
 
         public Startup(IHostingEnvironment env)
         {
@@ -33,6 +34,12 @@ namespace ApiTdtItForum
 
             _jwtConfigurationSection = Configuration.GetSection(nameof(Jwt));
 
+            // This line for local 
+            _connectionString = Configuration.GetConnectionString("LocalConnection");
+
+            // This line for server 
+            //_connectionString = Configuration.GetConnectionString("DefaultConnection");
+
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -43,16 +50,16 @@ namespace ApiTdtItForum
             // Add framework services.
             services.AddMvc();
 
-            var connectionStringBuilder = new SqliteConnectionStringBuilder { DataSource = @"C:\Users\thanh\Desktop\DbForum.db" };
-            var connectionString = connectionStringBuilder.ToString();
-            var connection = new SqliteConnection(connectionString);
-            services.AddEntityFrameworkSqlite().AddDbContext<DataContext>(options => options.UseSqlite(connection));
+            services.AddDbContext<DataContext>(options =>
+            {
+                options.UseSqlite(_connectionString);
+            });
 
             services.AddJwt(_jwtConfigurationSection[nameof(Jwt.Issuer)],
                 _jwtConfigurationSection[nameof(Jwt.Audience)],
                 _jwtConfigurationSection["Secret"]);
 
-            services.AddAuthorization(ConfiguredAuthorization.Configure);
+            services.AddAuthorization(ConfiguredAuthorization.Configure);            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,7 +92,7 @@ namespace ApiTdtItForum
                 TokenValidationParameters = tokenValidationParameters
             });
 
-            app.UseMvc();
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

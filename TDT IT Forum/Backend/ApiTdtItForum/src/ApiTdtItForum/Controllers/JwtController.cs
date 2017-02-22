@@ -42,7 +42,7 @@ namespace ApiTdtItForum.Controllers
                 audience: _jwt.Audience,
                 claims: claims,
                 notBefore: _jwt.NotBefore,
-                expires: _jwt.Expiration,
+                expires: _jwt.Expiration,                
                 signingCredentials: _jwt.SigningCredentials);
 
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);

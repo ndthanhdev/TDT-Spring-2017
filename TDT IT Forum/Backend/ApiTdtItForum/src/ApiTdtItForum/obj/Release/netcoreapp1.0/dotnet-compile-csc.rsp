@@ -1,14 +1,15 @@
-﻿-d:DEBUG
+﻿-d:RELEASE
 -d:TRACE
 -d:NETCOREAPP1_0
 -nowarn:CS1701
 -nowarn:CS1702
 -nowarn:CS1705
+-optimize
 -debug:full
 -nostdlib
 -nologo
-"C:\Users\thanh\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\obj\Debug\netcoreapp1.0\dotnet-compile.assemblyinfo.cs"
--out:"C:\Users\thanh\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\bin\Debug\netcoreapp1.0\ApiTdtItForum.dll"
+"C:\Users\thanh\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\obj\Release\netcoreapp1.0\dotnet-compile.assemblyinfo.cs"
+-out:"C:\Users\thanh\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\bin\Release\netcoreapp1.0\ApiTdtItForum.dll"
 -r:"C:\Users\thanh\.nuget\packages\Microsoft.AspNetCore.Antiforgery\1.1.0\lib\netstandard1.3\Microsoft.AspNetCore.Antiforgery.dll"
 -r:"C:\Users\thanh\.nuget\packages\Microsoft.AspNetCore.Authentication\1.1.0\lib\netstandard1.3\Microsoft.AspNetCore.Authentication.dll"
 -r:"C:\Users\thanh\.nuget\packages\Microsoft.AspNetCore.Authentication.JwtBearer\1.1.0\lib\netstandard1.4\Microsoft.AspNetCore.Authentication.JwtBearer.dll"
@@ -187,7 +188,7 @@
 -r:"C:\Users\thanh\.nuget\packages\System.Threading.Timer\4.3.0\ref\netstandard1.2\System.Threading.Timer.dll"
 -r:"C:\Users\thanh\.nuget\packages\System.Xml.ReaderWriter\4.3.0\ref\netstandard1.3\System.Xml.ReaderWriter.dll"
 -r:"C:\Users\thanh\.nuget\packages\System.Xml.XDocument\4.3.0\ref\netstandard1.3\System.Xml.XDocument.dll"
--resource:"C:\Users\thanh\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\obj\Debug\netcoreapp1.0\ApiTdtItForumdotnet-compile.deps.json",ApiTdtItForum.deps.json
+-resource:"C:\Users\thanh\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\obj\Release\netcoreapp1.0\ApiTdtItForumdotnet-compile.deps.json",ApiTdtItForum.deps.json
 "C:\Users\thanh\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\Program.cs"
 "C:\Users\thanh\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\Startup.cs"
 "C:\Users\thanh\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\Controllers\JwtController.cs"

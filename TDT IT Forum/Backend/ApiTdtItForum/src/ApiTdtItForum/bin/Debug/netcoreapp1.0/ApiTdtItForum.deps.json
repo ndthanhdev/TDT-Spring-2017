@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0",
-    "signature": "278071ffd82111363296313366ce6f21fcb55a8c"
+    "signature": "92dc83e6f34db83c8bf381489754efe8aa9d061e"
   },
   "compilationOptions": {
     "defines": [
@@ -33,54 +33,15 @@
           "Microsoft.EntityFrameworkCore.Sqlite.Design": "1.1.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
           "Microsoft.EntityFrameworkCore.Tools": "1.0.0-preview4-final",
-          "Microsoft.NETCore.App": "1.0.0",
           "System.IdentityModel.Tokens.Jwt": "5.1.2",
-          "Microsoft.AspNetCore.Authentication.JwtBearer": "1.1.0"
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "1.1.0",
+          "Microsoft.NETCore.App": "1.0.3"
         },
         "runtime": {
           "ApiTdtItForum.dll": {}
         },
         "compile": {
           "ApiTdtItForum.dll": {}
-        }
-      },
-      "Libuv/1.9.1": {
-        "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0"
-        },
-        "runtimeTargets": {
-          "runtimes/debian-x64/native/libuv.so": {
-            "rid": "debian-x64",
-            "assetType": "native"
-          },
-          "runtimes/fedora-x64/native/libuv.so": {
-            "rid": "fedora-x64",
-            "assetType": "native"
-          },
-          "runtimes/opensuse-x64/native/libuv.so": {
-            "rid": "opensuse-x64",
-            "assetType": "native"
-          },
-          "runtimes/osx/native/libuv.dylib": {
-            "rid": "osx",
-            "assetType": "native"
-          },
-          "runtimes/rhel-x64/native/libuv.so": {
-            "rid": "rhel-x64",
-            "assetType": "native"
-          },
-          "runtimes/win7-arm/native/libuv.dll": {
-            "rid": "win7-arm",
-            "assetType": "native"
-          },
-          "runtimes/win7-x64/native/libuv.dll": {
-            "rid": "win7-x64",
-            "assetType": "native"
-          },
-          "runtimes/win7-x86/native/libuv.dll": {
-            "rid": "win7-x86",
-            "assetType": "native"
-          }
         }
       },
       "Microsoft.AspNetCore.Antiforgery/1.1.0": {
@@ -3169,6 +3130,12 @@
           "ref/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
+      "Libuv/1.9.1": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.1.0"
+        },
+        "compileOnly": true
+      },
       "Microsoft.CodeAnalysis.Analyzers/1.1.0": {
         "compileOnly": true
       },
@@ -3234,14 +3201,15 @@
         },
         "compileOnly": true
       },
-      "Microsoft.NETCore.App/1.0.0": {
+      "Microsoft.NETCore.App/1.0.3": {
         "dependencies": {
           "Libuv": "1.9.1",
           "Microsoft.CSharp": "4.3.0",
           "Microsoft.CodeAnalysis.CSharp": "1.3.0",
           "Microsoft.CodeAnalysis.VisualBasic": "1.3.0",
-          "Microsoft.NETCore.DotNetHostPolicy": "1.0.1",
-          "Microsoft.NETCore.Runtime.CoreCLR": "1.0.2",
+          "Microsoft.NETCore.DotNetHostPolicy": "1.0.3",
+          "Microsoft.NETCore.Platforms": "1.1.0",
+          "Microsoft.NETCore.Runtime.CoreCLR": "1.0.5",
           "Microsoft.VisualBasic": "10.0.1",
           "NETStandard.Library": "1.6.1",
           "System.Buffers": "4.3.0",
@@ -3258,6 +3226,7 @@
           "System.Linq.Expressions": "4.3.0",
           "System.Linq.Parallel": "4.0.1",
           "System.Linq.Queryable": "4.3.0",
+          "System.Net.Http": "4.3.0",
           "System.Net.NameResolution": "4.3.0",
           "System.Net.Requests": "4.0.11",
           "System.Net.Security": "4.3.0",
@@ -3283,7 +3252,7 @@
       "Microsoft.NETCore.DotNetHost/1.0.1": {
         "compileOnly": true
       },
-      "Microsoft.NETCore.DotNetHostPolicy/1.0.1": {
+      "Microsoft.NETCore.DotNetHostPolicy/1.0.3": {
         "dependencies": {
           "Microsoft.NETCore.DotNetHostResolver": "1.0.1"
         },
@@ -3295,12 +3264,12 @@
         },
         "compileOnly": true
       },
-      "Microsoft.NETCore.Jit/1.0.2": {
+      "Microsoft.NETCore.Jit/1.0.5": {
         "compileOnly": true
       },
-      "Microsoft.NETCore.Runtime.CoreCLR/1.0.2": {
+      "Microsoft.NETCore.Runtime.CoreCLR/1.0.5": {
         "dependencies": {
-          "Microsoft.NETCore.Jit": "1.0.2",
+          "Microsoft.NETCore.Jit": "1.0.5",
           "Microsoft.NETCore.Windows.ApiSets": "1.0.1"
         },
         "compileOnly": true
@@ -3565,11 +3534,6 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
-    },
-    "Libuv/1.9.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-uqX2Frwf9PW8MaY7PRNY6HM5BpW1D8oj1EdqzrmbEFD5nH63Yat3aEjN/tws6Tw6Fk7LwmLBvtUh32tTeTaHiA=="
     },
     "Microsoft.AspNetCore.Antiforgery/1.1.0": {
       "type": "package",
@@ -4566,6 +4530,11 @@
       "serviceable": true,
       "sha512": "sha512-5zJ0XDxAIg8iy+t4aMnQAu0MqVbqyvfoUVl1yDV61xdo3Vth45oA2FoY4pPkxYAH5f8ixpmTqXeEIya95x0aCQ=="
     },
+    "Libuv/1.9.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-uqX2Frwf9PW8MaY7PRNY6HM5BpW1D8oj1EdqzrmbEFD5nH63Yat3aEjN/tws6Tw6Fk7LwmLBvtUh32tTeTaHiA=="
+    },
     "Microsoft.CodeAnalysis.Analyzers/1.1.0": {
       "type": "package",
       "serviceable": true,
@@ -4586,35 +4555,35 @@
       "serviceable": true,
       "sha512": "sha512-Sf3k8PkTkWqBmXnnblJbvb7ewO6mJzX6WO2t7m04BmOY5qBq6yhhyXnn/BMM+QCec3Arw3X35Zd8f9eBql0qgg=="
     },
-    "Microsoft.NETCore.App/1.0.0": {
+    "Microsoft.NETCore.App/1.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Bv40dLDrT+Igcg1e6otW3D8voeJCfcAxOlsxSVlDz+J+cdWls5kblZvPHHvx7gX3/oJoQVIkEeO3sMyv5PSVJA=="
+      "sha512": "sha512-1GKkw9n1vlhm825BDH2tUlp/xg2sgmdeVpEZIOBXsPb3Avq1V34Ex0V9W+lt082PmTQn8aB1OGdmBQ3jD6saFA=="
     },
     "Microsoft.NETCore.DotNetHost/1.0.1": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-uaMgykq6AckP3hZW4dsD6zjocxyXPz0tcTl8OX7mlSUWsyFXdtf45sjdwI0JIHxt3gnI6GihAlOAwYK8HE4niQ=="
     },
-    "Microsoft.NETCore.DotNetHostPolicy/1.0.1": {
+    "Microsoft.NETCore.DotNetHostPolicy/1.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-d8AQ+ZVj2iK9sbgl3IEsshCSaumhM1PNTPHxldZAQLOoI1BKF8QZ1zPCNqwBGisPiWOE3f/1SHDbQi1BTRBxuA=="
+      "sha512": "sha512-emPcHCi96pF2Rqkmya+oqPKVhokXb1VE4ZwtsUNrW5Hn3/ClGJN7wOsi7xvuNurR1JGZd2hQFwDUUjJqW1cunA=="
     },
     "Microsoft.NETCore.DotNetHostResolver/1.0.1": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-GEXgpAHB9E0OhfcmNJ664Xcd2bJkz2qkGIAFmCgEI5ANlQy4qEEmBVfUqA+Z9HB85ZwWxZc1eIJ6fxdxcjrctg=="
     },
-    "Microsoft.NETCore.Jit/1.0.2": {
+    "Microsoft.NETCore.Jit/1.0.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Ok2vWofa6X8WD9vc4pfLHwvJz1/B6t3gOAoZcjrjrQf7lQOlNIuZIZtLn3wnWX28DuQGpPJkRlBxFj7Z5txNqw=="
+      "sha512": "sha512-bFkW6vmXUvSZdOfbxpLMjxaInwO9or1kxt8oLXAugoadZsFX655e57JWy9MqbKnl7yU1qtlO7/7IXWXRJADLRg=="
     },
-    "Microsoft.NETCore.Runtime.CoreCLR/1.0.2": {
+    "Microsoft.NETCore.Runtime.CoreCLR/1.0.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-A0x1xtTjYJWZr2DRzgfCOXgB0JkQg8twnmtTJ79wFje+IihlLbXtx6Z2AxyVokBM5ruwTedR6YdCmHk39QJdtQ=="
+      "sha512": "sha512-F9Uq8v2a8ClvBkVTFOKMELKK9HSqv1P1VHNLtvzpODiYXf7UqYMdk1SyXZex8E5nC6N0TIWmB+7D0p8vaysLVQ=="
     },
     "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
       "type": "package",
