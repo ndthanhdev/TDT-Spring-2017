@@ -12,6 +12,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.Sqlite;
 using System.IdentityModel.Tokens.Jwt;
 using ApiTdtItForum.Security;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace ApiTdtItForum
 {
@@ -29,6 +32,7 @@ namespace ApiTdtItForum
             Configuration = builder.Build();
 
             _jwtConfigurationSection = Configuration.GetSection(nameof(Jwt));
+
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -47,7 +51,8 @@ namespace ApiTdtItForum
             services.AddJwt(_jwtConfigurationSection[nameof(Jwt.Issuer)],
                 _jwtConfigurationSection[nameof(Jwt.Audience)],
                 _jwtConfigurationSection["Secret"]);
-            
+
+            services.AddAuthorization(ConfiguredAuthorization.Configure);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +61,29 @@ namespace ApiTdtItForum
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidIssuer = _jwtConfigurationSection[nameof(Jwt.Issuer)],
+
+                ValidateAudience = true,
+                ValidAudience = _jwtConfigurationSection[nameof(Jwt.Audience)],
+
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtConfigurationSection["Secret"])),
+
+                RequireExpirationTime = true,
+                ValidateLifetime = true,
+
+                ClockSkew = TimeSpan.Zero
+            };
+
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                TokenValidationParameters = tokenValidationParameters
+            });
             app.UseMvc();
         }
     }

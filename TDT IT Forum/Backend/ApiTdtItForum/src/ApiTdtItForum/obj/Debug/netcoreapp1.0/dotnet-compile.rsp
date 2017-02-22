@@ -206,8 +206,10 @@ C:\Users\thanh\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtIt
 C:\Users\thanh\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\Models\User.cs
 C:\Users\thanh\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\Models\UserClaim.cs
 C:\Users\thanh\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\Models\UserTag.cs
-C:\Users\thanh\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\Models\Claims\RegisteredRoles.cs
 C:\Users\thanh\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\Models\Enum\RegisteredRoles.cs
 C:\Users\thanh\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\Models\Interface\ICommentable.cs
 C:\Users\thanh\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\Models\Interface\IPublishable.cs
+C:\Users\thanh\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\Security\ConfiguredAuthorization.cs
 C:\Users\thanh\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\Security\Jwt.cs
+C:\Users\thanh\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\Security\RegisteredPolicys.cs
+C:\Users\thanh\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\Security\RegisteredRoles.cs
