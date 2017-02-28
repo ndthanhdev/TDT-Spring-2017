@@ -7,6 +7,7 @@ using ApiTdtItForum.Models;
 using ApiTdtItForum;
 using System.Security.Claims;
 using ApiTdtItForum.Security;
+using ApiTdtItForum.Services;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,11 +16,11 @@ namespace ApiTdtItForum.Controllers
     [Route("[controller]")]
     public class SeedController : Controller
     {
-        DataContext _db;
+        UserServices _services;
 
-        public SeedController(DataContext dataContext)
+        public SeedController(UserServices services)
         {
-            _db = dataContext;
+            _services = services;
         }
 
         // GET api/values/5
@@ -32,37 +33,23 @@ namespace ApiTdtItForum.Controllers
 
         private async Task SeedUser()
         {
-            if (_db.Users.FirstOrDefault(model => model.UserName == "admin") == null)
+            if (await _services.IsUsernameExisted("admin"))
             {
                 var admin = new User()
                 {
-                    UserName = "admin",
+                    Username = "admin",
                     PasswordHash = "21232f297a57a5a743894a0e4a801fc3",
                     FullName = "Adminstrator",
                     Faculty = "Information Technology",
                     AdmissionYear = 2014,
                     Mail = "adminforum@tdt.edu.vn",
-                    Phone = "0123456789",
-                    IsVerified = true
+                    Phone = "0123456789"
                 };
-
-                await _db.Users.AddAsync(admin);
-                List<Task> jobs = new List<Task>();
 
                 var roles = new[] { RegisteredRoles.Adminstrator, RegisteredRoles.User, RegisteredRoles.Moderator };
 
-                foreach (var role in roles)
-                {
-                    jobs.Add(_db.UserClaims.AddAsync(new UserClaim()
-                    {
-                        ClaimType = ClaimTypes.Role,
-                        ClaimValue = role,
-                        UserId = admin.UserId
-                    }));
-                }
 
-                await Task.WhenAll(jobs);
-                await _db.SaveChangesAsync();
+
             }
         }
     }

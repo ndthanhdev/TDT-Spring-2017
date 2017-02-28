@@ -8,7 +8,7 @@ using ApiTdtItForum;
 namespace ApiTdtItForum.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20170228153615_m0")]
+    [Migration("20170228164829_m0")]
     partial class m0
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -138,7 +138,7 @@ namespace ApiTdtItForum.Migrations
 
                     b.Property<string>("Phone");
 
-                    b.Property<string>("UserName");
+                    b.Property<string>("Username");
 
                     b.HasKey("UserId");
 

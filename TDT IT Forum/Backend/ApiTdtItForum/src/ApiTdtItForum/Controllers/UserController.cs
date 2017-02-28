@@ -31,14 +31,17 @@ namespace ApiTdtItForum.Controllers
             _jwt = jwt;
             _services = services;
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] UserDTO user)
         {
-            var innerUser = _db.Users.FirstOrDefault(model => model.UserName == user.Username && model.PasswordHash == user.PasswordHash);
+            User innerUser = await _services.Login(user.Username, user.PasswordHash);
 
             if (innerUser == null)
-                return Unauthorized();
+            {
+                var isExisted = await _services.IsUsernameExisted(user.Username);
+                return Ok(isExisted ? LoginFailReason.Incorrect : LoginFailReason.NotExist);
+            }
 
             var jwt = await GenerateJwt(innerUser);
 
@@ -50,17 +53,17 @@ namespace ApiTdtItForum.Controllers
 
             return Ok(jwt);
         }
-        
+
         [HttpPost]
-        public async Task<IActionResult> Register(User user)
+        public async Task<IActionResult> Register([FromBody] User user)
         {
             var claims = new Claim[]
             {
                 new Claim(ClaimTypes.Role,RegisteredRoles.User)
             };
 
-            var result = await _services.CreateUser(user, claims);
-            if (result != CreateUserResult.Created)
+            var result = await _services.RegisterUser(user, claims);
+            if (result != RegisterUserResult.Created)
             {
                 return BadRequest(result);
             }
@@ -76,7 +79,7 @@ namespace ApiTdtItForum.Controllers
             var claims = new List<Claim>();
 
             // Add username
-            claims.Add(new Claim(ClaimTypes.Name, user.UserName));
+            claims.Add(new Claim(ClaimTypes.Name, user.Username));
 
             claims.AddRange(user.UserClaims.Select(model => model.ToClaim()));
 

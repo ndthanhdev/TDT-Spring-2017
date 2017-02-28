@@ -18,16 +18,16 @@ namespace ApiTdtItForum.Services
             _db = dataContext;
         }
 
-        public async Task<CreateUserResult> CreateUser(User user, IEnumerable<Claim> claims, bool IsVerified = false)
+        public async Task<RegisterUserResult> RegisterUser(User user, IEnumerable<Claim> claims, bool IsVerified = false)
         {
-            if (IsIncorrectInfor(user))
+            if (!IsCorrectInfor(user))
             {
-                return CreateUserResult.Incorrect;
+                return RegisterUserResult.Incorrect;
             }
 
-            if(await IsUsernameExisted(user.UserName))
+            if (await IsUsernameExisted(user.Username))
             {
-                return CreateUserResult.Existed;
+                return RegisterUserResult.Existed;
             }
 
             user.IsVerified = IsVerified;
@@ -46,20 +46,26 @@ namespace ApiTdtItForum.Services
 
             await Task.WhenAll(jobs);
             await _db.SaveChangesAsync();
-            return CreateUserResult.Created;
+            return RegisterUserResult.Created;
         }
 
         public async Task<bool> IsUsernameExisted(string username)
         {
-            var userInDb = await _db.Users.FirstOrDefaultAsync(model => model.UserName == username);
+            var userInDb = await _db.Users.FirstOrDefaultAsync(model => model.Username == username);
 
-            return userInDb == null;
+            return userInDb != null;
         }
-        
 
-        public static bool IsIncorrectInfor(User user)
+        public async Task<User> Login(string username, string passwordHash)
         {
-            if (string.IsNullOrEmpty(user.PasswordHash)
+            var innerUser = await _db.Users.FirstOrDefaultAsync(model => model.Username == username && model.PasswordHash == passwordHash);
+            return innerUser;
+        }
+
+        public static bool IsCorrectInfor(User user)
+        {
+            if (string.IsNullOrEmpty(user.Username)
+               || string.IsNullOrEmpty(user.PasswordHash)
                || string.IsNullOrEmpty(user.FullName)
                || string.IsNullOrEmpty(user.Faculty)
                || string.IsNullOrEmpty(user.Mail)

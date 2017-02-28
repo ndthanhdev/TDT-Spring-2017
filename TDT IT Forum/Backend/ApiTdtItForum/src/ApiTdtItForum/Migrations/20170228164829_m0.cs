@@ -33,7 +33,7 @@ namespace ApiTdtItForum.Migrations
                     Mail = table.Column<string>(nullable: true),
                     PasswordHash = table.Column<string>(nullable: true),
                     Phone = table.Column<string>(nullable: true),
-                    UserName = table.Column<string>(nullable: true)
+                    Username = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
