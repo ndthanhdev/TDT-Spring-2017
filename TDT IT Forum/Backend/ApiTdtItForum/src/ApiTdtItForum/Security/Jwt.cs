@@ -10,7 +10,7 @@ namespace ApiTdtItForum.Security
 {
     public class Jwt
     {
-        private static readonly TimeSpan VALIDFOR = TimeSpan.FromSeconds(1);
+        private static readonly TimeSpan VALIDFOR = TimeSpan.FromDays(1);
         public string Issuer { get; set; }
 
         public string Audience { get; set; }

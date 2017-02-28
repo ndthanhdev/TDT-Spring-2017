@@ -81,7 +81,7 @@ namespace ApiTdtItForum
 
                 RequireExpirationTime = true,
                 ValidateLifetime = true,
-
+                 
                 ClockSkew = TimeSpan.Zero
             };
 
@@ -91,6 +91,8 @@ namespace ApiTdtItForum
                 AutomaticChallenge = true,
                 TokenValidationParameters = tokenValidationParameters
             });
+
+            app.UseClaimsTransformation();
 
             app.UseMvcWithDefaultRoute();
         }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using ApiTdtItForum.Security;
+using System.Security.Claims;
 
 namespace ApiTdtItForum.Controllers
 {
@@ -16,6 +17,8 @@ namespace ApiTdtItForum.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
+            
+            var v = User;
             return new string[] { "value1", "value2" };
         }
 

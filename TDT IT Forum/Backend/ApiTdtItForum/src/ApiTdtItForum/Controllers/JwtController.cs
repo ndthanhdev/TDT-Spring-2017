@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System.Security.Cryptography;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Principal;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -34,7 +35,10 @@ namespace ApiTdtItForum.Controllers
             await _db.Entry(innerUser).Collection(model => model.UserClaims).LoadAsync();
 
             var claims = new List<Claim>();
+
             claims.Add(new Claim(JwtRegisteredClaimNames.Sub, innerUser.UserName));
+            claims.Add(new Claim(ClaimTypes.Name, innerUser.UserName)); 
+
             claims.AddRange(innerUser.UserClaims.Select(model => model.ToClaim()));
 
             var jwt = new JwtSecurityToken(
@@ -42,9 +46,8 @@ namespace ApiTdtItForum.Controllers
                 audience: _jwt.Audience,
                 claims: claims,
                 notBefore: _jwt.NotBefore,
-                expires: _jwt.Expiration,                
+                expires: _jwt.Expiration,
                 signingCredentials: _jwt.SigningCredentials);
-
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
             // Serialize and return the response
