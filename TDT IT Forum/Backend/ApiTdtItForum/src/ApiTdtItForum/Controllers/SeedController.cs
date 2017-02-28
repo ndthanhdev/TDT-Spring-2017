@@ -12,7 +12,7 @@ using ApiTdtItForum.Security;
 
 namespace ApiTdtItForum.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class SeedController : Controller
     {
         DataContext _db;
@@ -43,6 +43,7 @@ namespace ApiTdtItForum.Controllers
                     AdmissionYear = 2014,
                     Mail = "adminforum@tdt.edu.vn",
                     Phone = "0123456789",
+                    IsVerified = true
                 };
 
                 await _db.Users.AddAsync(admin);

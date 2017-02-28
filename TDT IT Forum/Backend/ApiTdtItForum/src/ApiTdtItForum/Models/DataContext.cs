@@ -9,7 +9,6 @@ namespace ApiTdtItForum
 {
     public class DataContext : DbContext
     {
-
         public DbSet<User> Users { get; set; }
         //public DbSet<Role> Roles { get; set; }
         public DbSet<Post> Posts { get; set; }
@@ -23,12 +22,6 @@ namespace ApiTdtItForum
         // Mapping two one to many
         public DbSet<UserTag> UserTags { get; set; }
         public DbSet<ContainerTag> ContainerTags { get; set; }
-
-
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
-        {
-            
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

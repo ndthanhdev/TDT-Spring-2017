@@ -943,10 +943,10 @@
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.SqlServer.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Tools/1.0.0-preview4-final": {
+      "Microsoft.EntityFrameworkCore.Tools/1.1.0-preview4-final": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Design": "1.0.1"
+          "Microsoft.EntityFrameworkCore.Design": "1.1.0"
         },
         "compile": {
           "lib/netstandard1.3/_._": {}
@@ -4728,14 +4728,14 @@
         "microsoft.entityframeworkcore.sqlserver.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Tools/1.0.0-preview4-final": {
-      "sha512": "CJ+ZQFSj+TcQYhG4r4QIgfixKusOiRIvRZaVma8d+AgYNZLfXIP79DmuEn6CG+mcplEM1ixbErPAt9qWMcunQw==",
+    "Microsoft.EntityFrameworkCore.Tools/1.1.0-preview4-final": {
+      "sha512": "n7g5JB4YxLYCl32XCmjXEHDF/9J/DSeNYGjxGAzG1xUi/IXOCWd6T3XyEnDXsub7iFDvpB2VgUlh6wHDqmTZgA==",
       "type": "package",
-      "path": "Microsoft.EntityFrameworkCore.Tools/1.0.0-preview4-final",
+      "path": "Microsoft.EntityFrameworkCore.Tools/1.1.0-preview4-final",
       "files": [
         "lib/net451/_._",
         "lib/netstandard1.3/_._",
-        "microsoft.entityframeworkcore.tools.1.0.0-preview4-final.nupkg.sha512",
+        "microsoft.entityframeworkcore.tools.1.1.0-preview4-final.nupkg.sha512",
         "microsoft.entityframeworkcore.tools.nuspec",
         "tools/EntityFrameworkCore.PowerShell2.psd1",
         "tools/EntityFrameworkCore.PowerShell2.psm1",
@@ -10403,7 +10403,7 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 1.1.0",
       "Microsoft.EntityFrameworkCore.Sqlite >= 1.1.0",
       "Microsoft.EntityFrameworkCore.Sqlite.Design >= 1.1.0",
-      "Microsoft.EntityFrameworkCore.Tools >= 1.0.0-preview4-final",
+      "Microsoft.EntityFrameworkCore.Tools >= 1.1.0-preview4-final",
       "Microsoft.Extensions.Configuration.EnvironmentVariables >= 1.1.0",
       "Microsoft.Extensions.Configuration.FileExtensions >= 1.1.0",
       "Microsoft.Extensions.Configuration.Json >= 1.1.0",
@@ -10418,13 +10418,13 @@
   },
   "tools": {
     ".NETCoreApp,Version=v1.0": {
-      "Microsoft.AspNetCore.Server.IISIntegration.Tools/1.0.0-preview4-final": {
+      "Microsoft.AspNetCore.Server.IISIntegration.Tools/1.1.0-preview4-final": {
         "type": "package",
         "dependencies": {
           "Microsoft.DotNet.ProjectModel": "1.0.0-rc3-003121",
-          "Microsoft.Extensions.CommandLineUtils": "1.0.1",
-          "Microsoft.NETCore.App": "1.0.3",
-          "System.Diagnostics.Process": "4.1.0"
+          "Microsoft.Extensions.CommandLineUtils": "1.1.0",
+          "Microsoft.NETCore.App": "1.1.0",
+          "System.Diagnostics.Process": "4.3.0"
         },
         "compile": {
           "lib/netcoreapp1.0/dotnet-publish-iis.dll": {}
@@ -10437,7 +10437,7 @@
   },
   "projectFileToolGroups": {
     ".NETCoreApp,Version=v1.0": [
-      "Microsoft.AspNetCore.Server.IISIntegration.Tools >= 1.0.0-preview4-final"
+      "Microsoft.AspNetCore.Server.IISIntegration.Tools >= 1.1.0-preview4-final"
     ]
   }
 }

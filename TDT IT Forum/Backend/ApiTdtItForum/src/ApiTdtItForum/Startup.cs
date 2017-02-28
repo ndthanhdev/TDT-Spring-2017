@@ -15,6 +15,7 @@ using ApiTdtItForum.Security;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using ApiTdtItForum.Services;
 
 namespace ApiTdtItForum
 {
@@ -34,11 +35,14 @@ namespace ApiTdtItForum
 
             _jwtConfigurationSection = Configuration.GetSection(nameof(Jwt));
 
+            _connectionString = Configuration.GetConnectionString("LocalConnection");
+#if DEBUG
             // This line for local 
             _connectionString = Configuration.GetConnectionString("LocalConnection");
-
-            // This line for server 
-            //_connectionString = Configuration.GetConnectionString("DefaultConnection");
+#else
+            //This line for server 
+            _connectionString = Configuration.GetConnectionString("DefaultConnection");
+#endif
 
         }
 
@@ -59,7 +63,9 @@ namespace ApiTdtItForum
                 _jwtConfigurationSection[nameof(Jwt.Audience)],
                 _jwtConfigurationSection["Secret"]);
 
-            services.AddAuthorization(ConfiguredAuthorization.Configure);            
+            services.AddAuthorization(ConfiguredAuthorization.Configure);
+
+            services.AddUserServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,7 +87,7 @@ namespace ApiTdtItForum
 
                 RequireExpirationTime = true,
                 ValidateLifetime = true,
-                 
+
                 ClockSkew = TimeSpan.Zero
             };
 
@@ -91,8 +97,6 @@ namespace ApiTdtItForum
                 AutomaticChallenge = true,
                 TokenValidationParameters = tokenValidationParameters
             });
-
-            app.UseClaimsTransformation();
 
             app.UseMvcWithDefaultRoute();
         }
