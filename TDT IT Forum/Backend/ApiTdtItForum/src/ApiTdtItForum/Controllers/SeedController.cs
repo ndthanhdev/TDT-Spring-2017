@@ -33,7 +33,7 @@ namespace ApiTdtItForum.Controllers
 
         private async Task SeedUser()
         {
-            if (await _services.IsUsernameExisted("admin"))
+            if (!await _services.IsUsernameExisted("admin"))
             {
                 var admin = new User()
                 {
@@ -48,7 +48,7 @@ namespace ApiTdtItForum.Controllers
 
                 var roles = new[] { RegisteredRoles.Adminstrator, RegisteredRoles.User, RegisteredRoles.Moderator };
 
-
+                await _services.RegisterUser(admin, roles.Select(r => new Claim(ClaimTypes.Role, r)));
 
             }
         }
