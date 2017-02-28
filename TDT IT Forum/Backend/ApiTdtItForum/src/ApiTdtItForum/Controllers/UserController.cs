@@ -31,8 +31,7 @@ namespace ApiTdtItForum.Controllers
             _jwt = jwt;
             _services = services;
         }
-
-
+        
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] UserDTO user)
         {
@@ -51,8 +50,7 @@ namespace ApiTdtItForum.Controllers
 
             return Ok(jwt);
         }
-
-
+        
         [HttpPost]
         public async Task<IActionResult> Register(User user)
         {

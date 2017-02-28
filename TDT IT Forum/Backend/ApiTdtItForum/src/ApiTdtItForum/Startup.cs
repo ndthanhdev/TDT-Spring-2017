@@ -35,7 +35,6 @@ namespace ApiTdtItForum
 
             _jwtConfigurationSection = Configuration.GetSection(nameof(Jwt));
 
-            _connectionString = Configuration.GetConnectionString("LocalConnection");
 #if DEBUG
             // This line for local 
             _connectionString = Configuration.GetConnectionString("LocalConnection");
@@ -51,13 +50,13 @@ namespace ApiTdtItForum
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
-            services.AddMvc();
-
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlite(_connectionString);
             });
+            
+            // Add framework services.
+            services.AddMvc();
 
             services.AddJwt(_jwtConfigurationSection[nameof(Jwt.Issuer)],
                 _jwtConfigurationSection[nameof(Jwt.Audience)],

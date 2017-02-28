@@ -10432,12 +10432,26 @@
         "runtime": {
           "lib/netcoreapp1.0/dotnet-publish-iis.dll": {}
         }
+      },
+      "Microsoft.EntityFrameworkCore.Tools.DotNet/1.1.0-preview4-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.DotNet.Cli.Utils": "1.0.0-preview2-003121",
+          "Microsoft.NETCore.App": "1.1.0"
+        },
+        "compile": {
+          "lib/netcoreapp1.0/dotnet-ef.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp1.0/dotnet-ef.dll": {}
+        }
       }
     }
   },
   "projectFileToolGroups": {
     ".NETCoreApp,Version=v1.0": [
-      "Microsoft.AspNetCore.Server.IISIntegration.Tools >= 1.1.0-preview4-final"
+      "Microsoft.AspNetCore.Server.IISIntegration.Tools >= 1.1.0-preview4-final",
+      "Microsoft.EntityFrameworkCore.Tools.DotNet >= 1.1.0-preview4-final"
     ]
   }
 }

@@ -55,6 +55,7 @@ namespace ApiTdtItForum.Services
 
             return userInDb == null;
         }
+        
 
         public static bool IsIncorrectInfor(User user)
         {
