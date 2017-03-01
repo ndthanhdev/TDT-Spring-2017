@@ -2,7 +2,10 @@
 
 body,
 header,
-section,
+section {
+    min-height: 75vh;
+}
+
 .full-height {
     min-height: 100vh;
 }

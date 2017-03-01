@@ -16,7 +16,8 @@
             </li>
         </ul>
         <form class="form-inline">
-            <a routerLink="login" routerLinkActive="active" class="btn btn-primary my-2 my-sm-0" [hidden]="isAuthorized">Login</a>
+            <a routerLink="register" routerLinkActive="active" class="btn btn-success my-2 mx-2 my-sm-0" [hidden]="isAuthorized">Register</a>
+            <a routerLink="login" routerLinkActive="active" class="btn btn-primary my-2 mx-2 my-sm-0" [hidden]="isAuthorized">Login</a>
             <button class="btn btn-danger my-2 my-sm-0" [hidden]="!isAuthorized" type="submit ">Logout</button>
         </form>
     </div>
