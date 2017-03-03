@@ -6,30 +6,38 @@
           <h2 class="my-3">Please fill form</h2>
 
           <div class="form-group">
-            <label for="inputId">Student's Id</label>
-            <input id="inputId" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter id">
+            <label for="inputId">Id</label>
+            <input id="inputId" [(ngModel)]="model.id" type="text" class="form-control" aria-describedby="idHelp"
+                   placeholder="Enter id" required name="id">
+            <small id="idHelp" class="form-text text-muted">Id can be Student's id or Lecture's id.</small>
           </div>
           <div class="form-group">
             <label for="inputPassword">Password</label>
-            <input id="inputPassword" type="password" class="form-control" placeholder="Enter password">
+            <input id="inputPassword" [(ngModel)]="model.password" type="password" class="form-control"
+                   placeholder="Enter password" required name="password">
           </div>
           <div class="form-group">
             <label for="inputFullName">Full name</label>
-            <input id="inputFullName" type="text" class="form-control" placeholder="Enter full name">
+            <input id="inputFullName" [(ngModel)]="model.fullName" type="text" class="form-control"
+                   placeholder="Enter full name" required name="name">
           </div>
           <div class="form-group">
             <label for="inputAdmissionYear">Admission Year</label>
-            <input type="date" class="form-control" id="inputAdmissionYear" placeholder="2014">
+            <select id="inputAdmissionYear" class="form-control" name="year">
+              <option *ngFor="let y of admissionYears" [value]="y">{{y}}</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="inputEmail">Email address</label>
-            <input type="email" class="form-control" id="inputEmail" placeholder="Enter email">
+            <input id="inputEmail" [(ngModel)]="model.email" type="email" class="form-control" placeholder="Enter email"
+                   required name="email">
           </div>
           <div class="form-group">
             <label for="inputPhone">Phone number</label>
-            <input type="tel" class="form-control" id="inputPhone" placeholder="Enter phone">
+            <input id="inputPhone" [(ngModel)]="model.phone" type="tel" class="form-control" placeholder="Enter phone"
+                   required name="phone">
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" (click)="submit()" class="btn btn-primary">Submit</button>
         </form>
       </div>
     </div>
