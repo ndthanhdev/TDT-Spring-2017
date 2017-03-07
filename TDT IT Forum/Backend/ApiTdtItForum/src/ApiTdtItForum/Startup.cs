@@ -54,7 +54,7 @@ namespace ApiTdtItForum
             {
                 options.UseSqlite(_connectionString);
             });
-            
+
             // Add framework services.
             services.AddMvc();
 
@@ -67,6 +67,10 @@ namespace ApiTdtItForum
             services.AddUserServices();
 
             services.AddCors();
+
+            services.AddApplicationMapper();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,7 +80,7 @@ namespace ApiTdtItForum
             loggerFactory.AddDebug();
 
             app.UseCors(builder =>
-            {                
+            {
                 builder.AllowAnyHeader();
                 builder.AllowAnyMethod();
                 builder.AllowAnyOrigin();
@@ -109,4 +113,12 @@ namespace ApiTdtItForum
             app.UseMvcWithDefaultRoute();
         }
     }
+    class t : AutoMapper.Profile
+    {
+        public t()
+        {
+
+        }
+    }
+
 }

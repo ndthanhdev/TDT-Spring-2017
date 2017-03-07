@@ -27,12 +27,14 @@ namespace ApiTdtItForum.Controllers
         DataContext _db;
         Jwt _jwt;
         UserServices _services;
+        readonly IMapper _mapper;
 
-        public UserController(DataContext db, Jwt jwt, UserServices services)
+        public UserController(DataContext db, Jwt jwt, UserServices services, IMapper mapper)
         {
             _db = db;
             _jwt = jwt;
             _services = services;
+            _mapper = mapper;
         }
 
         [HttpPost]
@@ -68,7 +70,7 @@ namespace ApiTdtItForum.Controllers
                 new Claim(ClaimTypes.Role,RegisteredRoles.User)
             };
 
-            var result = await _services.RegisterUser(registerInfo, claims);
+            var result = await _services.RegisterUser(_mapper.Map<User>(registerInfo), claims);
 
             if (result == null)
             {

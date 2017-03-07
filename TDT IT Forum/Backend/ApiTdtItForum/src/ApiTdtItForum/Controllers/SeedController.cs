@@ -36,7 +36,7 @@ namespace ApiTdtItForum.Controllers
         {
             if (!await _services.IsUsernameExisted("admin"))
             {
-                var admin = new RegisterRequest()
+                var admin = new User()
                 {
                     Username = "admin",
                     PasswordHash = "admin",

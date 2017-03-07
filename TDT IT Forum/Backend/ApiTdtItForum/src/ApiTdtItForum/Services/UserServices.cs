@@ -20,18 +20,17 @@ namespace ApiTdtItForum.Services
             _db = dataContext;
         }
 
-        public async Task<User> RegisterUser(RegisterRequest userInfor, IEnumerable<Claim> claims, bool IsVerified = false)
+        public async Task<User> RegisterUser(User user, IEnumerable<Claim> claims, bool IsVerified = false)
         {
-            if (!IsCorrectInfor(userInfor))
+            if (!IsCorrectInfor(user))
             {
                 return null;
             }
 
-            if (await IsUsernameExisted(userInfor.Username))
+            if (await IsUsernameExisted(user.Username))
             {
                 return null;
             }
-            var user = Mapper.Map<User>(userInfor);
 
             user.IsVerified = IsVerified;
             await _db.Users.AddAsync(user);
@@ -65,7 +64,7 @@ namespace ApiTdtItForum.Services
             return innerUser;
         }
 
-        public static bool IsCorrectInfor(RegisterRequest user)
+        public static bool IsCorrectInfor(User user)
         {
             if (string.IsNullOrEmpty(user.Username)
                || string.IsNullOrEmpty(user.PasswordHash)
