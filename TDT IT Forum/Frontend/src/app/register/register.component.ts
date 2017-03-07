@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RegisterInformation} from '../models/registerInformation';
+import {RegisterService} from "./register.service";
 
 @Component({
   moduleId: module.id,
@@ -12,7 +13,7 @@ export class RegisterComponent implements OnInit {
   admissionYears: number[] = [];
   model: RegisterInformation;
 
-  constructor() {
+  constructor(private service: RegisterService) {
   }
 
   ngOnInit() {
@@ -23,8 +24,9 @@ export class RegisterComponent implements OnInit {
     this.model = new RegisterInformation('', '', '', currentYear, '', '');
   }
 
-  submit():void {
-    console.log(this.model.admissionYear);
+  onSubmit(): void {
+    this.service.login('admin', 'admin');
   }
+
 
 }

@@ -65,6 +65,8 @@ namespace ApiTdtItForum
             services.AddAuthorization(ConfiguredAuthorization.Configure);
 
             services.AddUserServices();
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,6 +74,13 @@ namespace ApiTdtItForum
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            app.UseCors(builder =>
+            {                
+                builder.AllowAnyHeader();
+                builder.AllowAnyMethod();
+                builder.AllowAnyOrigin();
+            });
 
             var tokenValidationParameters = new TokenValidationParameters
             {

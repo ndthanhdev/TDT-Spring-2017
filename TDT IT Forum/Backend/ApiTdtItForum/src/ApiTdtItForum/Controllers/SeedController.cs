@@ -38,7 +38,7 @@ namespace ApiTdtItForum.Controllers
                 var admin = new User()
                 {
                     Username = "admin",
-                    PasswordHash = "21232f297a57a5a743894a0e4a801fc3",
+                    PasswordHash = "admin",
                     FullName = "Adminstrator",
                     Faculty = "Information Technology",
                     AdmissionYear = 2014,
