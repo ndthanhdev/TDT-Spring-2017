@@ -13,6 +13,9 @@ using ApiTdtItForum.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using ApiTdtItForum.Services;
+using ApiTdtItForum.DTO;
+using ApiTdtItForum.Controllers.DTO;
+using AutoMapper;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -33,14 +36,15 @@ namespace ApiTdtItForum.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] UserDTO user)
+        public async Task<IActionResult> Login([FromBody] LoginRequest loginInfo)
         {
-            User innerUser = await _services.Login(user.Username, user.PasswordHash);
-
+            User innerUser = await _services.Login(loginInfo.Username, loginInfo.PasswordHash);
+            var payload = new ResponsePayload();
             if (innerUser == null)
             {
-                var isExisted = await _services.IsUsernameExisted(user.Username);
-                return Ok(isExisted ? LoginFailReason.Incorrect : LoginFailReason.NotExist);
+                var isExisted = await _services.IsUsernameExisted(loginInfo.Username);
+                payload.StatusCode = (int)(isExisted ? LoginResponseCode.Incorrect : LoginResponseCode.NotExist);
+                return Json(payload);
             }
 
             var jwt = await GenerateJwt(innerUser);
@@ -50,26 +54,40 @@ namespace ApiTdtItForum.Controllers
             //{
             //    id_token = jwt
             //};
-
-            return Ok(jwt);
+            payload.Data = jwt;
+            return Json(payload);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody] User user)
+        public async Task<IActionResult> Register([FromBody] RegisterRequest registerInfo)
         {
+            var payload = new ResponsePayload();
+
             var claims = new Claim[]
             {
                 new Claim(ClaimTypes.Role,RegisteredRoles.User)
             };
 
-            var result = await _services.RegisterUser(user, claims);
-            if (result != RegisterUserResult.Created)
+            var result = await _services.RegisterUser(registerInfo, claims);
+
+            if (result == null)
             {
-                return BadRequest(result);
+                if (await _services.IsUsernameExisted(registerInfo.Username))
+                {
+                    payload.StatusCode = (int)RegisterResponseCode.Existed;
+                    return Json(payload);
+                }
+                else
+                {
+                    payload.StatusCode = (int)RegisterResponseCode.Incorrect;
+                    return Json(payload);
+                }
             }
 
-            var jwt = await GenerateJwt(user);
-            return Ok(jwt);
+            var jwt = await GenerateJwt(result);
+            payload.Data = jwt;
+            payload.StatusCode = (int)RegisterResponseCode.Created;
+            return Json(payload);
         }
 
         public async Task<string> GenerateJwt(User user)

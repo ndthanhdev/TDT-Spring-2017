@@ -8,6 +8,7 @@ using ApiTdtItForum;
 using System.Security.Claims;
 using ApiTdtItForum.Security;
 using ApiTdtItForum.Services;
+using ApiTdtItForum.Controllers.DTO;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -35,7 +36,7 @@ namespace ApiTdtItForum.Controllers
         {
             if (!await _services.IsUsernameExisted("admin"))
             {
-                var admin = new User()
+                var admin = new RegisterRequest()
                 {
                     Username = "admin",
                     PasswordHash = "admin",

@@ -1,4 +1,6 @@
-﻿using ApiTdtItForum.Models;
+﻿using ApiTdtItForum.Controllers.DTO;
+using ApiTdtItForum.Models;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -18,17 +20,18 @@ namespace ApiTdtItForum.Services
             _db = dataContext;
         }
 
-        public async Task<RegisterUserResult> RegisterUser(User user, IEnumerable<Claim> claims, bool IsVerified = false)
+        public async Task<User> RegisterUser(RegisterRequest userInfor, IEnumerable<Claim> claims, bool IsVerified = false)
         {
-            if (!IsCorrectInfor(user))
+            if (!IsCorrectInfor(userInfor))
             {
-                return RegisterUserResult.Incorrect;
+                return null;
             }
 
-            if (await IsUsernameExisted(user.Username))
+            if (await IsUsernameExisted(userInfor.Username))
             {
-                return RegisterUserResult.Existed;
+                return null;
             }
+            var user = Mapper.Map<User>(userInfor);
 
             user.IsVerified = IsVerified;
             await _db.Users.AddAsync(user);
@@ -46,7 +49,7 @@ namespace ApiTdtItForum.Services
 
             await Task.WhenAll(jobs);
             await _db.SaveChangesAsync();
-            return RegisterUserResult.Created;
+            return user;
         }
 
         public async Task<bool> IsUsernameExisted(string username)
@@ -62,7 +65,7 @@ namespace ApiTdtItForum.Services
             return innerUser;
         }
 
-        public static bool IsCorrectInfor(User user)
+        public static bool IsCorrectInfor(RegisterRequest user)
         {
             if (string.IsNullOrEmpty(user.Username)
                || string.IsNullOrEmpty(user.PasswordHash)
