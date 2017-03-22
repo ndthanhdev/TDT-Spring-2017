@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\app-routing",
+    "\\src\\app\\models",
+    "\\src\\app\\register",
+    "\\src\\app\\services"
+  ],
+  "SelectedNode": "\\src\\app\\register\\register.component.ts",
+  "PreviewInSolutionExplorer": false
+}

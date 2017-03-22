@@ -7,3 +7,12 @@ C:\Users\Duy Thanh Nguyen\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backe
 C:\Users\Duy Thanh Nguyen\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\obj\Debug\netcoreapp1.0\ApiTdtItForum.dll
 C:\Users\Duy Thanh Nguyen\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\obj\Debug\netcoreapp1.0\ApiTdtItForum.pdb
 C:\Users\Duy Thanh Nguyen\Documents\Workspace\TDT-Spring-2017\TDT IT Forum\Backend\ApiTdtItForum\src\ApiTdtItForum\obj\Debug\netcoreapp1.0\ApiTdtItForum.csprojResolveAssemblyReference.cache
+C:\Users\Duy Thanh Nguyen\Documents\Workspace\TDT-Spring-2017\TdtItForum\src\ApiTdtItForum\bin\Debug\netcoreapp1.0\ApiTdtItForum.deps.json
+C:\Users\Duy Thanh Nguyen\Documents\Workspace\TDT-Spring-2017\TdtItForum\src\ApiTdtItForum\bin\Debug\netcoreapp1.0\ApiTdtItForum.runtimeconfig.json
+C:\Users\Duy Thanh Nguyen\Documents\Workspace\TDT-Spring-2017\TdtItForum\src\ApiTdtItForum\bin\Debug\netcoreapp1.0\ApiTdtItForum.runtimeconfig.dev.json
+C:\Users\Duy Thanh Nguyen\Documents\Workspace\TDT-Spring-2017\TdtItForum\src\ApiTdtItForum\bin\Debug\netcoreapp1.0\ApiTdtItForum.dll
+C:\Users\Duy Thanh Nguyen\Documents\Workspace\TDT-Spring-2017\TdtItForum\src\ApiTdtItForum\bin\Debug\netcoreapp1.0\ApiTdtItForum.pdb
+C:\Users\Duy Thanh Nguyen\Documents\Workspace\TDT-Spring-2017\TdtItForum\src\ApiTdtItForum\obj\Debug\netcoreapp1.0\ApiTdtItForum.csprojResolveAssemblyReference.cache
+C:\Users\Duy Thanh Nguyen\Documents\Workspace\TDT-Spring-2017\TdtItForum\src\ApiTdtItForum\obj\Debug\netcoreapp1.0\ApiTdtItForum.AssemblyInfo.cs
+C:\Users\Duy Thanh Nguyen\Documents\Workspace\TDT-Spring-2017\TdtItForum\src\ApiTdtItForum\obj\Debug\netcoreapp1.0\ApiTdtItForum.dll
+C:\Users\Duy Thanh Nguyen\Documents\Workspace\TDT-Spring-2017\TdtItForum\src\ApiTdtItForum\obj\Debug\netcoreapp1.0\ApiTdtItForum.pdb
