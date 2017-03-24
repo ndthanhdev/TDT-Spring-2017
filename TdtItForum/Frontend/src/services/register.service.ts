@@ -11,6 +11,7 @@ import 'rxjs/add/operator/toPromise';
 
 import {RegisterInformation} from '../models/registerInformation';
 import {ConstanValue} from '../services/constantValue';
+import {ReceivedPayload} from '../dto/receivedPayload.dto';
 
 @Injectable()
 export class RegisterService {
@@ -36,14 +37,14 @@ export class RegisterService {
 
   }
 
-  register(info: RegisterInformation): Promise<boolean> {
+  register(info: RegisterInformation): Promise<ReceivedPayload> {
     return this.http.post(ConstanValue.API, info).toPromise().then(this.extractData)
       .catch(this.handleError);
   }
 
-  private extractData(res: Response) {
-    let body = res.json();
-    return body.data || {};
+  private extractData(res: Response): ReceivedPayload {
+    let json = res.json();
+    return json || {};
   }
 
   private handleError(error: Response | any) {

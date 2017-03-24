@@ -2,6 +2,10 @@
 import {RegisterInformation} from '../../models/registerInformation';
 import {RegisterService} from '../../services/register.service';
 import {ConstanValue} from "../../services/constantValue";
+import {Router} from "@angular/router";
+import {MdDialog} from'@angular/material';
+import {AlertComponent} from '../alert/alert.component';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   moduleId: module.id,
@@ -14,7 +18,7 @@ export class RegisterComponent implements OnInit {
   admissionYears: number[] = [];
   model: RegisterInformation;
 
-  constructor(private service: RegisterService) {
+  constructor(private service: RegisterService, private router: Router, private modalService: NgbModal, public dialog: MdDialog) {
   }
 
   ngOnInit() {
@@ -25,15 +29,29 @@ export class RegisterComponent implements OnInit {
     this.model = new RegisterInformation('', '', '', '', currentYear, '', '');
   }
 
-  onSubmit(): void {
-    this.service.register(this.model).then(this.saveToken,this.saveToken);
+  onSubmit(content): void {
+    this.service.register(this.model).then(payload => {
+      if (payload.statusCode == 0) {
+        this.saveToken(payload.data);
+        this.router.navigate(['/home']);
+      }
+      else {
+        const modalRef = this.modalService.open(AlertComponent);
+        modalRef.componentInstance.title = 'Register failed';
+        if (payload.statusCode == 1)
+          modalRef.componentInstance.message = 'Existed';
+        else
+          modalRef.componentInstance.message = 'Incorrect info';
+      }
+    }, this.httpError);
+
   }
 
-  saveToken(token): void {
+  saveToken(token: any): void {
     localStorage.setItem(ConstanValue.JWT_TOKEN_NAME, token);
   }
 
-  registerFail(err){
+  httpError(err) {
     console.log(err);
   }
 

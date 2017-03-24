@@ -70,7 +70,8 @@ namespace ApiTdtItForum.Controllers
                 new Claim(ClaimTypes.Role,RegisteredRoles.User)
             };
 
-            var result = await _services.RegisterUser(_mapper.Map<User>(registerInfo), claims);
+            var userInfo = _mapper.Map<User>(registerInfo);
+            var result = await _services.RegisterUser(userInfo, claims);
 
             if (result == null)
             {
