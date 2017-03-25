@@ -1,0 +1,9 @@
+C:\Users\thanh\CodeZone\OrderFoodApi\OrderFoodApi\bin\Debug\netcoreapp1.1\OrderFoodApi.deps.json
+C:\Users\thanh\CodeZone\OrderFoodApi\OrderFoodApi\bin\Debug\netcoreapp1.1\OrderFoodApi.runtimeconfig.json
+C:\Users\thanh\CodeZone\OrderFoodApi\OrderFoodApi\bin\Debug\netcoreapp1.1\OrderFoodApi.runtimeconfig.dev.json
+C:\Users\thanh\CodeZone\OrderFoodApi\OrderFoodApi\bin\Debug\netcoreapp1.1\OrderFoodApi.dll
+C:\Users\thanh\CodeZone\OrderFoodApi\OrderFoodApi\obj\Debug\netcoreapp1.1\OrderFoodApi.csprojResolveAssemblyReference.cache
+C:\Users\thanh\CodeZone\OrderFoodApi\OrderFoodApi\obj\Debug\netcoreapp1.1\OrderFoodApi.AssemblyInfo.cs
+C:\Users\thanh\CodeZone\OrderFoodApi\OrderFoodApi\bin\Debug\netcoreapp1.1\OrderFoodApi.pdb
+C:\Users\thanh\CodeZone\OrderFoodApi\OrderFoodApi\obj\Debug\netcoreapp1.1\OrderFoodApi.dll
+C:\Users\thanh\CodeZone\OrderFoodApi\OrderFoodApi\obj\Debug\netcoreapp1.1\OrderFoodApi.pdb
