@@ -1,0 +1,29 @@
+<nav id="mainNav" class="navbar fixed-top navbar-toggleable-md navbar-inverse px-5"
+     [ngClass]=" { 'navbar-shrink': isShrink} ">
+  <a pageScroll class="navbar-brand text-center" routerLink="home" routerLinkActive="active">TDT IT Forum</a>
+  <button class="navbar-toggler navbar-toggler-right " type="button " (click)="isCollapsed=! isCollapsed "
+          [attr.aria-expanded]="!isCollapsed " aria-controls="navbarToggler ">
+    <span class="navbar-toggler-icon "></span>
+  </button>
+  <div class="navbar-collapse" [ngbCollapse]="isCollapsed " id="navbarToggler ">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link " routerLink="home" routerLinkActive="active">Home</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link " href="# ">Category</a>
+      </li>
+      <li class="nav-item ">
+        <a routerLink="register" routerLinkActive="active" class="nav-link " href="">User</a>
+      </li>
+    </ul>
+    <form class="form-inline">
+      <a routerLink="register" routerLinkActive="active" class="btn btn-success my-2 mx-2 my-sm-0"
+         *ngIf="!isAuthrized">Register</a>
+      <a routerLink="login" routerLinkActive="active" class="btn btn-primary my-2 mx-2 my-sm-0" *ngIf="!isAuthrized">Login</a>
+      <a routerLinkActive="active" routerLink="profile" *ngIf="isAuthrized" class="my-2 mx-2 my-sm-0">Welcome,
+        {{userName}}!</a>
+      <a class="btn btn-danger my-2 my-sm-0" *ngIf="isAuthrized">Logout</a>
+    </form>
+  </div>
+</nav>

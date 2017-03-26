@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+
+body,
+header,
+section {
+  min-height: 80vh;
+}
+
+.full-height {
+  min-height: 100vh;
+}

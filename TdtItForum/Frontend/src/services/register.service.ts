@@ -62,10 +62,3 @@ export class RegisterService {
   }
 
 }
-//
-// class RegisterInfor {
-//   constructor(public Username: String, public PasswordHash: String, public FullName: String,
-//               public Faculty: String, public AdmissionYear: Number, public Mail: String,
-//               public Phone: String) {
-//   }
-// }

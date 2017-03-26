@@ -10465,15 +10465,15 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Duy Thanh Nguyen\\.nuget\\packages\\": {}
+    "C:\\Users\\duyth\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Duy Thanh Nguyen\\Documents\\Workspace\\TDT-Spring-2017\\TdtItForum\\src\\ApiTdtItForum\\ApiTdtItForum.csproj",
+      "projectUniqueName": "C:\\Users\\duyth\\Documents\\GitHub\\TDT-Spring-2017\\TdtItForum\\src\\ApiTdtItForum\\ApiTdtItForum.csproj",
       "projectName": "ApiTdtItForum",
-      "projectPath": "C:\\Users\\Duy Thanh Nguyen\\Documents\\Workspace\\TDT-Spring-2017\\TdtItForum\\src\\ApiTdtItForum\\ApiTdtItForum.csproj",
-      "outputPath": "C:\\Users\\Duy Thanh Nguyen\\Documents\\Workspace\\TDT-Spring-2017\\TdtItForum\\src\\ApiTdtItForum\\obj\\",
+      "projectPath": "C:\\Users\\duyth\\Documents\\GitHub\\TDT-Spring-2017\\TdtItForum\\src\\ApiTdtItForum\\ApiTdtItForum.csproj",
+      "outputPath": "C:\\Users\\duyth\\Documents\\GitHub\\TDT-Spring-2017\\TdtItForum\\src\\ApiTdtItForum\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.0"
