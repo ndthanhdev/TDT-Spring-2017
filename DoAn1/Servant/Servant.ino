@@ -15,24 +15,22 @@
 #define RX 11
 
 
-SoftwareSerial command(RX, TX);
-
-bool isPayloadCrossed(int time = 2000);
-
+SoftwareSerial commandTransporter(RX, TX);
 
 void setup()
-{	
+{
 	prepareMotor();
 	preparePhotoresistor();
-	command.begin(9600);
+	commandTransporter.begin(BAUD);
 }
 
 void loop()
 {
-	if (command.available())
+	if (commandTransporter.available())
 	{
-		releasePayload(command.parseInt());
+		releasePayload(commandTransporter.parseInt());
 	}
+
 }
 
 void prepareMotor() {

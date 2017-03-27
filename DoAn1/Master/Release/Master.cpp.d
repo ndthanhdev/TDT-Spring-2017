@@ -12,4 +12,18 @@ C:\Users\duyth\AppData\Local\Temp\VMBuilds\Master\uno\Release\Master.cpp.o: \
  C:\Users\duyth\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\cores\arduino/Arduino.h \
  C:\Users\duyth\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\variants\standard/pins_arduino.h \
  C:\Users\duyth\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries\SoftwareSerial\src/SoftwareSerial.h \
- C:\Users\duyth\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\cores\arduino/Stream.h
+ C:\Users\duyth\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\cores\arduino/Stream.h \
+ C:\Users\duyth\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries\SPI\src/SPI.h \
+ C:\Users\duyth\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\cores\arduino/Arduino.h \
+ C:\Users\duyth\Click2Run\arduino-1.8.1\libraries\Ethernet\src/Ethernet.h \
+ C:\Users\duyth\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\cores\arduino/IPAddress.h \
+ C:\Users\duyth\Click2Run\arduino-1.8.1\libraries\Ethernet\src/EthernetClient.h \
+ C:\Users\duyth\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\cores\arduino/Print.h \
+ C:\Users\duyth\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\cores\arduino/Client.h \
+ C:\Users\duyth\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\cores\arduino/IPAddress.h \
+ C:\Users\duyth\Click2Run\arduino-1.8.1\libraries\Ethernet\src/EthernetServer.h \
+ C:\Users\duyth\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\cores\arduino/Server.h \
+ C:\Users\duyth\Click2Run\arduino-1.8.1\libraries\Ethernet\src/Dhcp.h \
+ C:\Users\duyth\Click2Run\arduino-1.8.1\libraries\Ethernet\src/EthernetUdp.h \
+ C:\Users\duyth\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\cores\arduino/Udp.h \
+ C:\Users\duyth\Documents\Arduino\libraries\PubSubClient\src/PubSubClient.h

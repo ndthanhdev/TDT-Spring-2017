@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Servant", "Servant\Servant.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Master", "Master\Master.vcxproj", "{822D24D0-DC1F-45D1-B67A-2A52E3B3C028}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mqtt_basic", "..\..\..\Arduino\My Examples\mqtt_basic\mqtt_basic.vcxproj", "{7041C23A-6FCB-4096-8FFA-24060638A257}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -21,6 +23,10 @@ Global
 		{822D24D0-DC1F-45D1-B67A-2A52E3B3C028}.Debug|x86.Build.0 = Debug|Win32
 		{822D24D0-DC1F-45D1-B67A-2A52E3B3C028}.Release|x86.ActiveCfg = Release|Win32
 		{822D24D0-DC1F-45D1-B67A-2A52E3B3C028}.Release|x86.Build.0 = Release|Win32
+		{7041C23A-6FCB-4096-8FFA-24060638A257}.Debug|x86.ActiveCfg = Debug|Win32
+		{7041C23A-6FCB-4096-8FFA-24060638A257}.Debug|x86.Build.0 = Debug|Win32
+		{7041C23A-6FCB-4096-8FFA-24060638A257}.Release|x86.ActiveCfg = Release|Win32
+		{7041C23A-6FCB-4096-8FFA-24060638A257}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
