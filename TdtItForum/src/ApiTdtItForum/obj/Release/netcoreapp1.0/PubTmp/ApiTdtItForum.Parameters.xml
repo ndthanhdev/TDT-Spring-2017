@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="api-thanhgular" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\duyth\\Documents\\GitHub\\TDT-Spring-2017\\TdtItForum\\src\\ApiTdtItForum\\obj\\Release\\netcoreapp1\.0\\PubTmp\\Out\\$" />
+  </parameter>
+</parameters>

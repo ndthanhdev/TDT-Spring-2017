@@ -18,12 +18,12 @@
       </li>
     </ul>
     <form class="form-inline">
-      <a routerLink="register" routerLinkActive="active" class="btn btn-success my-2 mx-2 my-sm-0"
-         *ngIf="!isAuthrized">Register</a>
-      <a routerLink="login" routerLinkActive="active" class="btn btn-primary my-2 mx-2 my-sm-0" *ngIf="!isAuthrized">Login</a>
-      <a routerLinkActive="active" routerLink="profile" *ngIf="isAuthrized" class="my-2 mx-2 my-sm-0">Welcome,
+      <a routerLink="register" routerLinkActive="active" class="btn btn-success my-1 mx-2 my-sm-0"
+         *ngIf="!isAuthorized">Register</a>
+      <a routerLink="login" routerLinkActive="active" class="btn btn-primary my-1 mx-2 my-sm-0" *ngIf="!isAuthorized">Login</a>
+      <a routerLinkActive="active" routerLink="profile" *ngIf="isAuthorized" href="" class="my-1 mx-2 my-sm-0">Welcome,
         {{userName}}!</a>
-      <a class="btn btn-danger my-2 my-sm-0" *ngIf="isAuthrized">Logout</a>
+      <a (click)="logout()" class="btn btn-danger my-1 my-sm-0" *ngIf="isAuthorized">Logout</a>
     </form>
   </div>
 </nav>

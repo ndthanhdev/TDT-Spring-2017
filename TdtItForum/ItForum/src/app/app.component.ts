@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {JwtHelper} from 'angular2-jwt';
+import {ConstantValuesService} from '../services/constantValues/constant-values.service';
 
 
 @Component({
@@ -6,8 +8,13 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  isAuthrized = false;
-  userName ="admin";
+export class AppComponent implements OnInit {
+
+
+  constructor() {
+  }
+
+  ngOnInit() {
+  }
 
 }

@@ -8,7 +8,9 @@
                  autofocus="" [(ngModel)]="model.Username">
           <input type="password" id="inputPassword" name="password" class="form-control my-3" placeholder="Password"
                  required [(ngModel)]="model.PasswordHash">
-          <button class="btn btn-primary my-3" (click)="login()" [disabled]="!loginForm.form.valid||isBusy">Sign in
+          <button class="btn btn-primary my-3" (click)="login()" [disabled]="!loginForm.form.valid||isBusy">
+            {{!isBusy?'Sign in':''}}
+            <i *ngIf="isBusy" class="fa fa-spinner fa-spin fa-fw"></i>
           </button>
         </form>
       </div>

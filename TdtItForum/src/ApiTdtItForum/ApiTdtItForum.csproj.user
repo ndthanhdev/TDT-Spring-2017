@@ -5,5 +5,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <ActiveDebugProfile>IIS Express</ActiveDebugProfile>
+    <NameOfLastUsedPublishProfile>api-thanhgular - Web Deploy</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

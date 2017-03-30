@@ -3,6 +3,7 @@ import {UserService} from '../../services/user/user.service';
 import {LoginModel} from '../../models/login.model';
 import {AlertService} from '../../services/alert/alert.service';
 import {Router} from '@angular/router';
+import {ConstantValuesService} from '../../services/constantValues/constant-values.service';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,8 @@ export class LoginComponent implements OnInit {
     this.isBusy = true;
     this.service.login(this.model).then(payload => {
       if (payload.statusCode === 0) {
+        localStorage.setItem(ConstantValuesService.JWT_TOKEN_NAME, JSON.stringify(payload.data));
+        this.service.notifyAuthorizedChanged();
         this.router.navigate(['/home']);
       }
       else if (payload.statusCode === 1) {

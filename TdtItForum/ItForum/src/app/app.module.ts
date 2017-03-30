@@ -6,8 +6,10 @@ import {MaterialModule, MdDialogModule} from '@angular/material';
 
 import {Ng2PageScrollModule} from 'ng2-page-scroll';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {JwtHelper} from 'angular2-jwt';
 
-import {AppRoutingModule} from './app-routing/app-routing.module';
+import {AppRoutingModule} from '../modules/app-routing/app-routing.module';
+import {AuthHttpModule} from '../modules/auth-http/auth-http.module';
 
 import {AlertService} from '../services/alert/alert.service';
 import {ConstantValuesService} from '../services/constantValues/constant-values.service';
@@ -20,9 +22,9 @@ import {TeamComponent} from './team/team.component';
 import {FooterComponent} from './footer/footer.component';
 import {RegisterComponent} from './register/register.component';
 import {AlertComponent} from './alert/alert.component';
-import {RegisterService} from '../services/register/register.service';
 import {LoginComponent} from './login/login.component';
-import {UserService} from "../services/user/user.service";
+import {UserService} from '../services/user/user.service';
+
 
 @NgModule({
   declarations: [
@@ -43,12 +45,13 @@ import {UserService} from "../services/user/user.service";
     NgbModule.forRoot(),
     MaterialModule,
     Ng2PageScrollModule.forRoot(),
+    AuthHttpModule
   ],
   providers: [
+    JwtHelper,
     AlertService,
     ConstantValuesService,
     RequestService,
-    RegisterService,
     UserService],
   bootstrap: [AppComponent],
   entryComponents: [AlertComponent]
