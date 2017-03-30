@@ -24,7 +24,7 @@ export class NavBarComponent implements OnInit {
 
   @HostListener('window:scroll', [])
   track() {
-    console.log(this.document.body.scrollTop);
+    this.isShrink = this.document.body.scrollTop > 55;
   }
 
   ngOnInit() {

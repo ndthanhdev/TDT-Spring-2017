@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {MdDialog} from '@angular/material';
-
-import {AlertComponent} from '../alert/alert.component';
+import {AlertService} from '../../services/alert/alert.service';
+import {RegisterModel} from '../../models/register.model';
+import {UserService} from '../../services/user/user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -10,15 +11,36 @@ import {AlertComponent} from '../alert/alert.component';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(public dialog: MdDialog) {
-  }
+  admissionYears: number[] = [];
+  model: RegisterModel;
+  isBusy: boolean;
 
-  openDialog() {
-    let dialogRef = this.dialog.open(AlertComponent);
-    dialogRef.componentInstance.message = 'hello u';
+  constructor(private service: UserService, private alert: AlertService, private router: Router) {
   }
 
   ngOnInit() {
+    const currentYear = (new Date()).getFullYear();
+    for (let _i = currentYear; _i >= 1997; _i--) {
+      this.admissionYears.push(_i);
+    }
+    this.model = new RegisterModel('', '', '', '', currentYear, '', '');
   }
 
+  register(): void {
+    this.isBusy = true;
+    this.service.register(this.model).then(payload => {
+      if (payload.statusCode === 0) {
+        this.router.navigate(['/login']);
+      }
+      else if (payload.statusCode === 1) {
+        this.alert.openDialog('existed');
+      }
+      else {
+        this.alert.openDialog('incorrect');
+      }
+      this.isBusy = false;
+    });
+  }
 }
+
+
