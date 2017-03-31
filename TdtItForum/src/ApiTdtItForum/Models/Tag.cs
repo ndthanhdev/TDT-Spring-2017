@@ -14,5 +14,10 @@ namespace ApiTdtItForum.Models
         public List<ContainerTag> ContainerTags { get; set; }
 
         public List<UserTag> UserTags { get; set; }
+
+        public bool Equals(Tag obj)
+        {
+            return TagId == obj.TagId || Name == obj.Name;
+        }
     }
 }

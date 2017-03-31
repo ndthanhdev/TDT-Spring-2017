@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApiTdtItForum.SharedObject
 {
-    enum LoginResponseCode
+    public enum LoginResponseCode
     {
         Logged,
         Incorrect,

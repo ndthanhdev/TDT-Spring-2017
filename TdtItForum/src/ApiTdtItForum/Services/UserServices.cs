@@ -120,7 +120,10 @@ namespace ApiTdtItForum.Services
             if (user == null)
                 return null;
             var profile = _mapper.Map<ProfileResponse>(user);
+            foreach (var ut in user.UserTags)
+            {
 
+            }
             return null;
         }
     }

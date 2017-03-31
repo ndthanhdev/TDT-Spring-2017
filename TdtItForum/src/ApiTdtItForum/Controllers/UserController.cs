@@ -25,19 +25,17 @@ namespace ApiTdtItForum.Controllers
     [Route("[controller]/[action]")]
     public class UserController : Controller
     {
-        DataContext _db;
         UserServices _services;
         readonly IMapper _mapper;
 
-        public UserController(DataContext db, UserServices services, IMapper mapper)
+        public UserController(UserServices services, IMapper mapper)
         {
-            _db = db;
             _services = services;
             _mapper = mapper;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] LoginRequest loginInfo)
+        public async Task<IActionResult> Login([FromBody] UserLoginForm loginInfo)
         {
             User innerUser = await _services.Login(loginInfo.Username, loginInfo.PasswordHash);            
             var payload = new Payload();
@@ -55,7 +53,7 @@ namespace ApiTdtItForum.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody] RegisterRequest registerInfo)
+        public async Task<IActionResult> Register([FromBody] RegisterRegisterForm registerInfo)
         {
             var payload = new Payload();
 
