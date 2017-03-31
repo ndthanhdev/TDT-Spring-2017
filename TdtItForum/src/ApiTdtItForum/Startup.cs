@@ -58,6 +58,8 @@ namespace ApiTdtItForum
             // Add framework services.
             services.AddMvc();
 
+            services.AddRouting();
+
             services.AddJwt(_jwtConfigurationSection[nameof(Jwt.Issuer)],
                 _jwtConfigurationSection[nameof(Jwt.Audience)],
                 _jwtConfigurationSection["Secret"]);
@@ -111,13 +113,6 @@ namespace ApiTdtItForum
             });
 
             app.UseMvcWithDefaultRoute();
-        }
-    }
-    class t : AutoMapper.Profile
-    {
-        public t()
-        {
-
         }
     }
 

@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.isBusy = true;
     this.service.login(this.model).then(payload => {
+
       if (payload.statusCode === 0) {
         localStorage.setItem(ConstantValuesService.JWT_TOKEN_NAME, JSON.stringify(payload.data));
         this.service.notifyAuthorizedChanged();
@@ -38,8 +39,10 @@ export class LoginComponent implements OnInit {
       else {
         this.alert.openDialog('incorrect');
       }
-      this.isBusy = false;
+    }).catch(err => {
+      this.alert.openReadErrorInLog(err);
     });
 
+    this.isBusy = false;
   }
 }

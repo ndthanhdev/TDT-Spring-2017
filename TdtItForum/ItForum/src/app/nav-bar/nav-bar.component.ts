@@ -10,19 +10,20 @@ import {UserService} from '../../services/user/user.service';
 })
 export class NavBarComponent implements OnInit, OnDestroy {
 
+  @Input()
   isAuthorized: boolean;
+
+  @Input()
   userName: string;
+
   isShrink = false;
   isCollapsed = true;
 
   constructor(private router: Router, private  service: UserService) {
-    this.service.authorizationChanged$.subscribe(v => {
-      this.updateAuthorization();
-    });
+
   }
 
   ngOnInit() {
-    this.updateAuthorization();
   }
 
   ngOnDestroy(): void {
@@ -34,12 +35,6 @@ export class NavBarComponent implements OnInit, OnDestroy {
     this.isShrink = document.body.scrollTop > 55;
   }
 
-  updateAuthorization(): void {
-    this.isAuthorized = this.service.getIsAuthorized();
-    if (this.isAuthorized) {
-      this.userName = this.service.getUsername();
-    }
-  }
 
   logout(): void {
     localStorage.clear();

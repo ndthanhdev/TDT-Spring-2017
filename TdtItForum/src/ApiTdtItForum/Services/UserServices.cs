@@ -1,12 +1,15 @@
 ﻿using ApiTdtItForum.Controllers.DTO;
 using ApiTdtItForum.Models;
+using ApiTdtItForum.Security;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace ApiTdtItForum.Services
@@ -14,10 +17,12 @@ namespace ApiTdtItForum.Services
     public class UserServices
     {
         DataContext _db;
+        Jwt _jwt;
 
-        public UserServices(DataContext dataContext)
+        public UserServices(DataContext dataContext, Jwt jwt)
         {
             _db = dataContext;
+            _jwt = jwt;
         }
 
         public async Task<User> RegisterUser(User user, IEnumerable<Claim> claims, bool IsVerified = false)
@@ -76,6 +81,34 @@ namespace ApiTdtItForum.Services
                 return false;
             }
             return true;
+        }
+
+        public async Task<List<Claim>> getClaimsAsync(User user)
+        {
+            List<Claim> claims = new List<Claim>();
+
+            await _db.Entry(user).Collection(u => u.UserClaims).LoadAsync();
+            claims.AddRange(user.UserClaims.Select(uc => uc.ToClaim()));
+
+            claims.Add(new Claim(ClaimTypes.Name, user.UserId));
+            return claims;
+        }
+
+        public async Task<string> GenerateJwt(User user)
+        {
+            var claims = await this.getClaimsAsync(user);
+
+            var jwtToken = new JwtSecurityToken(
+                issuer: _jwt.Issuer,
+                audience: _jwt.Audience,
+                claims: claims,
+                notBefore: _jwt.NotBefore,
+                expires: _jwt.Expiration,
+                signingCredentials: _jwt.SigningCredentials);
+
+            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwtToken);
+
+            return encodedJwt;
         }
 
     }

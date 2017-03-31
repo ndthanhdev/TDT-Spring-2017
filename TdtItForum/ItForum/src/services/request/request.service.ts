@@ -30,7 +30,6 @@ export class RequestService {
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
-    console.error(errMsg);
     return Promise.reject(errMsg);
   }
 }
