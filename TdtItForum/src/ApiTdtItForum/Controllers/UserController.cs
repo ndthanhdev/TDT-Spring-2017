@@ -13,10 +13,10 @@ using ApiTdtItForum.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using ApiTdtItForum.Services;
-using ApiTdtItForum.DTO;
-using ApiTdtItForum.Controllers.DTO;
+using ApiTdtItForum.SharedObject;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using ApiTdtItForum.Controllers.SharedObjects.Request;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -40,7 +40,7 @@ namespace ApiTdtItForum.Controllers
         public async Task<IActionResult> Login([FromBody] LoginRequest loginInfo)
         {
             User innerUser = await _services.Login(loginInfo.Username, loginInfo.PasswordHash);            
-            var payload = new ResponsePayload();
+            var payload = new Payload();
             if (innerUser == null)
             {
                 var isExisted = await _services.IsUsernameExisted(loginInfo.Username);
@@ -57,7 +57,7 @@ namespace ApiTdtItForum.Controllers
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] RegisterRequest registerInfo)
         {
-            var payload = new ResponsePayload();
+            var payload = new Payload();
 
             var claims = new Claim[]
             {
@@ -97,6 +97,7 @@ namespace ApiTdtItForum.Controllers
         [Authorize(RegisteredPolicys.User)]
         public async Task<IActionResult> GetProfile()
         {
+            var result = await _services.GetUserProfile(User.Identity.Name);
             return Ok(User.Identity.Name);
         }
     }

@@ -4,11 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ApiTdtItForum.Models;
-using ApiTdtItForum;
 using System.Security.Claims;
 using ApiTdtItForum.Security;
 using ApiTdtItForum.Services;
-using ApiTdtItForum.Controllers.DTO;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -43,7 +41,7 @@ namespace ApiTdtItForum.Controllers
                     FullName = "Adminstrator",
                     Faculty = "Information Technology",
                     AdmissionYear = 2014,
-                    Mail = "adminforum@tdt.edu.vn",
+                    Email = "adminforum@tdt.edu.vn",
                     Phone = "0123456789"
                 };
 

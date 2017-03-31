@@ -27,10 +27,10 @@ namespace ApiTdtItForum.Migrations
                 {
                     UserId = table.Column<string>(nullable: false),
                     AdmissionYear = table.Column<int>(nullable: false),
+                    Email = table.Column<string>(nullable: true),
                     Faculty = table.Column<string>(nullable: true),
                     FullName = table.Column<string>(nullable: true),
                     IsVerified = table.Column<bool>(nullable: false),
-                    Mail = table.Column<string>(nullable: true),
                     PasswordHash = table.Column<string>(nullable: true),
                     Phone = table.Column<string>(nullable: true),
                     Username = table.Column<string>(nullable: true)

@@ -1,4 +1,4 @@
-﻿using ApiTdtItForum.Controllers.DTO;
+﻿using ApiTdtItForum.Controllers.SharedObjects.Response;
 using ApiTdtItForum.Models;
 using ApiTdtItForum.Security;
 using AutoMapper;
@@ -18,11 +18,13 @@ namespace ApiTdtItForum.Services
     {
         DataContext _db;
         Jwt _jwt;
+        readonly IMapper _mapper;
 
-        public UserServices(DataContext dataContext, Jwt jwt)
+        public UserServices(DataContext dataContext, Jwt jwt, IMapper mapper)
         {
             _db = dataContext;
             _jwt = jwt;
+            _mapper = mapper;
         }
 
         public async Task<User> RegisterUser(User user, IEnumerable<Claim> claims, bool IsVerified = false)
@@ -75,7 +77,7 @@ namespace ApiTdtItForum.Services
                || string.IsNullOrEmpty(user.PasswordHash)
                || string.IsNullOrEmpty(user.FullName)
                || string.IsNullOrEmpty(user.Faculty)
-               || string.IsNullOrEmpty(user.Mail)
+               || string.IsNullOrEmpty(user.Email)
                || string.IsNullOrEmpty(user.Phone))
             {
                 return false;
@@ -111,6 +113,16 @@ namespace ApiTdtItForum.Services
             return encodedJwt;
         }
 
+        public async Task<object> GetUserProfile(string userId)
+        {
+            await Task.Yield();
+            var user = await _db.Users.Include(u=>u.UserTags).FirstOrDefaultAsync(u => u.UserId == userId);
+            if (user == null)
+                return null;
+            var profile = _mapper.Map<ProfileResponse>(user);
+
+            return null;
+        }
     }
 
 

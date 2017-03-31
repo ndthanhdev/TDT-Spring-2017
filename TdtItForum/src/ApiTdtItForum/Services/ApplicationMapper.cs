@@ -1,4 +1,5 @@
-﻿using ApiTdtItForum.Controllers.DTO;
+﻿using ApiTdtItForum.Controllers.SharedObjects.Request;
+using ApiTdtItForum.Controllers.SharedObjects.Response;
 using ApiTdtItForum.Models;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,8 @@ namespace ApiTdtItForum.Services
         public ApplicationMapper()
         {
             CreateMap<RegisterRequest, User>();
+            CreateMap<User, ProfileResponse>();
+
         }
     }
 

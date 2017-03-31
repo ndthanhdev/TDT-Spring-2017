@@ -8,13 +8,13 @@ using ApiTdtItForum;
 namespace ApiTdtItForum.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20170228164829_m0")]
+    [Migration("20170331161317_m0")]
     partial class m0
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.1.0-rtm-22752");
+                .HasAnnotation("ProductVersion", "1.1.1");
 
             modelBuilder.Entity("ApiTdtItForum.Models.Comment", b =>
                 {
@@ -126,13 +126,13 @@ namespace ApiTdtItForum.Migrations
 
                     b.Property<int>("AdmissionYear");
 
+                    b.Property<string>("Email");
+
                     b.Property<string>("Faculty");
 
                     b.Property<string>("FullName");
 
                     b.Property<bool>("IsVerified");
-
-                    b.Property<string>("Mail");
 
                     b.Property<string>("PasswordHash");
 
