@@ -96,7 +96,9 @@ namespace OrderFoodApi.Migrations
                 {
                     ChiTietDonHangId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    DonHangId = table.Column<int>(nullable: false)
+                    DonHangId = table.Column<int>(nullable: false),
+                    MonAnId = table.Column<int>(nullable: false),
+                    SoLuong = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -107,12 +109,23 @@ namespace OrderFoodApi.Migrations
                         principalTable: "DonHangs",
                         principalColumn: "DonHangId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ChiTietDonHangs_MonAns_MonAnId",
+                        column: x => x.MonAnId,
+                        principalTable: "MonAns",
+                        principalColumn: "MonAnId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChiTietDonHangs_DonHangId",
                 table: "ChiTietDonHangs",
                 column: "DonHangId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ChiTietDonHangs_MonAnId",
+                table: "ChiTietDonHangs",
+                column: "MonAnId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DonHangs_Sdt",
@@ -131,19 +144,19 @@ namespace OrderFoodApi.Migrations
                 name: "ChiTietDonHangs");
 
             migrationBuilder.DropTable(
-                name: "MonAns");
-
-            migrationBuilder.DropTable(
                 name: "QuanLys");
 
             migrationBuilder.DropTable(
                 name: "DonHangs");
 
             migrationBuilder.DropTable(
-                name: "DanhMucs");
+                name: "MonAns");
 
             migrationBuilder.DropTable(
                 name: "KhachHangs");
+
+            migrationBuilder.DropTable(
+                name: "DanhMucs");
         }
     }
 }

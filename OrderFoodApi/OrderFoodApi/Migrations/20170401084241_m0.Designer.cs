@@ -9,7 +9,7 @@ using OrderFoodApi.Entity;
 namespace OrderFoodApi.Migrations
 {
     [DbContext(typeof(OrderFoodContext))]
-    [Migration("20170401055429_m0")]
+    [Migration("20170401084241_m0")]
     partial class m0
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,9 +24,15 @@ namespace OrderFoodApi.Migrations
 
                     b.Property<int>("DonHangId");
 
+                    b.Property<int>("MonAnId");
+
+                    b.Property<int>("SoLuong");
+
                     b.HasKey("ChiTietDonHangId");
 
                     b.HasIndex("DonHangId");
+
+                    b.HasIndex("MonAnId");
 
                     b.ToTable("ChiTietDonHangs");
                 });
@@ -116,6 +122,11 @@ namespace OrderFoodApi.Migrations
                     b.HasOne("OrderFoodApi.Entity.DonHang", "DonHang")
                         .WithMany("ChiTietDonHangs")
                         .HasForeignKey("DonHangId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("OrderFoodApi.Entity.MonAn", "MonAn")
+                        .WithMany()
+                        .HasForeignKey("MonAnId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

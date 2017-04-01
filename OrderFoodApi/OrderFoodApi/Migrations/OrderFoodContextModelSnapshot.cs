@@ -23,9 +23,15 @@ namespace OrderFoodApi.Migrations
 
                     b.Property<int>("DonHangId");
 
+                    b.Property<int>("MonAnId");
+
+                    b.Property<int>("SoLuong");
+
                     b.HasKey("ChiTietDonHangId");
 
                     b.HasIndex("DonHangId");
+
+                    b.HasIndex("MonAnId");
 
                     b.ToTable("ChiTietDonHangs");
                 });
@@ -115,6 +121,11 @@ namespace OrderFoodApi.Migrations
                     b.HasOne("OrderFoodApi.Entity.DonHang", "DonHang")
                         .WithMany("ChiTietDonHangs")
                         .HasForeignKey("DonHangId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("OrderFoodApi.Entity.MonAn", "MonAn")
+                        .WithMany()
+                        .HasForeignKey("MonAnId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

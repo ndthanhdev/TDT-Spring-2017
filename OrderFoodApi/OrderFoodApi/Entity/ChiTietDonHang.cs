@@ -15,5 +15,12 @@ namespace OrderFoodApi.Entity
 
         [ForeignKey(nameof(DonHangId))]
         public DonHang DonHang { get; set; }
+
+        public int MonAnId { get; set; }
+
+        [ForeignKey(nameof(MonAnId))]
+        public MonAn MonAn { get; set; }
+
+        public int SoLuong { get; set; }
     }
 }
