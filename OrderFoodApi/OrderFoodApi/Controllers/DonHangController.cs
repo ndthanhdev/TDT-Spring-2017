@@ -38,24 +38,26 @@ namespace OrderFoodApi.Controllers
                     ChiTietDonHangs = new List<ChiTietDonHang>()
                 };
                 List<Task> tasks = new List<Task>();
-                
+
                 foreach (var ctdh in data.ChiTietDonHangDatas)
                 {
                     if (ctdh.SoLuong <= 0)
                     {
                         return BadRequest("So luong phai lon hon 0");
                     }
-                    else if (await GetMonAnById(ctdh.MonAnId) == null)
-                    {
-                        return BadRequest("Mon an khong ton tai");
-                    }
                     else
                     {
+                        var monAn = await GetMonAnById(ctdh.MonAnId);
+                        if (monAn == null)
+                        {
+                            return BadRequest("Mon an khong ton tai");
+                        }
                         // mon an ton tai
                         donHang.ChiTietDonHangs.Add(new ChiTietDonHang()
                         {
                             MonAnId = ctdh.MonAnId,
-                            SoLuong = ctdh.SoLuong
+                            SoLuong = ctdh.SoLuong,
+                            DonGia = monAn.Gia
                         });
                     }
                 }
@@ -63,10 +65,37 @@ namespace OrderFoodApi.Controllers
                 await _db.DonHangs.AddAsync(donHang);
                 await _db.SaveChangesAsync();
 
-                return Json(donHang.DonHangId);
+                return Json(donHang);
             }
 
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetDonHang(int id)
+        {
+            return Json(await _db.DonHangs.Include(dh => dh.ChiTietDonHangs).FirstOrDefaultAsync(dh => dh.DonHangId == id));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateTinhTrangDonHang([FromBody] DonHangUpdateTinhTrangDonHangData data)
+        {
+            if(await _db.QuanLys.FirstOrDefaultAsync(ql=>ql.QuanLyId==data.QuanLy.QuanLyId && ql.Password == data.QuanLy.Password) == null)
+            {
+                return BadRequest("Khong co quyen");
+            }
+            var donHangInDb = await _db.DonHangs.FirstOrDefaultAsync(dh => dh.DonHangId == data.DonHangId);
+            if (donHangInDb == null)
+            {
+                return BadRequest("Don hang khong ton tai");
+            }
+            else
+            {
+                donHangInDb.TinhTrangDonHang = data.TinhTrangMoi;
+                await _db.SaveChangesAsync();
+                return Json(donHangInDb);
+            }
+        }
+
         private async Task<KhachHang> GetKhachHangBySdt(string sdt)
         {
             return await _db.KhachHangs.FirstOrDefaultAsync(kh => kh.Sdt == sdt);
@@ -82,11 +111,18 @@ namespace OrderFoodApi.Controllers
             public List<ChiTietDonHangData> ChiTietDonHangDatas { get; set; }
             public string Sdt { get; set; }
         }
+
         public class ChiTietDonHangData
         {
             public int MonAnId { get; set; }
             public int SoLuong { get; set; }
         }
 
+        public class DonHangUpdateTinhTrangDonHangData
+        {
+            public QuanLy QuanLy { get; set; }
+            public int DonHangId { get; set; }
+            public TinhTrangDonHang TinhTrangMoi { get; set; }
+        }
     }
 }

@@ -21,6 +21,8 @@ namespace OrderFoodApi.Migrations
                     b.Property<int>("ChiTietDonHangId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("DonGia");
+
                     b.Property<int>("DonHangId");
 
                     b.Property<int>("MonAnId");
