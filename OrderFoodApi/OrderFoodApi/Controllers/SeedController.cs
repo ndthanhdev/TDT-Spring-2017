@@ -21,7 +21,14 @@ namespace OrderFoodApi.Controllers
         public async Task<IActionResult> Index()
         {
 
+            await InnerSeedDanhMucMonAn();
 
+
+            return Ok("Seeded");
+        }
+
+        private async Task InnerSeedDanhMucMonAn()
+        {
             // 1
             var danhMuc1 = new DanhMuc()
             {
@@ -43,7 +50,7 @@ namespace OrderFoodApi.Controllers
                 MoTa = "Sữa chứa melamin",
                 DanhMuc = danhMuc1
             });
-            
+
 
 
             // 2
@@ -85,8 +92,9 @@ namespace OrderFoodApi.Controllers
             });
 
             await _context.SaveChangesAsync();
-
-            return Ok("Seeded");
         }
+
+
+
     }
 }

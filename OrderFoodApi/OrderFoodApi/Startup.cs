@@ -26,7 +26,7 @@ namespace OrderFoodApi
 
 #if DEBUG
             // This line for local 
-            _connectionString = @"Data Source=C:\Users\thanh\CodeZone\Db.db";
+            _connectionString = @"Data Source=C:\Users\duyth\Documents\GitHub\TDT-Spring-2017\OrderFoodApi\Db.db";
 #else
 //This line for server 
             _connectionString = "Data Source=D:\\home\\site\\wwwroot\\wwwroot\\Db.db";
