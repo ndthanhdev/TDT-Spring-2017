@@ -40,6 +40,28 @@ namespace ApiTdtItForum.Services
         {
             return !string.IsNullOrWhiteSpace(tag.Name) && !string.IsNullOrWhiteSpace(tag.TagId);
         }
+
+        public async Task<bool> IsUserHasTag(string userId, string TagId)
+        {
+            return await _db.UserTags.FirstOrDefaultAsync(ut => ut.UserId == userId && ut.TagId == TagId) != null;
+        }
+
+        public async Task<Tag> GetTagById(string tagId)
+        {
+            return await _db.Tags.FirstOrDefaultAsync(t => t.TagId == tagId);
+        }
+
+        public async Task<UserTag> AddUserTag(string userId, string tagId)
+        {
+            UserTag userTag = new UserTag()
+            {
+                UserId = userId,
+                TagId = tagId
+            };
+            await _db.UserTags.AddAsync(userTag);
+            await _db.SaveChangesAsync();
+            return userTag;
+        }
     }
 
     public static class TagServicesExtensions

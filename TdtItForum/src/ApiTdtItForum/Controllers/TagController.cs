@@ -22,11 +22,13 @@ namespace ApiTdtItForum.Controllers
     public class TagController : Controller
     {
         TagServices _services;
+        UserServices _userServices;
         readonly IMapper _mapper;
 
-        public TagController(TagServices services, IMapper mapper)
+        public TagController(TagServices services, UserServices userServices, IMapper mapper)
         {
             _services = services;
+            _userServices = userServices;
             _mapper = mapper;
         }
 
@@ -47,6 +49,31 @@ namespace ApiTdtItForum.Controllers
             {
                 payload.Data = JsonConvert.SerializeObject(await _services.CreateTag(tag), Formatting.Indented);
             }
+            return Json(payload);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddUserTag([FromBody] TagAddUserData data)
+        {
+            Payload payload = new Payload();
+
+            if (await _userServices.GetUserByIdAsync(data.UserId) == null)
+            {
+                // user not exist
+                payload.StatusCode = (int)TagAddUserTagCode.UserNotExist;
+            }
+            else if (await _services.GetTagById(data.TagId) == null)
+            {
+                // tag doesn't exist
+                payload.StatusCode = (int)TagAddUserTagCode.TagNotExist;
+            }
+            else
+            {
+                // create UserTag 
+                await _services.AddUserTag(data.UserId, data.TagId);
+                payload.StatusCode = (int)TagAddUserTagCode.Created;
+            }
+
             return Json(payload);
         }
     }

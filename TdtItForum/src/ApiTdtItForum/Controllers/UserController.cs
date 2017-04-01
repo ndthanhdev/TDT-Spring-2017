@@ -37,12 +37,12 @@ namespace ApiTdtItForum.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] UserLoginForm loginInfo)
         {
-            User innerUser = await _services.Login(loginInfo.Username, loginInfo.PasswordHash);            
+            User innerUser = await _services.Login(loginInfo.Username, loginInfo.PasswordHash);
             var payload = new Payload();
             if (innerUser == null)
             {
-                var isExisted = await _services.IsUsernameExisted(loginInfo.Username);
-                payload.StatusCode = (int)(isExisted ? LoginResponseCode.Incorrect : LoginResponseCode.NotExist);
+                var userInDb = await _services.GetUserByUserName(loginInfo.Username);
+                payload.StatusCode = (int)(userInDb != null ? LoginResponseCode.Incorrect : LoginResponseCode.NotExist);
                 return Json(payload);
             }
 
@@ -67,7 +67,7 @@ namespace ApiTdtItForum.Controllers
 
             if (result == null)
             {
-                if (await _services.IsUsernameExisted(registerInfo.Username))
+                if (await _services.GetUserByUserName(registerInfo.Username) != null)
                 {
                     payload.StatusCode = (int)RegisterResponseCode.Existed;
                     return Json(payload);
@@ -78,7 +78,7 @@ namespace ApiTdtItForum.Controllers
                     return Json(payload);
                 }
             }
-            
+
             payload.StatusCode = (int)RegisterResponseCode.Created;
             return Json(payload);
         }

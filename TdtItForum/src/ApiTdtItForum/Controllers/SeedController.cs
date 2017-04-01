@@ -32,7 +32,7 @@ namespace ApiTdtItForum.Controllers
 
         private async Task SeedUser()
         {
-            if (!await _services.IsUsernameExisted("admin"))
+            if (await _services.GetUserByUserName("admin") == null)
             {
                 var admin = new User()
                 {

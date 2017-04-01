@@ -34,7 +34,7 @@ namespace ApiTdtItForum.Services
                 return null;
             }
 
-            if (await IsUsernameExisted(user.Username))
+            if (await GetUserByUserName(user.Username) != null)
             {
                 return null;
             }
@@ -58,11 +58,11 @@ namespace ApiTdtItForum.Services
             return user;
         }
 
-        public async Task<bool> IsUsernameExisted(string username)
+        public async Task<User> GetUserByUserName(string username)
         {
             var userInDb = await _db.Users.FirstOrDefaultAsync(model => model.Username == username);
 
-            return userInDb != null;
+            return userInDb;
         }
 
         public async Task<User> Login(string username, string passwordHash)
@@ -116,7 +116,7 @@ namespace ApiTdtItForum.Services
         public async Task<object> GetUserProfile(string userId)
         {
             await Task.Yield();
-            var user = await _db.Users.Include(u=>u.UserTags).FirstOrDefaultAsync(u => u.UserId == userId);
+            var user = await _db.Users.Include(u => u.UserTags).FirstOrDefaultAsync(u => u.UserId == userId);
             if (user == null)
                 return null;
             var profile = _mapper.Map<ProfileResponse>(user);
@@ -125,6 +125,11 @@ namespace ApiTdtItForum.Services
 
             }
             return null;
+        }
+
+        public async Task<User> GetUserByIdAsync(string userId)
+        {
+            return await _db.Users.FirstOrDefaultAsync(u => u.UserId == userId);
         }
     }
 
