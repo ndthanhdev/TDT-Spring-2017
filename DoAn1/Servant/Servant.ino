@@ -7,6 +7,7 @@
 #include <SoftwareSerial.h>
 
 #define BAUD (9600)
+#define ENABLE 4
 #define STEP 3
 #define DIR 2
 #define PHOTO_RESISTOR 7
@@ -22,6 +23,8 @@ void setup()
 	prepareMotor();
 	preparePhotoresistor();
 	commandTransporter.begin(BAUD);
+
+	//Serial.begin(9600);
 }
 
 void loop()
@@ -30,12 +33,17 @@ void loop()
 	{
 		releasePayload(commandTransporter.parseInt());
 	}
-
+	//if (Serial.available())
+	//{
+	//	releasePayload(Serial.parseInt());
+	//}
 }
 
 void prepareMotor() {
 	pinMode(STEP, OUTPUT);
 	pinMode(DIR, OUTPUT);
+	pinMode(ENABLE, OUTPUT);
+	digitalWrite(ENABLE, HIGH);
 }
 
 void doHalfRevolution() {
@@ -65,6 +73,7 @@ bool isPayloadCrossed(int waitTime = 2000) {
 }
 
 void releasePayload(int n) {
+	digitalWrite(ENABLE, LOW);	// enable motor
 	while (n > 0)
 	{
 		while (!isPayloadCrossed()) {
@@ -72,6 +81,7 @@ void releasePayload(int n) {
 		}
 		n--;
 	}
+	digitalWrite(ENABLE, HIGH);	// disable motor
 }
 
 
