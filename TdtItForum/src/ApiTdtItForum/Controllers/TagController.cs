@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using ApiTdtItForum.Security;
-using ApiTdtItForum.Controllers.SharedObject.Request;
 using ApiTdtItForum.Services;
 using AutoMapper;
 using ApiTdtItForum.Models;
@@ -33,9 +32,8 @@ namespace ApiTdtItForum.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] TagCreateData data)
-        {
-            var tag = _mapper.Map<Tag>(data);
+        public async Task<IActionResult> Create([FromBody] Tag tag)
+        {            
             Payload payload = new Payload();
             if (TagServices.IsDataCorrect(tag))
             {
@@ -53,7 +51,7 @@ namespace ApiTdtItForum.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddUserTag([FromBody] TagAddUserData data)
+        public async Task<IActionResult> AddUserTag([FromBody] UserTag data)
         {
             Payload payload = new Payload();
 
@@ -76,5 +74,7 @@ namespace ApiTdtItForum.Controllers
 
             return Json(payload);
         }
+
+
     }
 }

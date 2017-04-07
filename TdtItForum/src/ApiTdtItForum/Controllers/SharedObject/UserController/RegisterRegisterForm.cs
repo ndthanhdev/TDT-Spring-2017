@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ApiTdtItForum.Controllers.SharedObjects.Request
+namespace ApiTdtItForum.Controllers.SharedObjects.UserController
 {
     public class RegisterRegisterForm
     {

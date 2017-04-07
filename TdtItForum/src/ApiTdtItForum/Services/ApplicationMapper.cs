@@ -1,5 +1,4 @@
-﻿using ApiTdtItForum.Controllers.SharedObject.Request;
-using ApiTdtItForum.Controllers.SharedObjects.Request;
+﻿using ApiTdtItForum.Controllers.SharedObjects.UserController;
 using ApiTdtItForum.Controllers.SharedObjects.Response;
 using ApiTdtItForum.Models;
 using AutoMapper;
@@ -16,10 +15,13 @@ namespace ApiTdtItForum.Services
         public ApplicationMapper()
         {
             CreateMap<RegisterRegisterForm, User>();
-            CreateMap<User, ProfileResponse>();
-            CreateMap<TagCreateData, Tag>();
+            CreateMap<User, ProfileResponse>()
+                .ForMember(pr => pr.ManagedTagIds, 
+                conf => conf
+                .MapFrom(t => t.UserTags.Select(ut => ut.TagId)));
 
         }
+
     }
 
     public static class ApplicationMapperExtensions

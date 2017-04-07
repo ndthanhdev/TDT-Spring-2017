@@ -34,7 +34,7 @@
   <!--</div>-->
   <!--<div class="form-group">-->
   <!--<label for="inputEmail">Email address</label>-->
-  <!--<input id="inputEmail" [(ngModel)]="model.Mail" type="email" class="form-control" placeholder="Enter email"-->
+  <!--<input id="inpEmailail" [(ngModel)]="model.Mail" type="email" class="form-control" placeholder="Enter email"-->
   <!--required name="email">-->
   <!--</div>-->
   <!--<div class="form-group">-->
@@ -79,7 +79,7 @@
       </div>
       <div class="form-group">
         <label for="inputEmail">Email address</label>
-        <input id="inputEmail" [(ngModel)]="model.Mail" type="email" class="form-control" placeholder="Enter email"
+        <input id="inputEmail" [(ngModel)]="model.Email" type="email" class="form-control" placeholder="Enter email"
                required name="email">
       </div>
       <div class="form-group">
@@ -88,7 +88,8 @@
                required name="phone">
       </div>
       <div class="form-group">
-        <button type="submit" class="btn btn-primary " [disabled]="!registerForm.form.valid||isBusy">Submit</button>
+        <button type="submit" class="btn btn-primary " [disabled]="!registerForm.form.valid||isBusy">Submit
+          <i *ngIf="isBusy" class="fa fa-spinner fa-spin fa-fw"></i></button>
       </div>
     </form>
   </div>

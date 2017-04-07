@@ -16,7 +16,8 @@ using ApiTdtItForum.Services;
 using ApiTdtItForum.SharedObject;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using ApiTdtItForum.Controllers.SharedObjects.Request;
+using ApiTdtItForum.Controllers.SharedObjects.UserController;
+using ApiTdtItForum.Controllers.SharedObject.UserController;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -35,13 +36,13 @@ namespace ApiTdtItForum.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] UserLoginForm loginInfo)
+        public async Task<IActionResult> Login([FromBody] User user)
         {
-            User innerUser = await _services.Login(loginInfo.Username, loginInfo.PasswordHash);
+            User innerUser = await _services.Login(user.Username, user.PasswordHash);
             var payload = new Payload();
             if (innerUser == null)
             {
-                var userInDb = await _services.GetUserByUserName(loginInfo.Username);
+                var userInDb = await _services.GetUserByUserName(user.Username);
                 payload.StatusCode = (int)(userInDb != null ? LoginResponseCode.Incorrect : LoginResponseCode.NotExist);
                 return Json(payload);
             }
@@ -53,7 +54,7 @@ namespace ApiTdtItForum.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody] RegisterRegisterForm registerInfo)
+        public async Task<IActionResult> Register([FromBody] User user)
         {
             var payload = new Payload();
 
@@ -62,12 +63,11 @@ namespace ApiTdtItForum.Controllers
                 new Claim(ClaimTypes.Role,RegisteredRoles.User)
             };
 
-            var userInfo = _mapper.Map<User>(registerInfo);
-            var result = await _services.RegisterUser(userInfo, claims);
+            var result = await _services.RegisterUser(user, claims);
 
             if (result == null)
             {
-                if (await _services.GetUserByUserName(registerInfo.Username) != null)
+                if (await _services.GetUserByUserName(user.Username) != null)
                 {
                     payload.StatusCode = (int)RegisterResponseCode.Existed;
                     return Json(payload);
@@ -84,19 +84,23 @@ namespace ApiTdtItForum.Controllers
         }
 
         [HttpGet]
-        [Authorize(RegisteredPolicys.User)]
         [Route("{id}")]
-        public async Task<IActionResult> GetProfile(int id)
+        public async Task<IActionResult> GetProfile(string id)
         {
-            return Ok(id);
+            var payload = new Payload();
+            payload.Data = await _services.GetUserProfile(id);
+            payload.StatusCode = payload.Data != null ? (int)GetProfileResponseCode.Ok : (int)GetProfileResponseCode.NotExist;
+            return Json(payload);
         }
 
         [HttpGet]
         [Authorize(RegisteredPolicys.User)]
         public async Task<IActionResult> GetProfile()
         {
-            var result = await _services.GetUserProfile(User.Identity.Name);
-            return Ok(User.Identity.Name);
+            var payload = new Payload();
+            payload.Data = await _services.GetUserProfile(User.Identity.Name);
+            payload.StatusCode = payload.Data != null ? (int)GetProfileResponseCode.Ok : (int)GetProfileResponseCode.NotExist;
+            return Json(payload);
         }
     }
 

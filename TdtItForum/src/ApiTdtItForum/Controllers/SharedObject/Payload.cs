@@ -8,7 +8,6 @@ namespace ApiTdtItForum.SharedObject
     public class Payload
     {
         public int StatusCode { get; set; }
-        public string Message { get; set; }
-        public String Data { get; set; }
+        public object Data { get; set; }
     }
 }
