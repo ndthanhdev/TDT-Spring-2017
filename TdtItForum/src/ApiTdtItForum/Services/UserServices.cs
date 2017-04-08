@@ -120,13 +120,15 @@ namespace ApiTdtItForum.Services
             if (user == null)
                 return null;
             var profile = _mapper.Map<ProfileResponse>(user);
-            return null;
+            
+            return profile;
         }
 
-        public async Task<User> GetUserByIdAsync(string userId)
+        public async Task<User> GetUserByIdAsync(string id)
         {
-            return await _db.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+            return await _db.Users.FirstOrDefaultAsync(u => u.UserId == id);
         }
+
     }
 
 

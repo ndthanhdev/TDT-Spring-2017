@@ -14,7 +14,8 @@ export class AppComponent implements OnInit {
 
   isAuthorized: boolean;
   userName: string;
-  profile: ProfileModel;
+  profile = new ProfileModel('', '123', '', '', 1997, '', '', false, []);
+
 
   constructor(private  service: UserService) {
     this.service.authorizationChanged$.subscribe(v => {
@@ -25,12 +26,22 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.authorizationChanged();
+
   }
 
-  authorizationChanged(): void {
+  async authorizationChanged(): Promise<void> {
     this.isAuthorized = UserService.isAuthorized();
     if (this.isAuthorized) {
       this.userName = 'unknown';
+      const lol = this.service.getJwt();
+      const userId = this.service.getJwt()[ConstantValuesService.JWT_USERNAME];
+      const payload = await this.service.getProfile(userId);
+      if (payload.statusCode === 0) {
+        this.profile = payload.data;
+      }
+    }
+    else {
+      this.profile = null;
     }
   }
 }

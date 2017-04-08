@@ -26,20 +26,19 @@ export class RegisterComponent implements OnInit {
     this.model = new RegisterModel('', '', '', '', currentYear, '', '');
   }
 
-  register(): void {
+  async register(): Promise<void> {
     this.isBusy = true;
-    this.service.register(this.model).then(payload => {
-      if (payload.statusCode === 0) {
-        this.router.navigate(['/login']);
-      }
-      else if (payload.statusCode === 1) {
-        this.alert.openDialog('existed');
-      }
-      else {
-        this.alert.openDialog('incorrect');
-      }
-      this.isBusy = false;
-    });
+    const payload = await this.service.register(this.model);
+    if (payload.statusCode === 0) {
+      this.router.navigate(['/login']);
+    }
+    else if (payload.statusCode === 1) {
+      this.alert.openDialog('existed');
+    }
+    else {
+      this.alert.openDialog('incorrect');
+    }
+    this.isBusy = false;
   }
 }
 

@@ -15,7 +15,6 @@ namespace ApiTdtItForum.Controllers.SharedObjects.Response
         public string Email { get; set; }
         public string Phone { get; set; }
         public bool IsVerified { get; set; }
-        public List<string> Roles { get; set; }
         public List<string> ManagedTagIds { get; set; }
         
     }

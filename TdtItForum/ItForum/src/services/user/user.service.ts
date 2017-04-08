@@ -40,7 +40,11 @@ export class UserService {
   }
 
   getProfile(userId: string): Promise<ReceivedPayload> {
-    return this.request.post(ConstantValuesService.REGISTER_URL, userId);
+    return this.request.get(ConstantValuesService.GET_PROFILE_URL + userId);
+  }
+
+  getJwt(): any {
+    return this.jwtHelper.decodeToken(localStorage.getItem('id_token'));
   }
 
 }

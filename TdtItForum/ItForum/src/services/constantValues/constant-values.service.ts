@@ -7,7 +7,9 @@ export class ConstantValuesService {
   public static readonly JWT_TOKEN_NAME = 'id_token';
   public static readonly REGISTER_URL = ConstantValuesService.API + '/user/register';
   public static readonly LOGIN_URL = ConstantValuesService.API + '/user/login';
+  public static readonly GET_PROFILE_URL = ConstantValuesService.API + '/user/getprofile/';
   public static readonly JWT_USERNAME = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name';
+  public static readonly JWT_ROLE = 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role';
 
   constructor() {
   }

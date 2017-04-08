@@ -16,6 +16,10 @@ export class AuthRequestService {
     return this.http.post(url, body).toPromise().then(this.extractData).catch(this.handleError);
   }
 
+  get(url: string): Promise<ReceivedPayload> {
+    return this.http.get(url).toPromise().then(this.extractData).catch(this.handleError);
+  }
+
   private extractData(res: Response): ReceivedPayload {
     const json = res.json();
     return json || {};
