@@ -120,7 +120,7 @@ namespace ApiTdtItForum.Services
             if (user == null)
                 return null;
             var profile = _mapper.Map<ProfileResponse>(user);
-            
+
             return profile;
         }
 
@@ -129,6 +129,12 @@ namespace ApiTdtItForum.Services
             return await _db.Users.FirstOrDefaultAsync(u => u.UserId == id);
         }
 
+        public async Task VerifyUser(string id)
+        {
+            var innerUser = await GetUserByIdAsync(id);
+            innerUser.IsVerified = true;
+            await _db.SaveChangesAsync();
+        }
     }
 
 

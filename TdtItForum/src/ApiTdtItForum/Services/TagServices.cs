@@ -62,6 +62,11 @@ namespace ApiTdtItForum.Services
             await _db.SaveChangesAsync();
             return userTag;
         }
+
+        public async Task<List<Tag>> GetAllTags()
+        {
+            return await _db.Tags.ToListAsync();
+        }
     }
 
     public static class TagServicesExtensions

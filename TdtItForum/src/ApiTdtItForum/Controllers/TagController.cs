@@ -17,7 +17,6 @@ using Newtonsoft.Json;
 namespace ApiTdtItForum.Controllers
 {
     [Route("[controller]/[action]")]
-    [Authorize(RegisteredPolicys.Adminstrator)]
     public class TagController : Controller
     {
         TagServices _services;
@@ -32,8 +31,9 @@ namespace ApiTdtItForum.Controllers
         }
 
         [HttpPost]
+        [Authorize(RegisteredPolicys.Adminstrator)]
         public async Task<IActionResult> Create([FromBody] Tag tag)
-        {            
+        {
             Payload payload = new Payload();
             if (TagServices.IsDataCorrect(tag))
             {
@@ -51,6 +51,7 @@ namespace ApiTdtItForum.Controllers
         }
 
         [HttpPost]
+        [Authorize(RegisteredPolicys.Adminstrator)]
         public async Task<IActionResult> AddUserTag([FromBody] UserTag data)
         {
             Payload payload = new Payload();
@@ -75,6 +76,13 @@ namespace ApiTdtItForum.Controllers
             return Json(payload);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllTags()
+        {
+            Payload payload = new Payload();
+            payload.Data = await _services.GetAllTags();
+            return Json(payload);
+        }
 
     }
 }

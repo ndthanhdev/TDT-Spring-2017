@@ -102,6 +102,13 @@ namespace ApiTdtItForum.Controllers
             payload.StatusCode = payload.Data != null ? (int)GetProfileResponseCode.Ok : (int)GetProfileResponseCode.NotExist;
             return Json(payload);
         }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> VerifyUser(string id)
+        {
+            
+        }
     }
 
 
