@@ -119,7 +119,7 @@ namespace ApiTdtItForum.Services
             var user = await _db.Users.Include(u => u.UserTags).FirstOrDefaultAsync(u => u.UserId == userId);
             if (user == null)
                 return null;
-            var profile = _mapper.Map<ProfileResponse>(user);
+            var profile = _mapper.Map<GetProfileResponseData>(user);
 
             return profile;
         }

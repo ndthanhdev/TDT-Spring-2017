@@ -70,6 +70,8 @@ namespace ApiTdtItForum
 
             services.AddTagServices();
 
+            services.AddPostServices();
+
             services.AddCors();
 
             services.AddApplicationMapper();

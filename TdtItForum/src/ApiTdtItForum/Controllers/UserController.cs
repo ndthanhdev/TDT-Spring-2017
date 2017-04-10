@@ -89,7 +89,7 @@ namespace ApiTdtItForum.Controllers
         {
             var payload = new Payload();
             payload.Data = await _services.GetUserProfile(id);
-            payload.StatusCode = payload.Data != null ? (int)GetProfileResponseCode.Ok : (int)GetProfileResponseCode.NotExist;
+            payload.StatusCode = payload.Data != null ? GetProfileResponseCode.Ok : GetProfileResponseCode.NotExist;
             return Json(payload);
         }
 
@@ -99,17 +99,27 @@ namespace ApiTdtItForum.Controllers
         {
             var payload = new Payload();
             payload.Data = await _services.GetUserProfile(User.Identity.Name);
-            payload.StatusCode = payload.Data != null ? (int)GetProfileResponseCode.Ok : (int)GetProfileResponseCode.NotExist;
+            payload.StatusCode = payload.Data != null ? GetProfileResponseCode.Ok : GetProfileResponseCode.NotExist;
             return Json(payload);
         }
 
         [HttpGet]
         [Route("{id}")]
+        [Authorize(RegisteredPolicys.Adminstrator)]
         public async Task<IActionResult> VerifyUser(string id)
         {
-            
+            Payload payload = new Payload();
+            var innerUser = await _services.GetUserByIdAsync(id);
+            if (innerUser == null)
+            {
+                payload.StatusCode = GetProfileResponseCode.NotExist;
+                return Json(payload);
+            }
+            payload.Data = _services.VerifyUser(id);
+            return Json(payload);
         }
+
+
+
     }
-
-
 }

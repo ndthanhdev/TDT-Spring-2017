@@ -1,4 +1,5 @@
 ﻿using ApiTdtItForum.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -16,15 +17,16 @@ namespace ApiTdtItForum.Services
             _db = db;
         }
 
-        //public async Task<List<Post>> GetPosts()
-        //{
-            
-        //}
+        public async Task<List<Container>> GetNewPosts()
+        {
+            var posts = await _db.Containers.Include(c => c.Post).OrderByDescending(c => c.Post.PublishDate).ToListAsync();
+            return posts;
+        }
     }
 
     public static class PostServicesExtensions
     {
-        public static void AddTagServices(this IServiceCollection builder)
+        public static void AddPostServices(this IServiceCollection builder)
         {
             builder.AddScoped(typeof(PostServices));
         }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApiTdtItForum.Controllers.SharedObjects.Response
 {
-    public class ProfileResponse
+    public class GetProfileResponseData
     {
         public string UserId { get; set; }
         public string Username { get; set; }

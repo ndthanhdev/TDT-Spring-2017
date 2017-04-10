@@ -15,7 +15,7 @@ namespace ApiTdtItForum.Services
         public ApplicationMapper()
         {
             CreateMap<RegisterRegisterForm, User>();
-            CreateMap<User, ProfileResponse>()
+            CreateMap<User, GetProfileResponseData>()
                 .ForMember(pr => pr.ManagedTagIds, 
                 conf => conf
                 .MapFrom(t => t.UserTags.Select(ut => ut.TagId)));

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace ApiTdtItForum.Controllers.SharedObject.UserController
 {
-    public enum GetProfileResponseCode
+    public class GetProfileResponseCode
     {
-        Ok,
-        NotExist
+        public readonly static int Ok = 0;
+        public readonly static int NotExist = 0;
     }
 }
