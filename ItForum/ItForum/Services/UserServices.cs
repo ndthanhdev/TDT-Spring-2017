@@ -1,6 +1,14 @@
-﻿using System;
+﻿using AutoMapper;
+using ItForum.Controllers.DTO.UserController;
+using ItForum.Models;
+using ItForum.Services.Jwt;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ItForum.Services
@@ -8,10 +16,10 @@ namespace ItForum.Services
     public class UserServices
     {
         DataContext _db;
-        Jwt _jwt;
+        JwtServices _jwt;
         readonly IMapper _mapper;
 
-        public UserServices(DataContext dataContext, Jwt jwt, IMapper mapper)
+        public UserServices(DataContext dataContext, JwtServices jwt, IMapper mapper)
         {
             _db = dataContext;
             _jwt = jwt;

@@ -11,6 +11,7 @@ namespace ItForum.Services.Jwt
     public class JwtServices
     {
         private static readonly TimeSpan VALIDFOR = TimeSpan.FromDays(1);
+
         public string Issuer { get; set; }
 
         public string Audience { get; set; }
@@ -19,12 +20,12 @@ namespace ItForum.Services.Jwt
 
         public DateTime Expiration => NotBefore.Add(VALIDFOR);
 
-        public SigningCredentials SigningCredentials { get; set; }
+        public SigningCredentials SigningCredentials { get; set; }        
     }
 
     public static class JwtServicesExtensions
     {
-        public static IServiceCollection AddJwtServicesExtensions(this IServiceCollection builder, string issuer, string audience, string secretKey)
+        public static IServiceCollection AddJwtServices(this IServiceCollection builder, string issuer, string audience, string secretKey)
         {
             builder.AddTransient(service =>
             {

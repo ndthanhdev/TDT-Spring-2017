@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ItForum.Controllers.DTO.UserController;
 using ItForum.Models;
 using Microsoft.Extensions.DependencyInjection;
 using System;
