@@ -1,19 +1,17 @@
-﻿using ItForum.Models;
+﻿using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using ItForum.Models;
 using ItForum.Services;
 using ItForum.Services.Jwt;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace ItForum.Controllers
 {
     [Route("[controller]")]
     public class SeedController : Controller
     {
-        UserServices _services;
+        private readonly UserServices _services;
 
         public SeedController(UserServices services)
         {
@@ -32,7 +30,7 @@ namespace ItForum.Controllers
         {
             if (await _services.GetUserByUserName("admin") == null)
             {
-                var admin = new User()
+                var admin = new User
                 {
                     Username = "admin",
                     PasswordHash = "admin",
@@ -43,10 +41,9 @@ namespace ItForum.Controllers
                     Phone = "0123456789"
                 };
 
-                var roles = new[] { RegisteredRoles.Adminstrator, RegisteredRoles.User, RegisteredRoles.Moderator };
+                var roles = new[] {RegisteredRoles.Adminstrator, RegisteredRoles.User, RegisteredRoles.Moderator};
 
                 await _services.RegisterUser(admin, roles.Select(r => new Claim(ClaimTypes.Role, r)));
-
             }
         }
     }

@@ -1,31 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
+using ItForum.Services;
+using ItForum.Services.Jwt;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using ItForum.Services;
-using ItForum.Services.Jwt;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 namespace ItForum
 {
     public class Startup
     {
-        private readonly IConfigurationSection _jwtConfigurationSection;
         private readonly string _connectionString;
+        private readonly IConfigurationSection _jwtConfigurationSection;
 
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("appsettings.json", false, true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
 
@@ -35,10 +32,9 @@ namespace ItForum
             // This line for local 
             _connectionString = Configuration.GetConnectionString("LocalConnection");
 #else
-            //This line for server 
+//This line for server 
             _connectionString = Configuration.GetConnectionString("DefaultConnection");
 #endif
-
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -46,10 +42,7 @@ namespace ItForum
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(options =>
-            {
-                options.UseSqlite(_connectionString);
-            });
+            services.AddDbContext<DataContext>(options => { options.UseSqlite(_connectionString); });
 
             // Add framework services.
             services.AddMvc();
@@ -95,7 +88,8 @@ namespace ItForum
                 ValidAudience = _jwtConfigurationSection[nameof(JwtServices.Audience)],
 
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtConfigurationSection["Secret"])),
+                IssuerSigningKey =
+                    new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtConfigurationSection["Secret"])),
 
                 RequireExpirationTime = true,
                 ValidateLifetime = true,

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace ItForum.Models
 {
@@ -11,13 +7,13 @@ namespace ItForum.Models
     public class UserClaim
     {
         /// <summary>
-        /// Gets or sets the identifier for this user claim.
+        ///     Gets or sets the identifier for this user claim.
         /// </summary>
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public virtual string Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the primary key of the user associated with this claim.
+        ///     Gets or sets the primary key of the user associated with this claim.
         /// </summary>
         public virtual string UserId { get; set; }
 
@@ -25,17 +21,17 @@ namespace ItForum.Models
         public User User { get; set; }
 
         /// <summary>
-        /// Gets or sets the claim type for this claim.
+        ///     Gets or sets the claim type for this claim.
         /// </summary>
         public virtual string ClaimType { get; set; }
 
         /// <summary>
-        /// Gets or sets the claim value for this claim.
+        ///     Gets or sets the claim value for this claim.
         /// </summary>
         public virtual string ClaimValue { get; set; }
 
         /// <summary>
-        /// Converts the entity into a Claim instance.
+        ///     Converts the entity into a Claim instance.
         /// </summary>
         /// <returns></returns>
         public virtual Claim ToClaim()
@@ -44,7 +40,7 @@ namespace ItForum.Models
         }
 
         /// <summary>
-        /// Reads the type and value from the Claim.
+        ///     Reads the type and value from the Claim.
         /// </summary>
         /// <param name="claim"></param>
         public virtual void InitializeFromClaim(Claim claim)

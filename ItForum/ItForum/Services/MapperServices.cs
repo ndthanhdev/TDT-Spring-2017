@@ -1,11 +1,8 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using ItForum.Controllers.DTO.UserController;
 using ItForum.Models;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ItForum.Services
 {
@@ -16,8 +13,8 @@ namespace ItForum.Services
             //CreateMap<RegisterRegisterForm, User>();
             CreateMap<User, GetProfileResponseData>()
                 .ForMember(pr => pr.ManagedTagIds,
-                conf => conf
-                .MapFrom(t => t.UserTags.Select(ut => ut.TagId)));
+                    conf => conf
+                        .MapFrom(t => t.UserTags.Select(ut => ut.TagId)));
         }
     }
 
@@ -25,12 +22,9 @@ namespace ItForum.Services
     {
         public static void AddMapperServices(this IServiceCollection builder)
         {
-            var configuration = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile<MapperServices>();
-            });
+            var configuration = new MapperConfiguration(cfg => { cfg.AddProfile<MapperServices>(); });
 
-            builder.AddSingleton<IMapper>(configuration.CreateMapper());
+            builder.AddSingleton(configuration.CreateMapper());
         }
     }
 }

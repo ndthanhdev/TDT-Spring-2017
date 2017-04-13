@@ -1,17 +1,19 @@
 ﻿using ItForum.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ItForum
 {
     public class DataContext : DbContext
     {
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        {
+        }
+
         public DbSet<User> Users { get; set; }
+
         //public DbSet<Role> Roles { get; set; }
         public DbSet<Post> Posts { get; set; }
+
         public DbSet<Point> Points { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Comment> Comments { get; set; }
@@ -21,11 +23,8 @@ namespace ItForum
 
         // Mapping two one to many
         public DbSet<UserTag> UserTags { get; set; }
-        public DbSet<ContainerTag> ContainerTags { get; set; }
 
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
-        {
-        }
+        public DbSet<ContainerTag> ContainerTags { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -37,17 +36,15 @@ namespace ItForum
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Point>()
-                .HasKey(model => new { model.PostId, model.UserId });
+                .HasKey(model => new {model.PostId, model.UserId});
 
             // many-to-many Container and Tag
             modelBuilder.Entity<ContainerTag>()
-                .HasKey(model => new { model.ContainerId, model.TagId });
+                .HasKey(model => new {model.ContainerId, model.TagId});
 
             // many-to-many User and Tag
             modelBuilder.Entity<UserTag>()
-                .HasKey(model => new { model.UserId, model.TagId });
-
+                .HasKey(model => new {model.UserId, model.TagId});
         }
-
     }
 }

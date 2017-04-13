@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ItForum.Models
 {
@@ -10,6 +7,7 @@ namespace ItForum.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string UserId { get; set; }
+
         public string Username { get; set; }
         public string PasswordHash { get; set; }
         public string FullName { get; set; }

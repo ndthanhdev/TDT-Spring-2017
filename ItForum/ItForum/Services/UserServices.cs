@@ -1,23 +1,22 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using AutoMapper;
 using ItForum.Controllers.DTO.UserController;
 using ItForum.Models;
 using ItForum.Services.Jwt;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace ItForum.Services
 {
     public class UserServices
     {
-        DataContext _db;
-        JwtServices _jwt;
-        readonly IMapper _mapper;
+        private readonly IMapper _mapper;
+        private readonly DataContext _db;
+        private readonly JwtServices _jwt;
 
         public UserServices(DataContext dataContext, JwtServices jwt, IMapper mapper)
         {
@@ -29,28 +28,22 @@ namespace ItForum.Services
         public async Task<User> RegisterUser(User user, IEnumerable<Claim> claims, bool IsVerified = false)
         {
             if (!IsCorrectInfor(user))
-            {
                 return null;
-            }
 
             if (await GetUserByUserName(user.Username) != null)
-            {
                 return null;
-            }
 
             user.IsVerified = IsVerified;
             await _db.Users.AddAsync(user);
-            List<Task> jobs = new List<Task>();
+            var jobs = new List<Task>();
 
             foreach (var claim in claims)
-            {
-                jobs.Add(_db.UserClaims.AddAsync(new UserClaim()
+                jobs.Add(_db.UserClaims.AddAsync(new UserClaim
                 {
                     UserId = user.UserId,
                     ClaimType = claim.Type,
                     ClaimValue = claim.Value
                 }));
-            }
 
             await Task.WhenAll(jobs);
             await _db.SaveChangesAsync();
@@ -66,27 +59,27 @@ namespace ItForum.Services
 
         public async Task<User> Login(string username, string passwordHash)
         {
-            var innerUser = await _db.Users.FirstOrDefaultAsync(model => model.Username == username && model.PasswordHash == passwordHash);
+            var innerUser =
+                await _db.Users.FirstOrDefaultAsync(
+                    model => model.Username == username && model.PasswordHash == passwordHash);
             return innerUser;
         }
 
         public static bool IsCorrectInfor(User user)
         {
             if (string.IsNullOrEmpty(user.Username)
-               || string.IsNullOrEmpty(user.PasswordHash)
-               || string.IsNullOrEmpty(user.FullName)
-               || string.IsNullOrEmpty(user.Faculty)
-               || string.IsNullOrEmpty(user.Email)
-               || string.IsNullOrEmpty(user.Phone))
-            {
+                || string.IsNullOrEmpty(user.PasswordHash)
+                || string.IsNullOrEmpty(user.FullName)
+                || string.IsNullOrEmpty(user.Faculty)
+                || string.IsNullOrEmpty(user.Email)
+                || string.IsNullOrEmpty(user.Phone))
                 return false;
-            }
             return true;
         }
 
-        public async Task<List<Claim>> getClaimsAsync(User user)
+        public async Task<List<Claim>> GetClaimsAsync(User user)
         {
-            List<Claim> claims = new List<Claim>();
+            var claims = new List<Claim>();
 
             await _db.Entry(user).Collection(u => u.UserClaims).LoadAsync();
             claims.AddRange(user.UserClaims.Select(uc => uc.ToClaim()));
@@ -97,15 +90,15 @@ namespace ItForum.Services
 
         public async Task<string> GenerateJwt(User user)
         {
-            var claims = await this.getClaimsAsync(user);
+            var claims = await GetClaimsAsync(user);
 
             var jwtToken = new JwtSecurityToken(
-                issuer: _jwt.Issuer,
-                audience: _jwt.Audience,
-                claims: claims,
-                notBefore: _jwt.NotBefore,
-                expires: _jwt.Expiration,
-                signingCredentials: _jwt.SigningCredentials);
+                _jwt.Issuer,
+                _jwt.Audience,
+                claims,
+                _jwt.NotBefore,
+                _jwt.Expiration,
+                _jwt.SigningCredentials);
 
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwtToken);
 
@@ -134,8 +127,13 @@ namespace ItForum.Services
             innerUser.IsVerified = true;
             await _db.SaveChangesAsync();
         }
-    }
 
+        public async Task<bool> IsTdt(string studentId)
+        {
+            await Task.Yield();
+            return true;
+        }
+    }
 
 
     public static class UserServicesExtensions

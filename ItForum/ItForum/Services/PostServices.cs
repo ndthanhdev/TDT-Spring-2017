@@ -1,16 +1,15 @@
-﻿using ItForum.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ItForum.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ItForum.Services
 {
     public class PostServices
     {
-        private DataContext _db;
+        private readonly DataContext _db;
 
         public PostServices(DataContext db)
         {
@@ -19,7 +18,9 @@ namespace ItForum.Services
 
         public async Task<List<Container>> GetNewPosts()
         {
-            var posts = await _db.Containers.Include(c => c.Post).OrderByDescending(c => c.Post.PublishDate).ToListAsync();
+            var posts = await _db.Containers.Include(c => c.Post)
+                .OrderByDescending(c => c.Post.PublishDate)
+                .ToListAsync();
             return posts;
         }
     }

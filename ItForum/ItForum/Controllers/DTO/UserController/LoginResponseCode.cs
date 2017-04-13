@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ItForum.Controllers.DTO.UserController
+﻿namespace ItForum.Controllers.DTO.UserController
 {
-    public enum LoginResponseCode
+    public class LoginResponseCode
     {
-        Logged,
-        Incorrect,
-        NotExist
+        public readonly int Logged = 0;
+        public readonly int Incorrect = 1;
+        public readonly int NotExist = 2;
     }
 }

@@ -1,18 +1,16 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using AutoMapper;
 using ItForum.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ItForum.Services
 {
     public class TagServices
     {
-        readonly DataContext _db;
-        readonly IMapper _mapper;
+        private readonly DataContext _db;
+        private readonly IMapper _mapper;
 
         public TagServices(DataContext db, IMapper mapper)
         {
@@ -53,7 +51,7 @@ namespace ItForum.Services
 
         public async Task<UserTag> AddUserTag(string userId, string tagId)
         {
-            UserTag userTag = new UserTag()
+            var userTag = new UserTag
             {
                 UserId = userId,
                 TagId = tagId

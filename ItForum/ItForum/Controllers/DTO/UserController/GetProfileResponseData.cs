@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ItForum.Controllers.DTO.UserController
 {
@@ -16,6 +13,5 @@ namespace ItForum.Controllers.DTO.UserController
         public string Phone { get; set; }
         public bool IsVerified { get; set; }
         public List<string> ManagedTagIds { get; set; }
-
     }
 }
