@@ -7,7 +7,7 @@ namespace ItForum.Services.Jwt
 {
     public class JwtServices
     {
-        private static readonly TimeSpan VALIDFOR = TimeSpan.FromDays(1);
+        private static readonly TimeSpan Validfor = TimeSpan.FromDays(1);
 
         public string Issuer { get; set; }
 
@@ -15,7 +15,7 @@ namespace ItForum.Services.Jwt
 
         public DateTime NotBefore { get; set; } = DateTime.UtcNow;
 
-        public DateTime Expiration => NotBefore.Add(VALIDFOR);
+        public DateTime Expiration => NotBefore.Add(Validfor);
 
         public SigningCredentials SigningCredentials { get; set; }
     }
@@ -27,12 +27,14 @@ namespace ItForum.Services.Jwt
         {
             builder.AddTransient(service =>
             {
-                var jwt = new JwtServices();
-                jwt.Issuer = issuer;
-                jwt.Audience = audience;
-                jwt.SigningCredentials =
-                    new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey)),
-                        SecurityAlgorithms.HmacSha256);
+                var jwt = new JwtServices
+                {
+                    Issuer = issuer,
+                    Audience = audience,
+                    SigningCredentials = new SigningCredentials(
+                        new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey)),
+                        SecurityAlgorithms.HmacSha256)
+                };
                 return jwt;
             });
             return builder;

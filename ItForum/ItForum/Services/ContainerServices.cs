@@ -10,12 +10,14 @@ namespace ItForum.Services
     public class ContainerServices
     {
         private readonly DataContext _db;
+        private readonly PostServices _postServices;
         private readonly TagServices _tagServices;
 
-        public ContainerServices(DataContext db, TagServices tagServices)
+        public ContainerServices(DataContext db, TagServices tagServices, PostServices postServices)
         {
             _db = db;
             _tagServices = tagServices;
+            _postServices = postServices;
         }
 
         public async Task<List<Container>> GetContainers()
@@ -41,28 +43,39 @@ namespace ItForum.Services
             await Task.Yield();
             if (string.IsNullOrWhiteSpace(container.Title))
                 return false;
-            if (await PostServices.IsPostValid(container.Post))
-                return false;
+
             var tagTasks = container.ContainerTags
                 ?.Select(containerContainerTag => _tagServices.GetTagById(containerContainerTag.ContainerId))
                 .ToList();
-            if (tagTasks == null) return false;
+            if (tagTasks == null)
+                return false;
             await Task.WhenAll(tagTasks);
             return tagTasks.All(tagTask => tagTask.Result != null);
         }
 
-        public async Task<Container> CreateContainerTask(Container container)
+        public async Task<Container> CreateContainer(Container container)
         {
-            if (await IsContainerValid(container))
-                return null;
             await _db.Containers.AddAsync(container);
+            await _db.SaveChangesAsync();
             return container;
+        }
+
+        public async Task<Container> GetContainerById(string containterId)
+        {
+            return await _db.Containers.FirstOrDefaultAsync(c => c.ContainerId == containterId);
+        }
+
+        public async Task<Container> AddPost(Post post)
+        {
+            await _db.Posts.AddAsync(post);
+            await _db.SaveChangesAsync();
+            return await GetContainerById(post.ContainerId);
         }
     }
 
-    public static class PostServicesExtensions
+    public static class ContainerServicesExtensions
     {
-        public static void AddPostServices(this IServiceCollection builder)
+        public static void AddContainerServices(this IServiceCollection builder)
         {
             builder.AddScoped(typeof(ContainerServices));
         }
