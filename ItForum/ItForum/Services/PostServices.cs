@@ -1,35 +1,36 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using ItForum.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace ItForum.Services
 {
     public class PostServices
     {
-        private readonly DataContext _db;
+        private readonly DataContext _data;
 
-        public PostServices(DataContext db)
+        public PostServices(DataContext data)
         {
-            _db = db;
+            _data = data;
         }
 
-        public async Task<List<Container>> GetNewPosts()
+        public async Task<List<Post>> GetPostInContainer(string containerId)
         {
-            var posts = await _db.Containers.Include(c => c.Post)
-                .OrderByDescending(c => c.Post.PublishDate)
-                .ToListAsync();
-            return posts;
+            var container = await _data.Containers.Include(c => c.Post)
+                .FirstOrDefaultAsync(c => c.ContainerId == containerId);
+            if (container == null)
+                return null;
+            return new List<Post>(container.Posts);
         }
-    }
 
-    public static class PostServicesExtensions
-    {
-        public static void AddPostServices(this IServiceCollection builder)
+        public static async Task<bool> IsPostValid(Post post)
         {
-            builder.AddScoped(typeof(PostServices));
+            await Task.Yield();
+            if (string.IsNullOrWhiteSpace(post?.Content))
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

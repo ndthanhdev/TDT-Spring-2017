@@ -2,8 +2,8 @@
 {
     public class LoginResponseCode
     {
-        public readonly int Logged = 0;
-        public readonly int Incorrect = 1;
-        public readonly int NotExist = 2;
+        public static readonly int Logged = 0;
+        public static readonly int Incorrect = 1;
+        public static readonly int NotExist = 2;
     }
 }

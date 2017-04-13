@@ -31,9 +31,7 @@ namespace ItForum.Controllers
             if (innerUser == null)
             {
                 var userInDb = await _services.GetUserByUserName(user.Username);
-                payload.StatusCode = (int) (userInDb != null
-                    ? LoginResponseCode.Incorrect
-                    : LoginResponseCode.NotExist);
+                payload.StatusCode = userInDb != null? LoginResponseCode.Incorrect: LoginResponseCode.NotExist;
                 return Json(payload);
             }
 
@@ -59,14 +57,14 @@ namespace ItForum.Controllers
             {
                 if (await _services.GetUserByUserName(user.Username) != null)
                 {
-                    payload.StatusCode = (int) RegisterResponseCode.Existed;
+                    payload.StatusCode = (int)RegisterResponseCode.Existed;
                     return Json(payload);
                 }
-                payload.StatusCode = (int) RegisterResponseCode.Incorrect;
+                payload.StatusCode = (int)RegisterResponseCode.Incorrect;
                 return Json(payload);
             }
 
-            payload.StatusCode = (int) RegisterResponseCode.Created;
+            payload.StatusCode = (int)RegisterResponseCode.Created;
             return Json(payload);
         }
 
@@ -74,7 +72,7 @@ namespace ItForum.Controllers
         [Route("{id}")]
         public async Task<IActionResult> GetProfile(string id)
         {
-            var payload = new Payload {Data = await _services.GetUserProfile(id)};
+            var payload = new Payload { Data = await _services.GetUserProfile(id) };
             payload.StatusCode = payload.Data != null ? GetProfileResponseCode.Ok : GetProfileResponseCode.NotExist;
             return Json(payload);
         }
@@ -83,7 +81,7 @@ namespace ItForum.Controllers
         [Authorize(RegisteredPolicys.User)]
         public async Task<IActionResult> GetProfile()
         {
-            var payload = new Payload {Data = await _services.GetUserProfile(User.Identity.Name)};
+            var payload = new Payload { Data = await _services.GetUserProfile(User.Identity.Name) };
             payload.StatusCode = payload.Data != null ? GetProfileResponseCode.Ok : GetProfileResponseCode.NotExist;
             return Json(payload);
         }

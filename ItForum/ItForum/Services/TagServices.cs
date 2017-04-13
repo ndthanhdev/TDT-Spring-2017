@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
 using ItForum.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,12 +9,10 @@ namespace ItForum.Services
     public class TagServices
     {
         private readonly DataContext _db;
-        private readonly IMapper _mapper;
 
-        public TagServices(DataContext db, IMapper mapper)
+        public TagServices(DataContext db)
         {
             _db = db;
-            _mapper = mapper;
         }
 
         public async Task<Tag> CreateTag(Tag tag)
@@ -39,9 +36,9 @@ namespace ItForum.Services
             return !string.IsNullOrWhiteSpace(tag.Name) && !string.IsNullOrWhiteSpace(tag.TagId);
         }
 
-        public async Task<bool> IsUserHasTag(string userId, string TagId)
+        public async Task<bool> IsUserHasTag(string userId, string tagId)
         {
-            return await _db.UserTags.FirstOrDefaultAsync(ut => ut.UserId == userId && ut.TagId == TagId) != null;
+            return await _db.UserTags.FirstOrDefaultAsync(ut => ut.UserId == userId && ut.TagId == tagId) != null;
         }
 
         public async Task<Tag> GetTagById(string tagId)

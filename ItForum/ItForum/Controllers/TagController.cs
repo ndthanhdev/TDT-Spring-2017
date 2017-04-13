@@ -40,7 +40,7 @@ namespace ItForum.Controllers
         }
 
         [HttpPost]
-        [Authorize(RegisteredPolicys.Adminstrator)]
+        [Authorize(RegisteredPolicys.Moderator)]
         public async Task<IActionResult> AddUserTag([FromBody] UserTag data)
         {
             var payload = new Payload();
