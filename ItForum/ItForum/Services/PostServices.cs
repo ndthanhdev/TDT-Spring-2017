@@ -21,9 +21,7 @@ namespace ItForum.Services
         {
             var container = await _data.Containers.Include(c => c.Post)
                 .FirstOrDefaultAsync(c => c.ContainerId == containerId);
-            if (container == null)
-                return null;
-            return new List<Post>(container.Posts);
+            return container == null ? null : new List<Post>(container.Posts);
         }
 
         public async Task<bool> IsPostValid(Post post)
@@ -40,6 +38,12 @@ namespace ItForum.Services
             return true;
         }
 
+        public async Task<Post> AddPostTask(Post post)
+        {
+            await _data.Posts.AddAsync(post);
+            await _data.SaveChangesAsync();
+            return post;
+        }
     }
     public static class PostServicesExtensions
     {
