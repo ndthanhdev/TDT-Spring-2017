@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
       const lol = this.service.getJwt();
       const userId = this.service.getJwt()[ConstantValuesService.JWT_USERNAME];
       const payload = await this.service.getProfile(userId);
-      if (payload.statusCode === 0) {
+       if (payload.statusCode === 0) {
         this.profile = payload.data;
       }
     }

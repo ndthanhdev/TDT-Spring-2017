@@ -26,18 +26,27 @@ export class LoginComponent implements OnInit {
 
   async login(): Promise<void> {
     this.isBusy = true;
-    const payload = await this.service.login(this.model);
-    if (payload.statusCode === 0) {
-      localStorage.setItem(ConstantValuesService.JWT_TOKEN_NAME, JSON.stringify(payload.data));
-      this.service.notifyAuthorizedChanged();
-      this.router.navigate(['/home']);
+    try {
+      const payload = await this.service.login(this.model);
+      if (payload.statusCode === 0) {
+        localStorage.setItem(ConstantValuesService.JWT_TOKEN_NAME, JSON.stringify(payload.data));
+        this.service.notifyAuthorizedChanged();
+        this.router.navigate(['/home']);
+      }
+      else if (payload.statusCode === 1) {
+        this.alert.openDialog("user isn't exist");
+      }
+      else {
+        this.alert.openDialog('incorrect');
+      }
     }
-    else if (payload.statusCode === 1) {
-      this.alert.openDialog('existed');
+    catch (e) {
+      this.alert.openDialog(e);
     }
-    else {
-      this.alert.openDialog('incorrect');
+    finally {
+      this.isBusy = false;
     }
-    this.isBusy = false;
+
+
   }
 }

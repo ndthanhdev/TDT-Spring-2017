@@ -2,6 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule, MdDialogModule} from '@angular/material';
 
 import {Ng2PageScrollModule} from 'ng2-page-scroll';
@@ -24,6 +25,8 @@ import {RegisterComponent} from './register/register.component';
 import {AlertComponent} from './alert/alert.component';
 import {LoginComponent} from './login/login.component';
 import {UserService} from '../services/user/user.service';
+import { ProfileComponent } from './profile/profile.component';
+import { CategoryComponent } from './category/category.component';
 
 
 @NgModule({
@@ -35,7 +38,9 @@ import {UserService} from '../services/user/user.service';
     FooterComponent,
     RegisterComponent,
     AlertComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,8 @@ import {UserService} from '../services/user/user.service';
     HttpModule,
     AppRoutingModule,
     NgbModule.forRoot(),
-    MaterialModule,
+    BrowserAnimationsModule,
+    MdDialogModule,
     Ng2PageScrollModule.forRoot(),
     AuthHttpModule
   ],

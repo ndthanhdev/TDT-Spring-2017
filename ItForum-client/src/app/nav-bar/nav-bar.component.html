@@ -11,16 +11,18 @@
         <a class="nav-link " routerLink="home" routerLinkActive="active">Home</a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link " href="# ">Category</a>
+        <a routerLink="category" class="nav-link " routerLinkActive="active">Category</a>
       </li>
-      <li class="nav-item ">
-        <a routerLink="register" routerLinkActive="active" class="nav-link " href="">User</a>
+      <li class="nav-item" *ngIf="isVerify">
+        <a routerLink="profile" routerLinkActive="active" class="nav-link " href="">Profile</a>
       </li>
     </ul>
     <form class="form-inline">
       <a routerLink="register" routerLinkActive="active" class="btn btn-success my-1 mx-2 my-sm-0"
          *ngIf="!isAuthorized">Register</a>
       <a routerLink="login" routerLinkActive="active" class="btn btn-primary my-1 mx-2 my-sm-0" *ngIf="!isAuthorized">Login</a>
+      <i class="fa" aria-hidden="true" *ngIf="isAuthorized"
+         [ngClass]="{'fa-check-circle-o':isVerify, 'fa-circle-o':!isVerify}"></i>
       <a routerLinkActive="active" routerLink="profile" *ngIf="isAuthorized" href="" class="my-1 mx-2 my-sm-0">Welcome,
         {{userName}}!</a>
       <a (click)="logout()" class="btn btn-danger my-1 my-sm-0" *ngIf="isAuthorized">Logout</a>

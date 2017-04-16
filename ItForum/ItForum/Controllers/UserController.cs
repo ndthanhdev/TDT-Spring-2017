@@ -31,7 +31,7 @@ namespace ItForum.Controllers
             if (innerUser == null)
             {
                 var userInDb = await _services.GetUserByUserName(user.Username);
-                payload.StatusCode = userInDb != null? LoginResponseCode.Incorrect: LoginResponseCode.NotExist;
+                payload.StatusCode = userInDb != null ? LoginResponseCode.NotExist : LoginResponseCode.Incorrect;
                 return Json(payload);
             }
 
