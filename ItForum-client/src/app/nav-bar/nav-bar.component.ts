@@ -19,6 +19,12 @@ export class NavBarComponent implements OnInit, OnDestroy {
   @Input()
   isVerify: boolean;
 
+  @Input()
+  isAdmin: boolean;
+
+  @Input()
+  isMod: boolean;
+
   isShrink = false;
   isCollapsed = true;
 

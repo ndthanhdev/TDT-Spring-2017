@@ -27,6 +27,9 @@ import {LoginComponent} from './login/login.component';
 import {UserService} from '../services/user/user.service';
 import { ProfileComponent } from './profile/profile.component';
 import { CategoryComponent } from './category/category.component';
+import { ManageUserComponent } from './manage-user/manage-user.component';
+import { ManageCategoryComponent } from './manage-category/manage-category.component';
+import { VerifyPostComponent } from './verify-post/verify-post.component';
 
 
 @NgModule({
@@ -40,7 +43,10 @@ import { CategoryComponent } from './category/category.component';
     AlertComponent,
     LoginComponent,
     ProfileComponent,
-    CategoryComponent
+    CategoryComponent,
+    ManageUserComponent,
+    ManageCategoryComponent,
+    VerifyPostComponent,
   ],
   imports: [
     BrowserModule,

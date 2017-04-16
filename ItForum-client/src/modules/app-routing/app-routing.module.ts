@@ -6,6 +6,9 @@ import {RegisterComponent} from '../../app/register/register.component';
 import {LoginComponent} from '../../app/login/login.component';
 import {ProfileComponent} from "../../app/profile/profile.component";
 import {CategoryComponent} from "../../app/category/category.component";
+import {ManageUserComponent} from "../../app/manage-user/manage-user.component";
+import {ManageCategoryComponent} from "../../app/manage-category/manage-category.component";
+import {VerifyPostComponent} from "../../app/verify-post/verify-post.component";
 
 
 const appRoutes: Routes = [
@@ -14,7 +17,10 @@ const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'profile', component: ProfileComponent},
-  {path: 'category', component: CategoryComponent}
+  {path: 'category', component: CategoryComponent},
+  {path: 'manage-user', component: ManageUserComponent},
+  {path: 'manage-category', component: ManageCategoryComponent},
+  {path: 'verify-post', component: VerifyPostComponent}
 ];
 
 @NgModule({

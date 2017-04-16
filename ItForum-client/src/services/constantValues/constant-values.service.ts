@@ -11,8 +11,15 @@ export class ConstantValuesService {
   public static readonly JWT_USERNAME = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name';
   public static readonly JWT_ROLE = 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role';
 
+
   constructor() {
   }
 
 
+}
+
+export class RegisteredRoles {
+  public static readonly User = 'User';
+  public static readonly Moderator = "Moderator";
+  public static readonly Adminstrator = "Adminstrator";
 }

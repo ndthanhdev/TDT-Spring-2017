@@ -13,8 +13,17 @@
       <li class="nav-item ">
         <a routerLink="category" class="nav-link " routerLinkActive="active">Category</a>
       </li>
-      <li class="nav-item" *ngIf="isVerify">
+      <li class="nav-item" *ngIf="isAuthorized">
         <a routerLink="profile" routerLinkActive="active" class="nav-link " href="">Profile</a>
+      </li>
+      <li class="nav-item" *ngIf="isMod">
+        <a routerLink="verify-post" routerLinkActive="active" class="nav-link " href="">Verify Post</a>
+      </li>
+      <li class="nav-item" *ngIf="isAdmin">
+        <a routerLink="manage-user" routerLinkActive="active" class="nav-link " href="">Manage User</a>
+      </li>
+      <li class="nav-item" *ngIf="isAdmin">
+        <a routerLink="manage-category" routerLinkActive="active" class="nav-link " href="">Manage Category</a>
       </li>
     </ul>
     <form class="form-inline">
