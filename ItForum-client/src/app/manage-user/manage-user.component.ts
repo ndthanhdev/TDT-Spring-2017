@@ -11,7 +11,8 @@ import {ancestorWhere} from "tslint";
 })
 export class ManageUserComponent implements OnInit {
 
-  isBusy: boolean;
+  isLoading: boolean;
+  isAutoVerifing:boolean;
   rows: User[];
   temp: User[];
 
@@ -23,7 +24,7 @@ export class ManageUserComponent implements OnInit {
   }
 
   async reload(): Promise<void> {
-    this.isBusy = true;
+    this.isLoading = true;
     try {
       let payload = await this.adminService.getAllUser();
       if (payload.statusCode === 0) {
@@ -34,7 +35,7 @@ export class ManageUserComponent implements OnInit {
       this.alert.openDialog(err);
     }
     finally {
-      this.isBusy = false;
+      this.isLoading = false;
     }
   }
 
@@ -52,4 +53,19 @@ export class ManageUserComponent implements OnInit {
     }
   }
 
+  async autoVerify():Promise<void>{
+    this.isAutoVerifing = true;
+    try {
+      let payload = await this.adminService.verifyUserAuto();
+      if (payload.statusCode === 0) {
+        await this.reload();
+      }
+    }
+    catch (err) {
+      this.alert.openDialog(err);
+    }
+    finally {
+      this.isAutoVerifing = false;
+    }
+  }
 }

@@ -17,4 +17,8 @@ export class AdminService {
     return this.authRequest.get(ConstantValuesService.VERIFY_USER + userId);
   }
 
+  async verifyUserAuto(): Promise<ReceivedPayload> {
+    return this.authRequest.get(ConstantValuesService.VERIFY_USER_AUTO);
+  }
+
 }

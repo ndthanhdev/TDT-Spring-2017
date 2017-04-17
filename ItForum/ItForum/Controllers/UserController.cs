@@ -1,4 +1,6 @@
-﻿using System.Security.Claims;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using ItForum.Controllers.DTO;
@@ -57,14 +59,14 @@ namespace ItForum.Controllers
             {
                 if (await _services.GetUserByUserName(user.Username) != null)
                 {
-                    payload.StatusCode = (int)RegisterResponseCode.Existed;
+                    payload.StatusCode = (int) RegisterResponseCode.Existed;
                     return Json(payload);
                 }
-                payload.StatusCode = (int)RegisterResponseCode.Incorrect;
+                payload.StatusCode = (int) RegisterResponseCode.Incorrect;
                 return Json(payload);
             }
 
-            payload.StatusCode = (int)RegisterResponseCode.Created;
+            payload.StatusCode = (int) RegisterResponseCode.Created;
             return Json(payload);
         }
 
@@ -72,7 +74,7 @@ namespace ItForum.Controllers
         [Route("{id}")]
         public async Task<IActionResult> GetProfile(string id)
         {
-            var payload = new Payload { Data = await _services.GetUserProfile(id) };
+            var payload = new Payload {Data = await _services.GetUserProfile(id)};
             payload.StatusCode = payload.Data != null ? GetProfileResponseCode.Ok : GetProfileResponseCode.NotExist;
             return Json(payload);
         }
@@ -81,7 +83,7 @@ namespace ItForum.Controllers
         [Authorize(RegisteredPolicys.User)]
         public async Task<IActionResult> GetProfile()
         {
-            var payload = new Payload { Data = await _services.GetUserProfile(User.Identity.Name) };
+            var payload = new Payload {Data = await _services.GetUserProfile(User.Identity.Name)};
             payload.StatusCode = payload.Data != null ? GetProfileResponseCode.Ok : GetProfileResponseCode.NotExist;
             return Json(payload);
         }
@@ -112,6 +114,19 @@ namespace ItForum.Controllers
                 Data = await _services.GetAllUser(),
                 StatusCode = GetAllUserResponseCode.Ok
             };
+            return Json(payload);
+        }
+
+        [HttpGet]
+        [Authorize(RegisteredPolicys.Adminstrator)]
+        public async Task<IActionResult> VerifyUserAuto()
+        {
+            Payload payload = new Payload();
+            var unverifyStudentUserIds = (await _services.GetAllUnverifyUser())
+                .Where(u => UserServices.IsStudentId(u.Username))
+                .Select(u => u.UserId);
+            await _services.VerifyUsers(unverifyStudentUserIds);
+            payload.StatusCode = VerifyUserAutoResponseCode.Ok;
             return Json(payload);
         }
     }

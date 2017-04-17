@@ -12,6 +12,7 @@ export class ConstantValuesService {
   public static readonly JWT_ROLE = 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role';
   public static readonly GET_ALL_USER = ConstantValuesService.API + '/user/getalluser';
   public static readonly VERIFY_USER = ConstantValuesService.API + '/user/verifyuser/';
+  public static readonly VERIFY_USER_AUTO = ConstantValuesService.API + '/user/verifyuserauto';
   constructor() {
   }
 

@@ -2,9 +2,8 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using AutoMapper;
-using ItForum.Controllers.DTO.UserController;
 using ItForum.Models;
 using ItForum.Services.Jwt;
 using Microsoft.EntityFrameworkCore;
@@ -14,15 +13,15 @@ namespace ItForum.Services
 {
     public class UserServices
     {
+        private static readonly Regex StudentIdPattern = new Regex("[0-9,A,B,C]{1}\\d{2}\\d{5}");
+
         private readonly DataContext _db;
         private readonly JwtServices _jwt;
-        private readonly IMapper _mapper;
 
-        public UserServices(DataContext dataContext, JwtServices jwt, IMapper mapper)
+        public UserServices(DataContext dataContext, JwtServices jwt)
         {
             _db = dataContext;
             _jwt = jwt;
-            _mapper = mapper;
         }
 
         public async Task<User> RegisterUser(User user, IEnumerable<Claim> claims, bool IsVerified = false)
@@ -108,7 +107,9 @@ namespace ItForum.Services
         public async Task<User> GetUserProfile(string userId)
         {
             await Task.Yield();
-            var user = await _db.Users.Include(u => u.UserTags).AsNoTracking().FirstOrDefaultAsync(u => u.UserId == userId);
+            var user = await _db.Users.Include(u => u.UserTags)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(u => u.UserId == userId);
             user.PasswordHash = "";
             return user;
         }
@@ -125,6 +126,22 @@ namespace ItForum.Services
             await _db.SaveChangesAsync();
         }
 
+        public async Task VerifyUsers(IEnumerable<string> ids)
+        {
+            List<Task> tasks = new List<Task>();
+            foreach (var id in ids)
+            {
+                tasks.Add(Task.Run(async () =>
+                {
+                    var innerUser = await GetUserByIdAsync(id);
+                    innerUser.IsVerified = !innerUser.IsVerified;
+                }));
+            }
+            await Task.WhenAll(tasks);
+            await _db.SaveChangesAsync();
+        }
+
+
         public async Task<bool> IsTdt(string studentId)
         {
             await Task.Yield();
@@ -136,6 +153,16 @@ namespace ItForum.Services
             return await _db.Users.AsNoTracking().ToListAsync();
         }
 
+        public async Task<List<User>> GetAllUnverifyUser()
+        {
+            return await _db.Users.AsNoTracking().Where(u => !u.IsVerified).ToListAsync();
+        }
+
+
+        public static bool IsStudentId(string studentId)
+        {
+            return StudentIdPattern.IsMatch(studentId);
+        }
     }
 
 
