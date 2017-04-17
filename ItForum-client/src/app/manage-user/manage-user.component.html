@@ -1,3 +1,51 @@
-<p>
-  manage-user works!
-</p>
+<section class="padding-nav-bar d-flex flex-column">
+  <div class="row justify-content-center">
+    <div class="container">
+      <ngx-datatable
+        class="material striped w-100"
+        [rows]="rows"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [limit]="50"
+        [loadingIndicator]="isBusy">
+        <ngx-datatable-column name="Username">
+          <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+            <span (click)="sort()">{{column.name}}</span>
+          </ng-template>
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <strong>{{value}}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="FullName">
+          <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+            <span (click)="sort()">{{column.name}}</span>
+          </ng-template>
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <strong>{{value}}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Faculty">
+          <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+            <span (click)="sort()">{{column.name}}</span>
+          </ng-template>
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <strong>{{value}}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="IsVerified">
+          <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+            <span (click)="sort()">{{column.name}}</span>
+          </ng-template>
+          <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+            <button type="button" class="btn btn-secondary" [ngClass]="{'btn-success': value}"
+                    (click)="verify(row)">Active <i class="fa fa-spinner fa-spin" *ngIf="row.isBusy"></i>
+            </button>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</section>
+

@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^4.0.2",
     "@angular/router": "^4.0.2",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.23",
+    "@swimlane/ngx-datatable": "^8.0.0",
     "angular2-jwt": "^0.2.2",
     "core-js": "^2.4.1",
     "ng2-page-scroll": "^4.0.0-beta.6",

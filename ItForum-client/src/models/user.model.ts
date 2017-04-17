@@ -1,8 +1,9 @@
+import {UserTag} from "./user-tag.model";
 /**
  * Created by duyth on 3/31/2017.
  */
-export class ProfileModel {
+export class User {
   constructor(public userId: string, public username: string, public fullName: string, public faculty: string, public addmissionYear: number,
-              public email: string, public phone: string, public isVerified: boolean, public managedTagIds: string[]) {
+              public email: string, public phone: string, public isVerified: boolean, public userTags: UserTag[]) {
   }
 }

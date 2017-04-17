@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     try {
       const payload = await this.service.login(this.model);
       if (payload.statusCode === 0) {
-        localStorage.setItem(ConstantValuesService.JWT_TOKEN_NAME, JSON.stringify(payload.data));
+        localStorage.setItem(ConstantValuesService.JWT_TOKEN_NAME, payload.data);
         this.service.notifyAuthorizedChanged();
         this.router.navigate(['/home']);
       }

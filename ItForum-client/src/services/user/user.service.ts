@@ -6,11 +6,13 @@ import {LoginModel} from '../../models/login.model';
 import {RegisterModel} from '../../models/register.model';
 import {Subject} from 'rxjs/Subject';
 import {JwtHelper} from 'angular2-jwt/angular2-jwt';
-import {ProfileModel} from '../../models/profile.model';
+import {User} from "../../models/user.model";
+
+
 @Injectable()
 export class UserService {
 
-  profile: ProfileModel;
+  profile: User;
 
   // Observable string sources
   private authorizationSource = new Subject<void>();
@@ -19,7 +21,7 @@ export class UserService {
   authorizationChanged$ = this.authorizationSource.asObservable();
 
   static isAuthorized(): boolean {
-    return localStorage.getItem('id_token') != null;
+    return localStorage.getItem(ConstantValuesService.JWT_TOKEN_NAME) != null;
   }
 
   constructor(private request: RequestService, private jwtHelper: JwtHelper) {
@@ -44,7 +46,7 @@ export class UserService {
   }
 
   getJwt(): any {
-    return this.jwtHelper.decodeToken(localStorage.getItem('id_token'));
+    return this.jwtHelper.decodeToken(localStorage.getItem(ConstantValuesService.JWT_TOKEN_NAME));
   }
 
 }

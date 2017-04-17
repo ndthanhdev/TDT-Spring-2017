@@ -102,5 +102,17 @@ namespace ItForum.Controllers
             await _services.VerifyUser(id);
             return Json(payload);
         }
+
+        [HttpGet]
+        [Authorize(RegisteredPolicys.Adminstrator)]
+        public async Task<IActionResult> GetAllUser()
+        {
+            Payload payload = new Payload
+            {
+                Data = await _services.GetAllUser(),
+                StatusCode = GetAllUserResponseCode.Ok
+            };
+            return Json(payload);
+        }
     }
 }

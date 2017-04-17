@@ -14,9 +14,9 @@ namespace ItForum.Services
 {
     public class UserServices
     {
-        private readonly IMapper _mapper;
         private readonly DataContext _db;
         private readonly JwtServices _jwt;
+        private readonly IMapper _mapper;
 
         public UserServices(DataContext dataContext, JwtServices jwt, IMapper mapper)
         {
@@ -105,15 +105,12 @@ namespace ItForum.Services
             return encodedJwt;
         }
 
-        public async Task<object> GetUserProfile(string userId)
+        public async Task<User> GetUserProfile(string userId)
         {
             await Task.Yield();
-            var user = await _db.Users.Include(u => u.UserTags).FirstOrDefaultAsync(u => u.UserId == userId);
-            if (user == null)
-                return null;
-            var profile = _mapper.Map<GetProfileResponseData>(user);
-
-            return profile;
+            var user = await _db.Users.Include(u => u.UserTags).AsNoTracking().FirstOrDefaultAsync(u => u.UserId == userId);
+            user.PasswordHash = "";
+            return user;
         }
 
         public async Task<User> GetUserByIdAsync(string id)
@@ -124,7 +121,7 @@ namespace ItForum.Services
         public async Task VerifyUser(string id)
         {
             var innerUser = await GetUserByIdAsync(id);
-            innerUser.IsVerified = true;
+            innerUser.IsVerified = !innerUser.IsVerified;
             await _db.SaveChangesAsync();
         }
 
@@ -133,6 +130,12 @@ namespace ItForum.Services
             await Task.Yield();
             return true;
         }
+
+        public async Task<List<User>> GetAllUser()
+        {
+            return await _db.Users.AsNoTracking().ToListAsync();
+        }
+
     }
 
 

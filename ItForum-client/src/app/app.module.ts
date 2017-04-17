@@ -8,6 +8,7 @@ import {MaterialModule, MdDialogModule} from '@angular/material';
 import {Ng2PageScrollModule} from 'ng2-page-scroll';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {JwtHelper} from 'angular2-jwt';
+import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 
 import {AppRoutingModule} from '../modules/app-routing/app-routing.module';
 import {AuthHttpModule} from '../modules/auth-http/auth-http.module';
@@ -25,11 +26,13 @@ import {RegisterComponent} from './register/register.component';
 import {AlertComponent} from './alert/alert.component';
 import {LoginComponent} from './login/login.component';
 import {UserService} from '../services/user/user.service';
-import { ProfileComponent } from './profile/profile.component';
-import { CategoryComponent } from './category/category.component';
-import { ManageUserComponent } from './manage-user/manage-user.component';
-import { ManageCategoryComponent } from './manage-category/manage-category.component';
-import { VerifyPostComponent } from './verify-post/verify-post.component';
+import {ProfileComponent} from './profile/profile.component';
+import {CategoryComponent} from './category/category.component';
+import {ManageUserComponent} from './manage-user/manage-user.component';
+import {ManageCategoryComponent} from './manage-category/manage-category.component';
+import {VerifyPostComponent} from './verify-post/verify-post.component';
+import {AdminService} from "../services/admin/admin.service";
+import {AuthRequestService} from "../services/authRequest/auth-request.service";
 
 
 @NgModule({
@@ -51,20 +54,24 @@ import { VerifyPostComponent } from './verify-post/verify-post.component';
   imports: [
     BrowserModule,
     FormsModule,
+    AuthHttpModule,
     HttpModule,
     AppRoutingModule,
     NgbModule.forRoot(),
     BrowserAnimationsModule,
     MdDialogModule,
     Ng2PageScrollModule.forRoot(),
-    AuthHttpModule
+    NgxDatatableModule
   ],
   providers: [
     JwtHelper,
     AlertService,
     ConstantValuesService,
     RequestService,
-    UserService],
+    AuthRequestService,
+    UserService,
+    AdminService
+  ],
   bootstrap: [AppComponent],
   entryComponents: [AlertComponent]
 })

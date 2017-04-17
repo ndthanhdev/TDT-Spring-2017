@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {JwtHelper} from 'angular2-jwt';
 import {ConstantValuesService, RegisteredRoles} from '../services/constantValues/constant-values.service';
 import {UserService} from '../services/user/user.service';
-import {ProfileModel} from '../models/profile.model';
+import {User} from '../models/user.model';
 
 
 @Component({
@@ -13,7 +13,7 @@ import {ProfileModel} from '../models/profile.model';
 export class AppComponent implements OnInit {
 
   isAuthorized: boolean;
-  profile = new ProfileModel('', '123', '', '', 1997, '', '', false, []);
+  profile = new User('', '123', '', '', 1997, '', '', false, []);
 
   isAdmin: boolean;
   isMod: boolean;
@@ -35,8 +35,8 @@ export class AppComponent implements OnInit {
     if (this.isAuthorized) {
       const jwt = this.service.getJwt();
       const userId = jwt[ConstantValuesService.JWT_USERNAME];
-      this.isAdmin = jwt[ConstantValuesService.JWT_ROLE].indexOf(RegisteredRoles.Adminstrator) != -1;
-      this.isMod = jwt[ConstantValuesService.JWT_ROLE].indexOf(RegisteredRoles.Moderator) != -1;
+      this.isAdmin = jwt[ConstantValuesService.JWT_ROLE].indexOf(RegisteredRoles.Adminstrator) !== -1;
+      this.isMod = jwt[ConstantValuesService.JWT_ROLE].indexOf(RegisteredRoles.Moderator) !== -1;
       const payload = await this.service.getProfile(userId);
       if (payload.statusCode === 0) {
         this.profile = payload.data;
@@ -44,6 +44,8 @@ export class AppComponent implements OnInit {
     }
     else {
       this.profile = null;
+      this.isAdmin = false;
+      this.isMod = false;
     }
   }
 }

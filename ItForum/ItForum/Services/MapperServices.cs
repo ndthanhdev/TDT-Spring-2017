@@ -11,10 +11,10 @@ namespace ItForum.Services
         public MapperServices()
         {
             //CreateMap<RegisterRegisterForm, User>();
-            CreateMap<User, GetProfileResponseData>()
-                .ForMember(pr => pr.ManagedTagIds,
-                    conf => conf
-                        .MapFrom(t => t.UserTags.Select(ut => ut.TagId)));
+            //CreateMap<User, GetProfileResponseData>()
+            //    .ForMember(pr => pr.ManagedTagIds,
+            //        conf => conf
+            //            .MapFrom(t => t.UserTags.Select(ut => ut.TagId)));
         }
     }
 
