@@ -1,5 +1,8 @@
 <section class="padding-nav-bar container d-flex flex-column">
   <div class="row justify-content-center">
+    <md-input-container class="w-50 my-3">
+      <input mdInput placeholder="Search" value="">
+    </md-input-container>
     <ngx-datatable
       class="material striped w-100"
       [rows]="rows"
@@ -9,7 +12,14 @@
       [rowHeight]="'auto'"
       [limit]="50"
       [loadingIndicator]="isLoading">
-
+      <ngx-datatable-column name="Title">
+        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+          <span (click)="sort()">{{column.name}}</span>
+        </ng-template>
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          <strong>{{value}}</strong>
+        </ng-template>
+      </ngx-datatable-column>
     </ngx-datatable>
     <div class="card my-3 w-100">
       <div class="card-block">

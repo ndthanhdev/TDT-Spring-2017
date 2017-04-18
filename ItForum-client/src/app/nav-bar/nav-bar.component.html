@@ -25,6 +25,10 @@
       <li class="nav-item" *ngIf="isAdmin">
         <a routerLink="manage-tag" routerLinkActive="active" class="nav-link " href="">Manage Tag</a>
       </li>
+      <li class="nav-item" *ngIf="isAuthorized">
+        <a [class.disabled]="!isVerify" routerLink="profile" routerLinkActive="active" class="nav-link " href="">Add A
+          Post</a>
+      </li>
     </ul>
     <form class="form-inline">
       <a routerLink="register" routerLinkActive="active" class="btn btn-success my-1 mx-2 my-sm-0"

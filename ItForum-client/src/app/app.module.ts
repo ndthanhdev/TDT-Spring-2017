@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MdDialogModule, MdSnackBarModule, MdProgressSpinnerModule} from '@angular/material';
+import {MdDialogModule, MdSnackBarModule, MdProgressSpinnerModule, MdInputModule} from '@angular/material';
 
 import {Ng2PageScrollModule} from 'ng2-page-scroll';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -69,6 +69,7 @@ import {ContainerService} from "../services/container/container.service";
     MdDialogModule,
     MdSnackBarModule,
     MdProgressSpinnerModule,
+    MdInputModule,
 
     Ng2PageScrollModule.forRoot(),
     NgxDatatableModule,
