@@ -36,6 +36,7 @@ import { AddCategoryComponent } from './add-category/add-category.component';
 import {TagService} from "../services/tag/tag.service";
 import { TagComponent } from './tag/tag.component';
 import { TagDetailComponent } from './tag-detail/tag-detail.component';
+import {ContainerService} from "../services/container/container.service";
 
 
 @NgModule({
@@ -81,7 +82,8 @@ import { TagDetailComponent } from './tag-detail/tag-detail.component';
     AuthRequestService,
     UserService,
     AdminService,
-    TagService
+    TagService,
+    ContainerService
   ],
   bootstrap: [AppComponent],
   entryComponents: [AlertComponent]

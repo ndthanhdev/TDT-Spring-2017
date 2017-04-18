@@ -126,7 +126,7 @@ namespace ItForum.Services
             await _db.SaveChangesAsync();
         }
 
-        public async Task VerifyUsers(IEnumerable<string> ids)
+        public async Task<int> VerifyUsers(IEnumerable<string> ids)
         {
             List<Task> tasks = new List<Task>();
             foreach (var id in ids)
@@ -139,6 +139,7 @@ namespace ItForum.Services
             }
             await Task.WhenAll(tasks);
             await _db.SaveChangesAsync();
+            return tasks.Count;
         }
 
 

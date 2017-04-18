@@ -10,8 +10,11 @@ using ItForum.Services.Jwt;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
 namespace ItForum.Controllers
 {
+    [Route("[controller]/[action]")]
     public class ContainerController : Controller
     {
         private readonly ContainerServices _containerServices;
@@ -60,15 +63,16 @@ namespace ItForum.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetContainersInTag(Tag tag)
+        [Route("{id}")]
+        public async Task<IActionResult> GetContainersInTag(string id)
         {
             Payload payload = new Payload();
-            if (await _tagServices.GetTagById(tag.TagId) == null)
+            if (await _tagServices.GetTagById(id) == null)
             {
                 payload.StatusCode = GetContainersInTagResponseCode.TagNotExist;
                 return Json(payload);
             }
-            payload.Data = await _containerServices.GetContainerInTag(tag.TagId);
+            payload.Data = await _containerServices.GetContainerInTag(id);
             payload.StatusCode = GetContainersInTagResponseCode.Ok;
             return Json(payload);
         }

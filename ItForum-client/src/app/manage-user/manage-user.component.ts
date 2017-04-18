@@ -57,6 +57,7 @@ export class ManageUserComponent implements OnInit {
     try {
       let payload = await this.adminService.verifyUserAuto();
       if (payload.statusCode === 0) {
+        this.alert.openSnackbar(`verified ${payload.data} user`)
         await this.reload();
       }
     }

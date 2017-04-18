@@ -21,6 +21,8 @@ namespace ItForum.Models
         [ForeignKey(nameof(ContainerId))]
         public Container Container { get; set; }
 
+        public bool IsVerified { get; set; }
+
         public List<Point> Points { get; set; }
 
         public List<Comment> Comments { get; set; }

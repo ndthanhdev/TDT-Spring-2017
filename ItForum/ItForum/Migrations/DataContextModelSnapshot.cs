@@ -91,6 +91,8 @@ namespace ItForum.Migrations
 
                     b.Property<string>("Content");
 
+                    b.Property<bool>("IsVerified");
+
                     b.Property<DateTime>("PublishDate");
 
                     b.Property<string>("UserId");

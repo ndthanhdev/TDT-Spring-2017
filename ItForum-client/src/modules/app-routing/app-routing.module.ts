@@ -10,6 +10,7 @@ import {ManageUserComponent} from "../../app/manage-user/manage-user.component";
 import {ManageTagComponent} from "../../app/manage-tag/manage-tag.component";
 import {VerifyPostComponent} from "../../app/verify-post/verify-post.component";
 import {AddCategoryComponent} from "../../app/add-category/add-category.component";
+import {TagDetailComponent} from "../../app/tag-detail/tag-detail.component";
 
 
 const appRoutes: Routes = [
@@ -22,7 +23,8 @@ const appRoutes: Routes = [
   {path: 'manage-user', component: ManageUserComponent},
   {path: 'manage-tag', component: ManageTagComponent},
   {path: 'manage-tag/add', component: AddCategoryComponent},
-  {path: 'verify-post', component: VerifyPostComponent}
+  {path: 'verify-post', component: VerifyPostComponent},
+  {path: 'tag/:id', component: TagDetailComponent}
 ];
 
 @NgModule({

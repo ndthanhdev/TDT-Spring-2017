@@ -109,6 +109,7 @@ namespace ItForum.Migrations
                     PostId = table.Column<string>(nullable: false),
                     ContainerId = table.Column<string>(nullable: true),
                     Content = table.Column<string>(nullable: true),
+                    IsVerified = table.Column<bool>(nullable: false),
                     PublishDate = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<string>(nullable: true)
                 },

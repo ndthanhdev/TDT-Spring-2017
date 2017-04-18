@@ -8,7 +8,7 @@ using ItForum;
 namespace ItForum.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20170417235319_m")]
+    [Migration("20170418190237_m")]
     partial class m
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -91,6 +91,8 @@ namespace ItForum.Migrations
                     b.Property<string>("ContainerId");
 
                     b.Property<string>("Content");
+
+                    b.Property<bool>("IsVerified");
 
                     b.Property<DateTime>("PublishDate");
 

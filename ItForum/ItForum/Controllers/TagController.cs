@@ -75,5 +75,14 @@ namespace ItForum.Controllers
             };
             return Json(payload);
         }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetTagById(string id)
+        {
+            Payload payload = new Payload {Data = await _services.GetTagById(id)};
+            payload.StatusCode = payload.Data == null ? GetTagByIdCode.NotExist : GetTagByIdCode.Ok;
+            return Json(payload);
+        }
     }
 }

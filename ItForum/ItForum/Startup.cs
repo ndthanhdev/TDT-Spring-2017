@@ -59,6 +59,8 @@ namespace ItForum
 
             services.AddTagServices();
 
+            services.AddPostServices();
+
             services.AddContainerServices();
 
             services.AddCors();
