@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ItForum.Models
 {
     public class Tag
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string TagId { get; set; }
+
         public string Name { get; set; }
         public string Description { get; set; }
 

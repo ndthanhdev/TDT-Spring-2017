@@ -6,6 +6,7 @@ namespace ItForum.Models
 {
     public class Container
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string ContainerId { get; set; }
 
         public string Title { get; set; }

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {AuthRequestService} from "../authRequest/auth-request.service";
 import {ConstantValuesService} from "../constantValues/constant-values.service";
 import {ReceivedPayload} from "../../dto/receivedPayload.dto";
+import {Tag} from "../../models/tag.model";
 
 @Injectable()
 export class AdminService {
@@ -19,6 +20,14 @@ export class AdminService {
 
   async verifyUserAuto(): Promise<ReceivedPayload> {
     return this.authRequest.get(ConstantValuesService.VERIFY_USER_AUTO);
+  }
+
+  async getAllTag(): Promise<ReceivedPayload> {
+    return this.authRequest.get(ConstantValuesService.GET_ALL_TAG);
+  }
+
+  async addTag(tag:Tag):Promise<ReceivedPayload> {
+    return this.authRequest.post(ConstantValuesService.ADD_TAG,tag);
   }
 
 }

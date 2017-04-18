@@ -17,7 +17,7 @@ namespace ItForum.Services
 
         public async Task<Tag> CreateTag(Tag tag)
         {
-            var entry = await _db.Tags.AddAsync(tag);
+            var entry = await _db.AddAsync(tag);
             if (entry.State == EntityState.Added)
             {
                 await _db.SaveChangesAsync();

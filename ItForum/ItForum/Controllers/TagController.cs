@@ -40,7 +40,7 @@ namespace ItForum.Controllers
         }
 
         [HttpPost]
-        [Authorize(RegisteredPolicys.Moderator)]
+        [Authorize(RegisteredPolicys.Adminstrator)]
         public async Task<IActionResult> AddUserTag([FromBody] UserTag data)
         {
             var payload = new Payload();
@@ -66,10 +66,13 @@ namespace ItForum.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllTags()
+        public async Task<IActionResult> GetAllTag()
         {
-            var payload = new Payload();
-            payload.Data = await _services.GetAllTags();
+            var payload = new Payload()
+            {
+                Data = await _services.GetAllTags(),
+                StatusCode = GetAllTagCode.Ok
+            };
             return Json(payload);
         }
     }

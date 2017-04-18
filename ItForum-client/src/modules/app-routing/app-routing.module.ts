@@ -9,6 +9,7 @@ import {CategoryComponent} from "../../app/category/category.component";
 import {ManageUserComponent} from "../../app/manage-user/manage-user.component";
 import {ManageCategoryComponent} from "../../app/manage-category/manage-category.component";
 import {VerifyPostComponent} from "../../app/verify-post/verify-post.component";
+import {AddCategoryComponent} from "../../app/add-category/add-category.component";
 
 
 const appRoutes: Routes = [
@@ -20,6 +21,7 @@ const appRoutes: Routes = [
   {path: 'category', component: CategoryComponent},
   {path: 'manage-user', component: ManageUserComponent},
   {path: 'manage-category', component: ManageCategoryComponent},
+  {path: 'manage-category/add', component: AddCategoryComponent},
   {path: 'verify-post', component: VerifyPostComponent}
 ];
 

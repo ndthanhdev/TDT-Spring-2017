@@ -44,11 +44,13 @@ namespace ItForum.Services
             if (string.IsNullOrWhiteSpace(container.Title))
                 return false;
 
+            // check tag exist
             var tagTasks = container.ContainerTags
                 ?.Select(containerContainerTag => _tagServices.GetTagById(containerContainerTag.ContainerId))
                 .ToList();
             if (tagTasks == null)
                 return false;
+
             await Task.WhenAll(tagTasks);
             return tagTasks.All(tagTask => tagTask.Result != null);
         }

@@ -24,7 +24,7 @@ namespace ItForum.Services
             _jwt = jwt;
         }
 
-        public async Task<User> RegisterUser(User user, IEnumerable<Claim> claims, bool IsVerified = false)
+        public async Task<User> RegisterUser(User user, IEnumerable<Claim> claims, bool isVerified = false)
         {
             if (!IsCorrectInfor(user))
                 return null;
@@ -32,7 +32,7 @@ namespace ItForum.Services
             if (await GetUserByUserName(user.Username) != null)
                 return null;
 
-            user.IsVerified = IsVerified;
+            user.IsVerified = isVerified;
             await _db.Users.AddAsync(user);
             var jobs = new List<Task>();
 

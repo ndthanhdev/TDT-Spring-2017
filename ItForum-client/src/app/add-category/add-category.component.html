@@ -1,0 +1,26 @@
+<section class="padding-nav-bar d-flex flex-column">
+  <div class="row justify-content-center">
+    <div class="container">
+      <form class="form-control i-aligncenter p-5" #form="ngForm">
+        <h2 class="my-3">Add category</h2>
+        <div class="form-group">
+          <label for="inputName">Name</label>
+          <input id="inputName" type="text" class="form-control"
+                 placeholder="Enter name" [(ngModel)]="model.name" required name="name">
+        </div>
+        <div class="form-group">
+          <label for="inputDescription">Description</label>
+          <textarea id="inputDescription" type="text" class="form-control" rows="3"
+                 placeholder="Enter description" [(ngModel)]="model.description" required name="description">
+          </textarea>
+        </div>
+        <button class="btn btn-primary my-3"
+                (click)="add()"
+                [disabled]="!form.form.valid||isBusy">
+          Add&nbsp;
+          <i class="fa fa-spinner fa-spin" *ngIf="isBusy"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

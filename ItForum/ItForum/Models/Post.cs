@@ -6,6 +6,7 @@ namespace ItForum.Models
 {
     public class Post
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string PostId { get; set; }
 
         public string Content { get; set; }

@@ -14,7 +14,6 @@ export class ManageUserComponent implements OnInit {
   isLoading: boolean;
   isAutoVerifing:boolean;
   rows: User[];
-  temp: User[];
 
   constructor(private adminService: AdminService, private alert: AlertService) {
   }

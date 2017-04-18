@@ -49,7 +49,7 @@
   <!--</div>-->
   <div class="container">
     <form (ngSubmit)="register()" #registerForm="ngForm" class="form-control p-5">
-      <h2>Please fill form</h2>
+      <h2>Fill register form</h2>
       <div class="form-group">
         <label for="inputId">Id</label>
         <input id="inputId" [(ngModel)]="model.Username" type="text" class="form-control" aria-describedby="idHelp"
@@ -69,7 +69,7 @@
       <div class="form-group">
         <label for="inputFullName">Faculty</label>
         <input id="inputFaculty" [(ngModel)]="model.Faculty" type="text" class="form-control"
-               placeholder="Enter faculty" required name="name">
+               placeholder="Enter faculty" required name="faculty">
       </div>
       <div class="form-group">
         <label for="inputAdmissionYear">Admission Year</label>

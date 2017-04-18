@@ -2,7 +2,7 @@
   <div class="row justify-content-center">
     <div class="container">
       <div class="d-flex justify-content-end">
-        <button type="button" (click)="autoVerify()" class="btn btn-info m-2">Auto Verify<i
+        <button type="button" (click)="autoVerify()" class="btn btn-info m-2">Auto Verify&nbsp;<i
           class="fa fa-spinner fa-spin"
           *ngIf="isAutoVerifing"></i></button>
       </div>
@@ -44,7 +44,7 @@
             <span (click)="sort()">{{column.name}}</span>
           </ng-template>
           <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-            <button type="button" class="btn btn-secondary" [ngClass]="{'btn-success': value}"
+            <button type="button" class="btn btn-secondary" [disabled]="row.isBusy" [ngClass]="{'btn-success': value}"
                     (click)="verify(row)">Active <i class="fa fa-spinner fa-spin" *ngIf="row.isBusy"></i>
             </button>
           </ng-template>

@@ -33,6 +33,7 @@ import {ManageCategoryComponent} from './manage-category/manage-category.compone
 import {VerifyPostComponent} from './verify-post/verify-post.component';
 import {AdminService} from "../services/admin/admin.service";
 import {AuthRequestService} from "../services/authRequest/auth-request.service";
+import { AddCategoryComponent } from './add-category/add-category.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import {AuthRequestService} from "../services/authRequest/auth-request.service";
     ManageUserComponent,
     ManageCategoryComponent,
     VerifyPostComponent,
+    AddCategoryComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ namespace ItForum.Models
 {
     public class Comment
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string CommentId { get; set; }
 
         public DateTime PublishDate { get; set; }
