@@ -1,6 +1,7 @@
 import {Component, OnInit, OnDestroy, Input, HostListener, Inject} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserService} from '../../services/user/user.service';
+import {AlertService} from "../../services/alert/alert.service";
 
 
 @Component({
@@ -28,7 +29,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   isShrink = false;
   isCollapsed = true;
 
-  constructor(private router: Router, private  service: UserService) {
+  constructor(private router: Router, private  service: UserService, private alert: AlertService) {
 
   }
 
@@ -49,6 +50,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     localStorage.clear();
     this.service.notifyAuthorizedChanged();
     this.router.navigate(['/home']);
+    this.alert.openSnackbar("You logged out");
   }
 
 }

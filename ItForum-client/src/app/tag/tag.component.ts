@@ -1,19 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import {AlertService} from "../../services/alert/alert.service";
-import {CategoryService} from "../../services/category/category.service";
+import {TagService} from "../../services/tag/tag.service";
 import {Tag} from "../../models/tag.model";
 
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css']
+  selector: 'app-tag',
+  templateUrl: './tag.component.html',
+  styleUrls: ['./tag.component.css']
 })
-export class CategoryComponent implements OnInit {
+export class TagComponent implements OnInit {
 
   isBusy: boolean;
   categories: Tag[];
 
-  constructor(private categoryService: CategoryService, private alert: AlertService) {
+  constructor(private tagService: TagService, private alert: AlertService) {
   }
 
   ngOnInit() {
@@ -23,7 +23,7 @@ export class CategoryComponent implements OnInit {
   async reload(): Promise<void> {
     this.isBusy = true;
     try {
-      let payload = await this.categoryService.getAllTag();
+      let payload = await this.tagService.getAllTag();
       if (payload.statusCode === 0) {
         this.categories = payload.data;
       }

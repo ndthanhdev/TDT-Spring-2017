@@ -1,0 +1,15 @@
+<section *ngIf="!isBusy" class="padding-nav-bar">
+  <div class=" container d-flex flex-wrap">
+    <div *ngFor="let category of categories" class="card m-1" style="width: 20rem;">
+      <div class="card-block">
+        <h4 class="card-title truncate">{{category.name}}</h4>
+        <a [routerLink]="category.tagId" routerLinkActive="active" class="btn btn-primary">Browse</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section *ngIf="isBusy" class="padding-nav-bar d-flex flex-column justify-content-center">
+  <div class="d-flex justify-content-center">
+    <md-spinner></md-spinner>
+  </div>
+</section>

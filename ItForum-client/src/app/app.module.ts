@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MaterialModule, MdDialogModule} from '@angular/material';
+import {MdDialogModule, MdSnackBarModule, MdProgressSpinnerModule} from '@angular/material';
 
 import {Ng2PageScrollModule} from 'ng2-page-scroll';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -27,14 +27,15 @@ import {AlertComponent} from './alert/alert.component';
 import {LoginComponent} from './login/login.component';
 import {UserService} from '../services/user/user.service';
 import {ProfileComponent} from './profile/profile.component';
-import {CategoryComponent} from './category/category.component';
 import {ManageUserComponent} from './manage-user/manage-user.component';
-import {ManageCategoryComponent} from './manage-category/manage-category.component';
+import {ManageTagComponent} from './manage-tag/manage-tag.component';
 import {VerifyPostComponent} from './verify-post/verify-post.component';
 import {AdminService} from "../services/admin/admin.service";
 import {AuthRequestService} from "../services/authRequest/auth-request.service";
 import { AddCategoryComponent } from './add-category/add-category.component';
-import {CategoryService} from "../services/category/category.service";
+import {TagService} from "../services/tag/tag.service";
+import { TagComponent } from './tag/tag.component';
+import { TagDetailComponent } from './tag-detail/tag-detail.component';
 
 
 @NgModule({
@@ -48,11 +49,12 @@ import {CategoryService} from "../services/category/category.service";
     AlertComponent,
     LoginComponent,
     ProfileComponent,
-    CategoryComponent,
+    TagComponent,
     ManageUserComponent,
-    ManageCategoryComponent,
+    ManageTagComponent,
     VerifyPostComponent,
     AddCategoryComponent,
+    TagDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -61,10 +63,15 @@ import {CategoryService} from "../services/category/category.service";
     HttpModule,
     AppRoutingModule,
     NgbModule.forRoot(),
+    //@angular/material
     BrowserAnimationsModule,
     MdDialogModule,
+    MdSnackBarModule,
+    MdProgressSpinnerModule,
+
     Ng2PageScrollModule.forRoot(),
-    NgxDatatableModule
+    NgxDatatableModule,
+
   ],
   providers: [
     JwtHelper,
@@ -74,7 +81,7 @@ import {CategoryService} from "../services/category/category.service";
     AuthRequestService,
     UserService,
     AdminService,
-    CategoryService
+    TagService
   ],
   bootstrap: [AppComponent],
   entryComponents: [AlertComponent]

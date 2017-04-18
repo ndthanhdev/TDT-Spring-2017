@@ -3,6 +3,7 @@ import {AlertService} from '../../services/alert/alert.service';
 import {RegisterModel} from '../../models/register.model';
 import {UserService} from '../../services/user/user.service';
 import {Router} from '@angular/router';
+import {MdSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-register',
@@ -32,6 +33,7 @@ export class RegisterComponent implements OnInit {
       const payload = await this.service.register(this.model);
       if (payload.statusCode === 0) {
         this.router.navigate(['/login']);
+        this.alert.openSnackbar("You registered");
       }
       else if (payload.statusCode === 1) {
         this.alert.openDialog('existed');

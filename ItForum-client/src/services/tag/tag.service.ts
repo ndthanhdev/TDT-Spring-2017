@@ -4,7 +4,7 @@ import {AuthRequestService} from "../authRequest/auth-request.service";
 import {ConstantValuesService} from "../constantValues/constant-values.service";
 
 @Injectable()
-export class CategoryService {
+export class TagService {
 
   constructor(private authRequest: AuthRequestService) { }
 

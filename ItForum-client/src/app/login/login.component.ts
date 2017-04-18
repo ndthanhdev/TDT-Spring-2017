@@ -4,6 +4,7 @@ import {LoginModel} from '../../models/login.model';
 import {AlertService} from '../../services/alert/alert.service';
 import {Router} from '@angular/router';
 import {ConstantValuesService} from '../../services/constantValues/constant-values.service';
+import {MdSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-login',
@@ -31,6 +32,7 @@ export class LoginComponent implements OnInit {
       if (payload.statusCode === 0) {
         localStorage.setItem(ConstantValuesService.JWT_TOKEN_NAME, payload.data);
         this.service.notifyAuthorizedChanged();
+        this.alert.openSnackbar("You logged");
         this.router.navigate(['/home']);
       }
       else if (payload.statusCode === 1) {

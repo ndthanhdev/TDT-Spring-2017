@@ -2,7 +2,9 @@
   <div class="row justify-content-center">
     <div class="container">
       <div class="d-flex justify-content-end">
-        <button type="button" (click)="router.navigate(['manage-category/add']);" class="btn btn-info m-2">Add</button>
+        <a class="m-2" routerLink="/manage-category/add">
+          <button type="button" class="btn btn-info">Add</button>
+        </a>
       </div>
       <ngx-datatable
         class="material striped w-100"
