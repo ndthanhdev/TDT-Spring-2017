@@ -21,20 +21,20 @@ export class AddCategoryComponent implements OnInit {
     this.model = new Tag(null, '', '');
   }
 
-  async add():Promise<void>{
+  async add(): Promise<void> {
     this.isBusy = true;
     try {
       let payload = await this.adminService.addTag(this.model);
       if (payload.statusCode === 0) {
         this.router.navigate(['/manage-category']);
       }
-      else if(payload.statusCode === 1){
+      else if (payload.statusCode === 1) {
         this.alert.openDialog('category existed');
       }
-      else if(payload.statusCode === 2){
+      else if (payload.statusCode === 2) {
         this.alert.openDialog('incorrect category info');
       }
-      else{
+      else {
         this.alert.openDialog('unknown code');
       }
     }

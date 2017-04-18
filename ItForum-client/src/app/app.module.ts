@@ -34,6 +34,7 @@ import {VerifyPostComponent} from './verify-post/verify-post.component';
 import {AdminService} from "../services/admin/admin.service";
 import {AuthRequestService} from "../services/authRequest/auth-request.service";
 import { AddCategoryComponent } from './add-category/add-category.component';
+import {CategoryService} from "../services/category/category.service";
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { AddCategoryComponent } from './add-category/add-category.component';
     RequestService,
     AuthRequestService,
     UserService,
-    AdminService
+    AdminService,
+    CategoryService
   ],
   bootstrap: [AppComponent],
   entryComponents: [AlertComponent]

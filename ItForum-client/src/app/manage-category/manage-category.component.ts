@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Tag} from "../../models/tag.model";
-import {AdminService} from "../../services/admin/admin.service";
 import {AlertService} from "../../services/alert/alert.service";
 import {Router} from "@angular/router";
+import {CategoryService} from "../../services/category/category.service";
 
 @Component({
   selector: 'app-manage-category',
@@ -14,7 +14,7 @@ export class ManageCategoryComponent implements OnInit {
   isLoading: boolean;
   rows: Tag[];
 
-  constructor(private adminService: AdminService, private alert: AlertService, private router: Router) { }
+  constructor(private categoryService:CategoryService, private alert: AlertService, private router: Router) { }
 
   ngOnInit() {
     this.reload();
@@ -23,7 +23,7 @@ export class ManageCategoryComponent implements OnInit {
   async reload(): Promise<void> {
     this.isLoading = true;
     try {
-      let payload = await this.adminService.getAllTag();
+      let payload = await this.categoryService.getAllTag();
       if (payload.statusCode === 0) {
         this.rows = payload.data;
       }

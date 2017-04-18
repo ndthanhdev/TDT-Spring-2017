@@ -22,10 +22,6 @@ export class AdminService {
     return this.authRequest.get(ConstantValuesService.VERIFY_USER_AUTO);
   }
 
-  async getAllTag(): Promise<ReceivedPayload> {
-    return this.authRequest.get(ConstantValuesService.GET_ALL_TAG);
-  }
-
   async addTag(tag:Tag):Promise<ReceivedPayload> {
     return this.authRequest.post(ConstantValuesService.ADD_TAG,tag);
   }
