@@ -37,6 +37,7 @@ import {TagService} from "../services/tag/tag.service";
 import { TagComponent } from './tag/tag.component';
 import { TagDetailComponent } from './tag-detail/tag-detail.component';
 import {ContainerService} from "../services/container/container.service";
+import { AddPostComponent } from './add-post/add-post.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import {ContainerService} from "../services/container/container.service";
     ManageTagComponent,
     VerifyPostComponent,
     AddCategoryComponent,
-    TagDetailComponent
+    TagDetailComponent,
+    AddPostComponent
   ],
   imports: [
     BrowserModule,

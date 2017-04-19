@@ -43,7 +43,13 @@
   #mainNav .navbar-brand {
     font-size: 1.5em;
   }
+
   #mainNav.navbar-shrink .navbar-brand {
     font-size: 1.25em;
   }
+}
+
+a.link-disabled {
+  pointer-events: none;
+  /*cursor: default;*/
 }
