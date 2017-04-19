@@ -28,14 +28,12 @@ namespace ItForum.Services
             return containers;
         }
 
-        public async Task<List<Container>> GetContainerInTag(string tagId)
+        public async Task<List<Container>> GetContainerInTag(string tagName)
         {
-            var tag = await _db.Tags.Include(t => t.ContainerTags)
-                .ThenInclude(ct => ct.Container)
-                .FirstOrDefaultAsync(t => t.Name == tagId);
-            if (tag == null)
+            var containerIds = await _db.ContainerTags.Where(ct => ct.TagName == tagName).Select(ct => ct.ContainerId).ToListAsync();
+            if (containerIds == null || containerIds.Count == 0)
                 return null;
-            return new List<Container>(tag.ContainerTags.Select(ct => ct.Container));
+            return await _db.Containers.Include(c=>c.ContainerTags).Where(c => containerIds.Contains(c.ContainerId)).ToListAsync();
         }
 
         public async Task<bool> IsContainerValid(Container container)
@@ -46,7 +44,7 @@ namespace ItForum.Services
 
             // check tag exist
             var tagTasks = container.ContainerTags
-                ?.Select(containerContainerTag => _tagServices.GetTagById(containerContainerTag.ContainerId))
+                ?.Select(containerContainerTag => _tagServices.GetTagById(containerContainerTag.TagName))
                 .ToList();
             if (tagTasks == null || tagTasks.Count == 0)
                 return false;

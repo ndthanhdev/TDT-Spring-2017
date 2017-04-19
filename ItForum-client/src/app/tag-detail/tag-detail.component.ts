@@ -20,11 +20,12 @@ export class TagDetailComponent implements OnInit, OnDestroy {
   tag: Tag;
 
   constructor(private route: ActivatedRoute, private router: Router, private containerService: ContainerService,private tagService:TagService, private alert: AlertService) {
+
   }
 
   async ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      this.tagId = params['id'];
+      this.tagId = params.id;
       this.reload();
       this.reloadTag();
     });

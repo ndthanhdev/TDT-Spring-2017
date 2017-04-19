@@ -15,7 +15,7 @@ export class TagService {
   }
 
   async getTagById(id: string): Promise<ReceivedPayload> {
-    return this.authRequest.get(ConstantValuesService.GET_TAG_BY_ID + id);
+    return this.authRequest.get(ConstantValuesService.GET_TAG_BY_ID + encodeURIComponent(id));
   }
 
 }

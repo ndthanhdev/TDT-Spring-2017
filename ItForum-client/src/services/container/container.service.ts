@@ -11,7 +11,7 @@ export class ContainerService {
   }
 
   async getContainersInTag(tagId: string): Promise<ReceivedPayload> {
-    return this.authRequest.get(ConstantValuesService.GET_CONTAINERS_IN_TAG + tagId);
+    return this.authRequest.get(ConstantValuesService.GET_CONTAINERS_IN_TAG + encodeURIComponent(tagId));
   }
 
   async createContainer(container: Container): Promise<ReceivedPayload> {

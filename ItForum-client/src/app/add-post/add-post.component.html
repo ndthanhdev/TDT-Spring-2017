@@ -1,5 +1,5 @@
 <section *ngIf="!isBusy" class="padding-nav-bar container d-flex justify-content-center">
-  <form class="form-control i-aligncenter p-2" #form="ngForm">
+  <form class="form-control i-aligncenter p-2" #form="ngForm" (keydown.enter)="$event.preventDefault()">
     <h2 class="my-3">Add category</h2>
     <div class="form-group">
       <label for="inputName">Title</label>
@@ -7,15 +7,11 @@
              placeholder="Enter title" required name="name" [(ngModel)]="model.title">
     </div>
     <div class="form-group">
-      <label for="inputDescription">Description</label>
-      <div id="inputDescription" [froalaEditor] [(froalaModel)]="model.post.content"></div>
-    </div>
-    <div class="form-group">
       <label for="tagList">Tags</label>
       <div>
         <div class="d-inline-flex flex-wrap">
           <md-chip-list [selectable]="true" id="tagList">
-            <md-chip *ngFor="let ct of model.containerTag" (click)="removeTag(ct.tagName);" class="mx-2">{{ct.tagName}}
+            <md-chip *ngFor="let ct of model.containerTags" (click)="removeTag(ct.tagName);" class="mx-2">{{ct.tagName}}
             </md-chip>
           </md-chip-list>
 
@@ -34,12 +30,16 @@
       </div>
       <small class="form-text text-muted">Click to tag to remove.</small>
     </div>
+    <div class="form-group">
+      <label for="inputDescription">Description</label>
+      <div id="inputDescription" [froalaEditor] [(froalaModel)]="model.post.content" ></div>
+    </div>
+
 
     <br>
     <button class="btn btn-primary my-3" (click)="add()"
-            [disabled]="!form.form.valid||isBusy||model.containerTag.length===0">
-      Add&nbsp;
-      <i class="fa fa-spinner fa-spin" *ngIf="isBusy"></i>
+            [disabled]="!form.form.valid||isBusy||model.containerTags.length===0">
+      Add&nbsp;<i class="fa fa-spinner fa-spin" *ngIf="isBusy"></i>
     </button>
   </form>
 

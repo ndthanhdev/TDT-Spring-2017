@@ -42,20 +42,20 @@ export class AddPostComponent implements OnInit {
   }
 
   filterTags(val: string) {
-    return val ? this.tags.filter(tag => new RegExp(`^${val}`, 'gi').test(tag.name))
+    return val ? this.tags.filter(tag => tag.name.indexOf(val) >= 0)
       : this.tags;
   }
 
   addTag(tagName: string) {
     for (let tag of this.tags) {
       if (tag.name === tagName) {
-        for (let ct of this.model.containerTag) {
+        for (let ct of this.model.containerTags) {
           if (ct.tagName === tagName) {
             this.alert.openSnackbar(`${tag.name} was added`);
             return;
           }
         }
-        this.model.containerTag.push(new ContainerTag(tag.name));
+        this.model.containerTags.push(new ContainerTag(tag.name));
         return;
       }
     }
@@ -63,7 +63,7 @@ export class AddPostComponent implements OnInit {
   }
 
   removeTag(tagName: string) {
-    this.model.containerTag = this.model.containerTag.filter((value, index, array) => value.tagName !== tagName);
+    this.model.containerTags = this.model.containerTags.filter((value, index, array) => value.tagName !== tagName);
   }
 
   async reload(): Promise<void> {

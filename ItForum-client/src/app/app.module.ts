@@ -42,6 +42,7 @@ import { TagComponent } from './tag/tag.component';
 import { TagDetailComponent } from './tag-detail/tag-detail.component';
 import {ContainerService} from "../services/container/container.service";
 import { AddPostComponent } from './add-post/add-post.component';
+import { ContainerDetailComponent } from './container-detail/container-detail.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { AddPostComponent } from './add-post/add-post.component';
     VerifyPostComponent,
     AddTagComponent,
     TagDetailComponent,
-    AddPostComponent
+    AddPostComponent,
+    ContainerDetailComponent
   ],
   imports: [
     BrowserModule,

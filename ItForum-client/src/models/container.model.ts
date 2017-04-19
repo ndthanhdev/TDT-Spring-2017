@@ -12,13 +12,13 @@ export class Container {
 
   public post:Post;
 
-  public containerTag:ContainerTag[];
+  public containerTags:ContainerTag[];
 
   constructor(postId: string, title: string, containerId: string, post: Post) {
     this.postId = postId;
     this.title = title;
     this.containerId = containerId;
     this.post = post;
-    this.containerTag = new Array<ContainerTag>();
+    this.containerTags = new Array<ContainerTag>();
   }
 }

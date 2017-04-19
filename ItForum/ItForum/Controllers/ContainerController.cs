@@ -34,13 +34,13 @@ namespace ItForum.Controllers
         public async Task<IActionResult> Create([FromBody] Container container)
         {
             Payload payload = new Payload();
-            if (await _postServices.IsPostValid(container.Post))
+            if (!await _postServices.IsPostValid(container.Post))
             {
                 // unvalid post
                 payload.StatusCode = CreateResponseCode.InvalidPost;
                 return Json(payload);
             }
-            if (await _containerServices.IsContainerValid(container))
+            if (!await _containerServices.IsContainerValid(container))
             {
                 // unvalid container
                 payload.StatusCode = CreateResponseCode.InvalidContainer;

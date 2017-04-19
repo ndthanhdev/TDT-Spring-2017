@@ -42,7 +42,7 @@ export class UserService {
   }
 
   getProfile(userId: string): Promise<ReceivedPayload> {
-    return this.request.get(ConstantValuesService.GET_PROFILE_URL + userId);
+    return this.request.get(ConstantValuesService.GET_PROFILE_URL + encodeURIComponent(userId));
   }
 
   getJwt(): any {

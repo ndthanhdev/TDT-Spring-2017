@@ -3,7 +3,7 @@
     <div *ngFor="let category of categories" class="card m-1" style="width: 20rem;">
       <div class="card-block">
         <h4 class="card-title truncate">{{category.name}}</h4>
-        <a [routerLink]="category.tagId" routerLinkActive="active" class="btn btn-primary">Browse</a>
+        <a [routerLink]="category.name" routerLinkActive="active" class="btn btn-primary">Browse</a>
       </div>
     </div>
   </div>

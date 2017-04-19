@@ -15,7 +15,7 @@ export class AdminService {
   }
 
   async verifyUser(userId: string): Promise<ReceivedPayload> {
-    return this.authRequest.get(ConstantValuesService.VERIFY_USER + userId);
+    return this.authRequest.get(ConstantValuesService.VERIFY_USER + encodeURIComponent(userId));
   }
 
   async verifyUserAuto(): Promise<ReceivedPayload> {
