@@ -1,9 +1,12 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MdDialogModule, MdSnackBarModule, MdProgressSpinnerModule, MdInputModule} from '@angular/material';
+import {
+  MdDialogModule, MdSnackBarModule, MdProgressSpinnerModule, MdInputModule,
+  MdAutocompleteModule, MdChipsModule
+} from '@angular/material';
 
 import {Ng2PageScrollModule} from 'ng2-page-scroll';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -67,12 +70,16 @@ import { AddPostComponent } from './add-post/add-post.component';
     HttpModule,
     AppRoutingModule,
     NgbModule.forRoot(),
+    ReactiveFormsModule,
+
     //@angular/material
     BrowserAnimationsModule,
     MdDialogModule,
     MdSnackBarModule,
     MdProgressSpinnerModule,
     MdInputModule,
+    MdAutocompleteModule,
+    MdChipsModule,
 
     Ng2PageScrollModule.forRoot(),
     NgxDatatableModule,

@@ -10,10 +10,28 @@
       <label for="inputDescription">Description</label>
       <div id="inputDescription" [froalaEditor] [(froalaModel)]="model.post.content"></div>
     </div>
+
+    <md-chip-list>
+      <md-chip *ngFor="let ct of model.containerTag" [selectable]="true"> {{getTagByName(ct.tagId)}}</md-chip>
+    </md-chip-list>
+    <br>
+
+    <md-input-container>
+      <input mdInput placeholder="Type and enter to add tag" [mdAutocomplete]="auto" #tagInput [formControl]="formC"
+             (keyup.enter)="addTag(tagInput.value);">
+    </md-input-container>
+    <md-autocomplete #auto="mdAutocomplete">
+      <md-option *ngFor="let tag of tags" [value]="tag.name">
+        {{tag.name}}
+      </md-option>
+    </md-autocomplete>
+    <br>
+
     <button class="btn btn-primary my-3" (click)="add()"
             [disabled]="!form.form.valid||isBusy">
       Add&nbsp;
       <i class="fa fa-spinner fa-spin" *ngIf="isBusy"></i>
     </button>
   </form>
+
 </section>
