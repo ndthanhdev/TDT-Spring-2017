@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Container} from "../../models/container.model";
+import {Post} from "../../models/post.model";
+import {ContainerService} from "../../services/container/container.service";
+import {UserService} from "../../services/user/user.service";
+import {ConstantValuesService} from "../../services/constantValues/constant-values.service";
 
 @Component({
   selector: 'app-add-post',
@@ -7,9 +12,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddPostComponent implements OnInit {
 
-  constructor() { }
+  isBusy: boolean;
+  model: Container;
 
-  ngOnInit() {
+  constructor(private containerService: ContainerService,private userService:UserService) {
   }
 
+  ngOnInit() {
+    this.model = new Container(null, '', null, new Post(this.userService.getJwt()[ConstantValuesService.JWT_USERNAME]));
+  }
+
+  async add() {
+    console.log(this.model);
+  }
 }

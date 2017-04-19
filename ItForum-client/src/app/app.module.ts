@@ -9,6 +9,7 @@ import {Ng2PageScrollModule} from 'ng2-page-scroll';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {JwtHelper} from 'angular2-jwt';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
+import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
 
 import {AppRoutingModule} from '../modules/app-routing/app-routing.module';
 import {AuthHttpModule} from '../modules/auth-http/auth-http.module';
@@ -32,7 +33,7 @@ import {ManageTagComponent} from './manage-tag/manage-tag.component';
 import {VerifyPostComponent} from './verify-post/verify-post.component';
 import {AdminService} from "../services/admin/admin.service";
 import {AuthRequestService} from "../services/authRequest/auth-request.service";
-import { AddCategoryComponent } from './add-category/add-category.component';
+import { AddTagComponent } from './add-tag/add-tag.component';
 import {TagService} from "../services/tag/tag.service";
 import { TagComponent } from './tag/tag.component';
 import { TagDetailComponent } from './tag-detail/tag-detail.component';
@@ -55,7 +56,7 @@ import { AddPostComponent } from './add-post/add-post.component';
     ManageUserComponent,
     ManageTagComponent,
     VerifyPostComponent,
-    AddCategoryComponent,
+    AddTagComponent,
     TagDetailComponent,
     AddPostComponent
   ],
@@ -75,6 +76,9 @@ import { AddPostComponent } from './add-post/add-post.component';
 
     Ng2PageScrollModule.forRoot(),
     NgxDatatableModule,
+
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
 
   ],
   providers: [

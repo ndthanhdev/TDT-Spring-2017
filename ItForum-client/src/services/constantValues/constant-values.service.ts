@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class ConstantValuesService {
 
-  public static readonly BASE_URL = 'http://localhost:49957';// 'http://api-thanhgular.azurewebsites.net';
+  public static readonly BASE_URL = 'http://localhost:49957'; // 'http://api-thanhgular.azurewebsites.net';
   public static readonly JWT_TOKEN_NAME = 'token';
 
   public static readonly JWT_USERNAME = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name';
@@ -24,6 +24,8 @@ export class ConstantValuesService {
 
   // container
   public static readonly GET_CONTAINERS_IN_TAG = ConstantValuesService.BASE_URL + '/container/GetContainersInTag/';
+  public static readonly CREATE_CONTAINERS = ConstantValuesService.BASE_URL + '/container/Create';
+
   constructor() {
   }
 

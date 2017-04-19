@@ -5,11 +5,11 @@ import {AdminService} from "services/admin/admin.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-add-category',
-  templateUrl: './add-category.component.html',
-  styleUrls: ['./add-category.component.css']
+  selector: 'app-add-tag',
+  templateUrl: './add-tag.component.html',
+  styleUrls: ['./add-tag.component.css']
 })
-export class AddCategoryComponent implements OnInit {
+export class AddTagComponent implements OnInit {
 
   isBusy: boolean;
   model: Tag;

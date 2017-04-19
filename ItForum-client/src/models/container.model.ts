@@ -1,25 +1,21 @@
+import {Post} from "./post.model";
 /**
  * Created by duyth on 4/19/2017.
  */
-export class container {
+export class Container {
   public postId: string;
 
-  public content: string;
-
-  public userId: string;
+  public title: string;
 
   public containerId: string;
 
-  public isVerified: boolean;
+  public post:Post;
 
-  public publishDate: Date;
 
-  constructor(postId: string, content: string, userId: string, containerId: string, isVerified: boolean, publishDate: Date) {
+  constructor(postId: string, title: string, containerId: string, post: Post) {
     this.postId = postId;
-    this.content = content;
-    this.userId = userId;
+    this.title = title;
     this.containerId = containerId;
-    this.isVerified = isVerified;
-    this.publishDate = publishDate;
+    this.post = post;
   }
 }
