@@ -26,25 +26,20 @@ namespace ItForum
 
         public DbSet<ContainerTag> ContainerTags { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Point>()
-                .HasKey(model => new {model.PostId, model.UserId});
+                .HasKey(model => new { model.PostId, model.UserId });
 
             // many-to-many Container and Tag
             modelBuilder.Entity<ContainerTag>()
-                .HasKey(model => new {model.ContainerId, model.TagId});
+                .HasKey(model => new { model.ContainerId, model.TagName });
 
             // many-to-many User and Tag
             modelBuilder.Entity<UserTag>()
-                .HasKey(model => new {model.UserId, model.TagId});
+                .HasKey(model => new { model.UserId, model.TagName });
         }
     }
 }

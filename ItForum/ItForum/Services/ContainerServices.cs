@@ -32,7 +32,7 @@ namespace ItForum.Services
         {
             var tag = await _db.Tags.Include(t => t.ContainerTags)
                 .ThenInclude(ct => ct.Container)
-                .FirstOrDefaultAsync(t => t.TagId == tagId);
+                .FirstOrDefaultAsync(t => t.Name == tagId);
             if (tag == null)
                 return null;
             return new List<Container>(tag.ContainerTags.Select(ct => ct.Container));
@@ -48,7 +48,7 @@ namespace ItForum.Services
             var tagTasks = container.ContainerTags
                 ?.Select(containerContainerTag => _tagServices.GetTagById(containerContainerTag.ContainerId))
                 .ToList();
-            if (tagTasks == null)
+            if (tagTasks == null || tagTasks.Count == 0)
                 return false;
 
             await Task.WhenAll(tagTasks);

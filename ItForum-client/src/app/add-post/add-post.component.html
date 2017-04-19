@@ -1,5 +1,5 @@
 <section *ngIf="!isBusy" class="padding-nav-bar container d-flex justify-content-center">
-  <form class="form-control i-aligncenter p-5" #form="ngForm">
+  <form class="form-control i-aligncenter p-2" #form="ngForm">
     <h2 class="my-3">Add category</h2>
     <div class="form-group">
       <label for="inputName">Title</label>
@@ -10,25 +10,34 @@
       <label for="inputDescription">Description</label>
       <div id="inputDescription" [froalaEditor] [(froalaModel)]="model.post.content"></div>
     </div>
+    <div class="form-group">
+      <label for="tagList">Tags</label>
+      <div>
+        <div class="d-inline-flex flex-wrap">
+          <md-chip-list [selectable]="true" id="tagList">
+            <md-chip *ngFor="let ct of model.containerTag" (click)="removeTag(ct.tagName);" class="mx-2">{{ct.tagName}}
+            </md-chip>
+          </md-chip-list>
 
-    <md-chip-list>
-      <md-chip *ngFor="let ct of model.containerTag" [selectable]="true"> {{getTagByName(ct.tagId)}}</md-chip>
-    </md-chip-list>
+          <md-input-container>
+            <input mdInput placeholder="Type and enter to add tag." [mdAutocomplete]="auto" #tagInput
+                   [formControl]="formC"
+                   (keyup.enter)="addTag(tagInput.value);"
+                   (input)="tagInput.value=$event.target.value.toLowerCase()">
+          </md-input-container>
+          <md-autocomplete #auto="mdAutocomplete">
+            <md-option *ngFor="let tag of filteredTags| async" [value]="tag.name">
+              {{tag.name}}
+            </md-option>
+          </md-autocomplete>
+        </div>
+      </div>
+      <small class="form-text text-muted">Click to tag to remove.</small>
+    </div>
+
     <br>
-
-    <md-input-container>
-      <input mdInput placeholder="Type and enter to add tag" [mdAutocomplete]="auto" #tagInput [formControl]="formC"
-             (keyup.enter)="addTag(tagInput.value);">
-    </md-input-container>
-    <md-autocomplete #auto="mdAutocomplete">
-      <md-option *ngFor="let tag of tags" [value]="tag.name">
-        {{tag.name}}
-      </md-option>
-    </md-autocomplete>
-    <br>
-
     <button class="btn btn-primary my-3" (click)="add()"
-            [disabled]="!form.form.valid||isBusy">
+            [disabled]="!form.form.valid||isBusy||model.containerTag.length===0">
       Add&nbsp;
       <i class="fa fa-spinner fa-spin" *ngIf="isBusy"></i>
     </button>

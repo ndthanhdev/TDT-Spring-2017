@@ -9,9 +9,9 @@ namespace ItForum.Models
         [ForeignKey(nameof(UserId))]
         public User User { get; set; }
 
-        public string TagId { get; set; }
+        public string TagName { get; set; }
 
-        [ForeignKey(nameof(TagId))]
+        [ForeignKey(nameof(TagName))]
         public Tag Tag { get; set; }
     }
 }

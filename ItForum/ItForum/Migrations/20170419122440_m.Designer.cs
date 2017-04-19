@@ -8,7 +8,7 @@ using ItForum;
 namespace ItForum.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20170418190237_m")]
+    [Migration("20170419122440_m")]
     partial class m
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,11 +61,11 @@ namespace ItForum.Migrations
                 {
                     b.Property<string>("ContainerId");
 
-                    b.Property<string>("TagId");
+                    b.Property<string>("TagName");
 
-                    b.HasKey("ContainerId", "TagId");
+                    b.HasKey("ContainerId", "TagName");
 
-                    b.HasIndex("TagId");
+                    b.HasIndex("TagName");
 
                     b.ToTable("ContainerTags");
                 });
@@ -109,14 +109,12 @@ namespace ItForum.Migrations
 
             modelBuilder.Entity("ItForum.Models.Tag", b =>
                 {
-                    b.Property<string>("TagId")
+                    b.Property<string>("Name")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("Name");
-
-                    b.HasKey("TagId");
+                    b.HasKey("Name");
 
                     b.ToTable("Tags");
                 });
@@ -169,11 +167,11 @@ namespace ItForum.Migrations
                 {
                     b.Property<string>("UserId");
 
-                    b.Property<string>("TagId");
+                    b.Property<string>("TagName");
 
-                    b.HasKey("UserId", "TagId");
+                    b.HasKey("UserId", "TagName");
 
-                    b.HasIndex("TagId");
+                    b.HasIndex("TagName");
 
                     b.ToTable("UserTags");
                 });
@@ -208,7 +206,7 @@ namespace ItForum.Migrations
 
                     b.HasOne("ItForum.Models.Tag", "Tag")
                         .WithMany("ContainerTags")
-                        .HasForeignKey("TagId")
+                        .HasForeignKey("TagName")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -247,7 +245,7 @@ namespace ItForum.Migrations
                 {
                     b.HasOne("ItForum.Models.Tag", "Tag")
                         .WithMany("UserTags")
-                        .HasForeignKey("TagId")
+                        .HasForeignKey("TagName")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ItForum.Models.User", "User")

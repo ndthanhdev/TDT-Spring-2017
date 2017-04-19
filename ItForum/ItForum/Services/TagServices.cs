@@ -33,17 +33,17 @@ namespace ItForum.Services
 
         public static bool IsDataCorrect(Tag tag)
         {
-            return !string.IsNullOrWhiteSpace(tag.Name) && !string.IsNullOrWhiteSpace(tag.TagId);
+            return !string.IsNullOrWhiteSpace(tag.Name);
         }
 
         public async Task<bool> IsUserHasTag(string userId, string tagId)
         {
-            return await _db.UserTags.FirstOrDefaultAsync(ut => ut.UserId == userId && ut.TagId == tagId) != null;
+            return await _db.UserTags.FirstOrDefaultAsync(ut => ut.UserId == userId && ut.TagName == tagId) != null;
         }
 
         public async Task<Tag> GetTagById(string tagId)
         {
-            return await _db.Tags.FirstOrDefaultAsync(t => t.TagId == tagId);
+            return await _db.Tags.FirstOrDefaultAsync(t => t.Name == tagId);
         }
 
         public async Task<UserTag> AddUserTag(string userId, string tagId)
@@ -51,7 +51,7 @@ namespace ItForum.Services
             var userTag = new UserTag
             {
                 UserId = userId,
-                TagId = tagId
+                TagName = tagId
             };
             await _db.UserTags.AddAsync(userTag);
             await _db.SaveChangesAsync();

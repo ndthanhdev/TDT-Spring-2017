@@ -37,16 +37,16 @@ namespace ItForum.Controllers
             if (await _postServices.IsPostValid(container.Post))
             {
                 // unvalid post
-                payload.StatusCode = CreateResponseCode.UnvalidPost;
+                payload.StatusCode = CreateResponseCode.InvalidPost;
                 return Json(payload);
             }
             if (await _containerServices.IsContainerValid(container))
             {
                 // unvalid container
-                payload.StatusCode = CreateResponseCode.UnvalidContainer;
+                payload.StatusCode = CreateResponseCode.InvalidContainer;
                 return Json(payload);
             }
-            payload.Data = await _containerServices.CreateContainer(container);
+            payload.Data = (await _containerServices.CreateContainer(container)).ContainerId;
             payload.StatusCode = CreateResponseCode.Ok;
             return Json(payload);
 

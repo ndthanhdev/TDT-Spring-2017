@@ -30,7 +30,7 @@ namespace ItForum.Controllers
         public async Task<IActionResult> Create([FromBody] Tag tag)
         {
             var payload = new Payload();
-            if (TagServices.IsDataCorrect(tag))
+            if (!TagServices.IsDataCorrect(tag))
                 payload.StatusCode = (int) TagCreateCode.Incorrect;
             else if (await _services.IsTagExisted(tag))
                 payload.StatusCode = (int) TagCreateCode.Existed;
@@ -50,7 +50,7 @@ namespace ItForum.Controllers
                 // user not exist
                 payload.StatusCode = (int) TagAddUserTagCode.UserNotExist;
             }
-            else if (await _services.GetTagById(data.TagId) == null)
+            else if (await _services.GetTagById(data.TagName) == null)
             {
                 // tag doesn't exist
                 payload.StatusCode = (int) TagAddUserTagCode.TagNotExist;
@@ -58,7 +58,7 @@ namespace ItForum.Controllers
             else
             {
                 // create UserTag 
-                await _services.AddUserTag(data.UserId, data.TagId);
+                await _services.AddUserTag(data.UserId, data.TagName);
                 payload.StatusCode = (int) TagAddUserTagCode.Created;
             }
 

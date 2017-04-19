@@ -12,13 +12,12 @@ namespace ItForum.Migrations
                 name: "Tags",
                 columns: table => new
                 {
-                    TagId = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tags", x => x.TagId);
+                    table.PrimaryKey("PK_Tags", x => x.Name);
                 });
 
             migrationBuilder.CreateTable(
@@ -65,16 +64,16 @@ namespace ItForum.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    TagId = table.Column<string>(nullable: false)
+                    TagName = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserTags", x => new { x.UserId, x.TagId });
+                    table.PrimaryKey("PK_UserTags", x => new { x.UserId, x.TagName });
                     table.ForeignKey(
-                        name: "FK_UserTags_Tags_TagId",
-                        column: x => x.TagId,
+                        name: "FK_UserTags_Tags_TagName",
+                        column: x => x.TagName,
                         principalTable: "Tags",
-                        principalColumn: "TagId",
+                        principalColumn: "Name",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserTags_Users_UserId",
@@ -89,16 +88,16 @@ namespace ItForum.Migrations
                 columns: table => new
                 {
                     ContainerId = table.Column<string>(nullable: false),
-                    TagId = table.Column<string>(nullable: false)
+                    TagName = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ContainerTags", x => new { x.ContainerId, x.TagId });
+                    table.PrimaryKey("PK_ContainerTags", x => new { x.ContainerId, x.TagName });
                     table.ForeignKey(
-                        name: "FK_ContainerTags_Tags_TagId",
-                        column: x => x.TagId,
+                        name: "FK_ContainerTags_Tags_TagName",
+                        column: x => x.TagName,
                         principalTable: "Tags",
-                        principalColumn: "TagId",
+                        principalColumn: "Name",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -210,9 +209,9 @@ namespace ItForum.Migrations
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ContainerTags_TagId",
+                name: "IX_ContainerTags_TagName",
                 table: "ContainerTags",
-                column: "TagId");
+                column: "TagName");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Points_UserId",
@@ -235,9 +234,9 @@ namespace ItForum.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserTags_TagId",
+                name: "IX_UserTags_TagName",
                 table: "UserTags",
-                column: "TagId");
+                column: "TagName");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_ContainerTags_Containers_ContainerId",

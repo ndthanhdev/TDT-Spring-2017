@@ -1,14 +1,20 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ItForum.Models
 {
     public class Tag
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string TagId { get; set; }
+        private string _name;
 
-        public string Name { get; set; }
+        [Key]
+        public string Name
+        {
+            get => _name;
+            set => _name = value.ToLower();
+        }
+
         public string Description { get; set; }
 
         public List<ContainerTag> ContainerTags { get; set; }
@@ -17,7 +23,7 @@ namespace ItForum.Models
 
         public bool Equals(Tag obj)
         {
-            return TagId == obj.TagId || Name == obj.Name;
+            return Name == obj.Name;
         }
     }
 }

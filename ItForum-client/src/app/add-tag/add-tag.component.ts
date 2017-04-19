@@ -18,7 +18,7 @@ export class AddTagComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.model = new Tag(null, '', '');
+    this.model = new Tag('', '');
   }
 
   async add(): Promise<void> {

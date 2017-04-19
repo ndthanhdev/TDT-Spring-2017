@@ -8,7 +8,7 @@ namespace ItForum.Controllers.DTO.ContainerController
     public static class CreateResponseCode
     {
         public static readonly int Ok = 0;
-        public static readonly int UnvalidPost = 1;
-        public static readonly int UnvalidContainer = 2;
+        public static readonly int InvalidPost = 1;
+        public static readonly int InvalidContainer = 2;
     }
 }

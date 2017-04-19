@@ -3,10 +3,10 @@
  */
 export class ContainerTag {
   public containerId: string;
-  public tagId: string;
+  public tagName: string;
 
 
   constructor(tagId: string) {
-    this.tagId = tagId;
+    this.tagName = tagId;
   }
 }
