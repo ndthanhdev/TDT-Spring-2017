@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {JwtHelper} from 'angular2-jwt';
 import {ConstantValuesService, RegisteredRoles} from '../services/constantValues/constant-values.service';
 import {UserService} from '../services/user/user.service';
 import {User} from '../models/user.model';
+import {Router} from "@angular/router";
+import {AlertService} from "../services/alert/alert.service";
 
 
 @Component({
@@ -18,7 +20,10 @@ export class AppComponent implements OnInit {
   isAdmin: boolean;
   isMod: boolean;
 
-  constructor(private  service: UserService) {
+  isShrink = false;
+  isCollapsed = true;
+
+  constructor(private router: Router, private  service: UserService, private alert: AlertService) {
     this.service.authorizationChanged$.subscribe(v => {
       this.authorizationChanged();
     });
@@ -55,5 +60,17 @@ export class AppComponent implements OnInit {
       this.isAdmin = false;
       this.isMod = false;
     }
+  }
+
+  @HostListener('window:scroll', [])
+  track() {
+    this.isShrink = document.body.scrollTop > 55;
+  }
+
+  logout(): void {
+    localStorage.clear();
+    this.service.notifyAuthorizedChanged();
+    this.router.navigate(['/home']);
+    this.alert.openSnackbar("You logged out");
   }
 }

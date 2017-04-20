@@ -42,6 +42,7 @@ import {ContainerService} from "../services/container/container.service";
 import {AddPostComponent} from './add-post/add-post.component';
 import {ContainerDetailComponent} from './container-detail/container-detail.component';
 import {RoleService} from "../services/role/role.service";
+import { TopicDetailComponent } from './topic-detail/topic-detail.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import {RoleService} from "../services/role/role.service";
     AddTagComponent,
     TagDetailComponent,
     AddPostComponent,
-    ContainerDetailComponent
+    ContainerDetailComponent,
+    TopicDetailComponent
   ],
   imports: [
     BrowserModule,

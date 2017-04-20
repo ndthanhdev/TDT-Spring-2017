@@ -1,5 +1,50 @@
-<app-nav-bar [isAuthorized]="isAuthorized" [user]="profile"
-             [isAdmin]="isAdmin" [isMod]="isMod"></app-nav-bar>
+<!--<app-nav-bar [isAuthorized]="isAuthorized" [user]="profile"-->
+<!--[isAdmin]="isAdmin" [isMod]="isMod"></app-nav-bar>-->
+<nav id="mainNav" class="navbar fixed-top navbar-toggleable-md navbar-inverse px-5"
+     [ngClass]=" { 'navbar-shrink': isShrink} ">
+  <a pageScroll class="navbar-brand text-center" routerLink="home" routerLinkActive="active">TDT IT Forum</a>
+  <button class="navbar-toggler navbar-toggler-right " type="button " (click)="isCollapsed=! isCollapsed "
+          [attr.aria-expanded]="!isCollapsed " aria-controls="navbarToggler ">
+    <span class="navbar-toggler-icon "></span>
+  </button>
+  <div class="navbar-collapse" [ngbCollapse]="isCollapsed " id="navbarToggler ">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link " routerLink="home" routerLinkActive="active">Home</a>
+      </li>
+      <li class="nav-item ">
+        <a routerLink="tag" class="nav-link " routerLinkActive="active">Tags</a>
+      </li>
+      <li class="nav-item" *ngIf="isAuthorized">
+        <a *ngIf="profile" [routerLink]="['/profile', profile?.userId]" routerLinkActive="active" class="nav-link" href="">Profile</a>
+      </li>
+      <li class="nav-item" *ngIf="isMod">
+        <a routerLink="verify-post" routerLinkActive="active" class="nav-link " href="">Verify Post</a>
+      </li>
+      <li class="nav-item" *ngIf="isAdmin">
+        <a routerLink="manage-user" routerLinkActive="active" class="nav-link " href="">Manage User</a>
+      </li>
+      <li class="nav-item" *ngIf="isAdmin">
+        <a routerLink="manage-tag" routerLinkActive="active" class="nav-link " href="">Manage Tag</a>
+      </li>
+      <li class="nav-item" *ngIf="isAuthorized">
+        <a class="nav-link" routerLink="add-post" routerLinkActive="active" *ngIf="profile?.isVerified">Add Topic</a>
+        <a class="nav-link disabled" *ngIf="!profile?.isVerified">Add A Post</a>
+      </li>
+    </ul>
+    <form class="form-inline">
+      <a routerLink="register" routerLinkActive="active" class="btn btn-success my-1 mx-2 my-sm-0"
+         *ngIf="!isAuthorized">Register</a>
+      <a routerLink="login" routerLinkActive="active" class="btn btn-primary my-1 mx-2 my-sm-0" *ngIf="!isAuthorized">Login</a>
+      <i class="fa" aria-hidden="true" *ngIf="isAuthorized"
+         [ngClass]="{'fa-check-circle-o':profile?.isVerified, 'fa-circle-o':!profile?.isVerified}"></i>
+        <a *ngIf="isAuthorized && profile" [routerLink]="['/profile',profile?.userId]" class="my-1 mx-2 my-sm-0">Welcome,
+        {{profile?.fullName}}!</a>
+      <a (click)="logout()" class="btn btn-danger my-1 my-sm-0" *ngIf="isAuthorized">Logout</a>
+    </form>
+  </div>
+</nav>
+
 <router-outlet></router-outlet>
 <footer class="p-3">
   <div class="container">
@@ -10,7 +55,8 @@
       </div>
       <div class="col-md-4">
         <ul class="list-inline social-buttons">
-          <li class="list-inline-item"><a href="https://www.facebook.com/it.tdt.edu.vn"><i class="fa fa-facebook fa-2x"></i></a>
+          <li class="list-inline-item"><a href="https://www.facebook.com/it.tdt.edu.vn"><i
+            class="fa fa-facebook fa-2x"></i></a>
           </li>
         </ul>
       </div>

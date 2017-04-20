@@ -14,10 +14,10 @@
       [loadingIndicator]="isLoading">
       <ngx-datatable-column name="Title">
         <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
-          <span (click)="sort()">{{column.name}}</span>
+          <span (click)="sort()">Topics</span>
         </ng-template>
         <ng-template let-value="value" ngx-datatable-cell-template>
-          <strong>{{value}}</strong>
+          <a class="link-disabled" href="#">{{value}}</a>
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>

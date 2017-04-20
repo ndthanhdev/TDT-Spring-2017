@@ -13,6 +13,7 @@ import {AddTagComponent} from "../../app/add-tag/add-tag.component";
 import {TagDetailComponent} from "../../app/tag-detail/tag-detail.component";
 import {AddPostComponent} from "../../app/add-post/add-post.component";
 import {ContainerDetailComponent} from "../../app/container-detail/container-detail.component";
+import {TopicDetailComponent} from "../../app/topic-detail/topic-detail.component";
 
 
 const appRoutes: Routes = [
@@ -28,7 +29,8 @@ const appRoutes: Routes = [
   {path: 'verify-post', component: VerifyPostComponent},
   {path: 'tag/:id', component: TagDetailComponent},
   {path: 'add-post', component: AddPostComponent},
-  {path: 'container-detail/:id', component: ContainerDetailComponent}
+  {path: 'container-detail/:id', component: ContainerDetailComponent},
+  {path: 'topic-detail', component: TopicDetailComponent},
 ];
 
 @NgModule({
