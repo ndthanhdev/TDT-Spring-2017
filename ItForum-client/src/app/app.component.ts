@@ -13,7 +13,7 @@ import {User} from '../models/user.model';
 export class AppComponent implements OnInit {
 
   isAuthorized: boolean;
-  profile = new User('', '', '', '', 1997, '', '', false, []);
+  profile: User;
 
   isAdmin: boolean;
   isMod: boolean;
@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.profile = new User('', '', '', '', 1997, '', '', false, [], []);
     this.authorizationChanged();
 
   }
@@ -39,7 +40,14 @@ export class AppComponent implements OnInit {
       this.isMod = jwt[ConstantValuesService.JWT_ROLE].indexOf(RegisteredRoles.Moderator) !== -1;
       const payload = await this.service.getProfile(userId);
       if (payload.statusCode === 0) {
-        this.profile = payload.data;
+        try {
+
+
+          this.profile = payload.data;
+        }
+        catch (err){
+
+        }
       }
     }
     else {

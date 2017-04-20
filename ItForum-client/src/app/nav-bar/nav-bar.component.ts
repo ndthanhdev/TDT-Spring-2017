@@ -2,6 +2,7 @@ import {Component, OnInit, OnDestroy, Input, HostListener, Inject} from '@angula
 import {Router} from '@angular/router';
 import {UserService} from '../../services/user/user.service';
 import {AlertService} from "../../services/alert/alert.service";
+import {User} from "../../models/user.model";
 
 
 @Component({
@@ -15,13 +16,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   isAuthorized: boolean;
 
   @Input()
-  userName: string;
-
-  @Input()
-  userId: string;
-
-  @Input()
-  isVerify: boolean;
+  user:User;
 
   @Input()
   isAdmin: boolean;

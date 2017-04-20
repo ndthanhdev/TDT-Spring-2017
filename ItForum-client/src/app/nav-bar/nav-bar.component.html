@@ -14,7 +14,7 @@
         <a routerLink="tag" class="nav-link " routerLinkActive="active">Tags</a>
       </li>
       <li class="nav-item" *ngIf="isAuthorized">
-        <a [routerLink]="['/profile',userId]" routerLinkActive="active" class="nav-link " href="">Profile</a>
+        <a routerLink="" routerLinkActive="active" class="nav-link" href="">Profile</a>
       </li>
       <li class="nav-item" *ngIf="isMod">
         <a routerLink="verify-post" routerLinkActive="active" class="nav-link " href="">Verify Post</a>
@@ -26,8 +26,8 @@
         <a routerLink="manage-tag" routerLinkActive="active" class="nav-link " href="">Manage Tag</a>
       </li>
       <li class="nav-item" *ngIf="isAuthorized">
-        <a class="nav-link" routerLink="add-post" routerLinkActive="active" *ngIf="isVerify">Add Topic</a>
-        <a class="nav-link disabled" *ngIf="!isVerify">Add A Post</a>
+        <a class="nav-link" routerLink="add-post" routerLinkActive="active" *ngIf="user?.isVerified">Add Topic</a>
+        <a class="nav-link disabled" *ngIf="!user?.isVerified">Add A Post</a>
       </li>
     </ul>
     <form class="form-inline">
@@ -35,9 +35,9 @@
          *ngIf="!isAuthorized">Register</a>
       <a routerLink="login" routerLinkActive="active" class="btn btn-primary my-1 mx-2 my-sm-0" *ngIf="!isAuthorized">Login</a>
       <i class="fa" aria-hidden="true" *ngIf="isAuthorized"
-         [ngClass]="{'fa-check-circle-o':isVerify, 'fa-circle-o':!isVerify}"></i>
-      <a routerLinkActive="active" routerLink="profile" *ngIf="isAuthorized" href="" class="my-1 mx-2 my-sm-0">Welcome,
-        {{userName}}!</a>
+         [ngClass]="{'fa-check-circle-o':user?.isVerified, 'fa-circle-o':!user?.isVerified}"></i>
+      <a *ngIf="isAuthorized" href="" class="my-1 mx-2 my-sm-0">Welcome,
+        {{user?.fullName}}!</a>
       <a (click)="logout()" class="btn btn-danger my-1 my-sm-0" *ngIf="isAuthorized">Logout</a>
     </form>
   </div>

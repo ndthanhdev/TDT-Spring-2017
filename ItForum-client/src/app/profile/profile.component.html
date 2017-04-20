@@ -1,4 +1,4 @@
-<section class="padding-nav-bar d-flex justify-content-center">
+<section *ngIf="!isLoading" class="padding-nav-bar d-flex justify-content-center">
   <div class="card w-50">
     <div class="card-header">{{model?.fullName}}</div>
     <div class="card-block">
@@ -38,7 +38,32 @@
 
             <tr>
               <td>Roles:</td>
-              <td>Kathmandu,Nepal</td>
+              <td>
+                <div class="d-inline-flex flex-wrap">
+                  <md-chip-list *ngIf="isAdmin" [selectable]="true">
+                    <md-chip *ngFor="let uc of model?.userClaims" (click)="removeClaim(uc.claimValue);" class="mx-2">
+                      {{uc.claimValue}}
+                    </md-chip>
+                  </md-chip-list>
+                  <md-chip-list *ngIf="!isAdmin" [selectable]="true">
+                    <md-chip *ngFor="let uc of model?.userClaims" class="mx-2">
+                      {{uc.claimValue}}
+                    </md-chip>
+                  </md-chip-list>
+                  <div *ngIf="isAdmin">
+                    <md-input-container>
+                      <input mdInput placeholder="Type and enter to add tag." [mdAutocomplete]="autoRole" #roleInput
+                             [formControl]="formRoles"
+                             (keyup.enter)="addRole(roleInput.value);">
+                    </md-input-container>
+                    <md-autocomplete #autoRole="mdAutocomplete">
+                      <md-option *ngFor="let role of filteredRoles| async" [value]="role">
+                        {{role}}
+                      </md-option>
+                    </md-autocomplete>
+                  </div>
+                </div>
+              </td>
             </tr>
 
             <tr>
@@ -58,7 +83,7 @@
                   <div *ngIf="isAdmin">
                     <md-input-container>
                       <input mdInput placeholder="Type and enter to add tag." [mdAutocomplete]="auto" #tagInput
-                             [formControl]="formC"
+                             [formControl]="formTag"
                              (keyup.enter)="addTag(tagInput.value);"
                              (input)="tagInput.value=$event.target.value.toLowerCase()">
                     </md-input-container>
@@ -76,10 +101,15 @@
           </table>
           <button class="btn btn-primary my-3" (click)="save()"
                   [disabled]="isBusy">
-            Save&nbsp;<i class="fa fa-spinner fa-spin" *ngIf="isBusy"></i>
+            Update&nbsp;<i class="fa fa-spinner fa-spin" *ngIf="isBusy"></i>
           </button>
         </div>
       </div>
     </div>
+  </div>
+</section>
+<section *ngIf="isLoading" class="padding-nav-bar d-flex flex-column justify-content-center">
+  <div class="d-flex justify-content-center">
+    <md-spinner></md-spinner>
   </div>
 </section>

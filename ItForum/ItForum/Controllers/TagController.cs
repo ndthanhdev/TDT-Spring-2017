@@ -16,7 +16,6 @@ namespace ItForum.Controllers
     [Route("[controller]/[action]")]
     public class TagController : Controller
     {
-        private readonly IMapper _mapper;
         private readonly TagServices _services;
         private readonly UserServices _userServices;
 
@@ -24,7 +23,6 @@ namespace ItForum.Controllers
         {
             _services = services;
             _userServices = userServices;
-            _mapper = mapper;
         }
 
         [HttpPost]
@@ -88,6 +86,7 @@ namespace ItForum.Controllers
             return Json(payload);
         }
 
+        [HttpPost]
         [Authorize(RegisteredPolicys.Adminstrator)]
         public async Task<IActionResult> UpdateUserTagOfUser([FromBody] User data)
         {

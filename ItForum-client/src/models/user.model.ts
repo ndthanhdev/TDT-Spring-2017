@@ -4,7 +4,9 @@ import {UserClaim} from "./user-claim.model";
  * Created by duyth on 3/31/2017.
  */
 export class User {
-  constructor(userId: string, username: string, fullName: string, faculty: string, admissionYear: number, email: string, phone: string, isVerified: boolean, userTags: UserTag[]) {
+
+
+  constructor(userId: string, username: string, fullName: string, faculty: string, admissionYear: number, email: string, phone: string, isVerified: boolean, userTags: UserTag[], userClaims: UserClaim[]) {
     this.userId = userId;
     this.username = username;
     this.fullName = fullName;
@@ -14,6 +16,7 @@ export class User {
     this.phone = phone;
     this.isVerified = isVerified;
     this.userTags = userTags;
+    this.userClaims = userClaims;
   }
 
   public userId: string;

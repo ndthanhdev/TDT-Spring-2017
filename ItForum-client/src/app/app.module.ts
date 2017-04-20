@@ -41,6 +41,7 @@ import {TagDetailComponent} from './tag-detail/tag-detail.component';
 import {ContainerService} from "../services/container/container.service";
 import {AddPostComponent} from './add-post/add-post.component';
 import {ContainerDetailComponent} from './container-detail/container-detail.component';
+import {RoleService} from "../services/role/role.service";
 
 
 @NgModule({
@@ -95,7 +96,8 @@ import {ContainerDetailComponent} from './container-detail/container-detail.comp
     UserService,
     AdminService,
     TagService,
-    ContainerService
+    ContainerService,
+    RoleService
   ],
   bootstrap: [AppComponent],
   entryComponents: [AlertComponent]

@@ -27,6 +27,9 @@ export class ConstantValuesService {
   public static readonly GET_CONTAINERS_IN_TAG = ConstantValuesService.BASE_URL + '/container/GetContainersInTag/';
   public static readonly CREATE_CONTAINERS = ConstantValuesService.BASE_URL + '/container/Create';
 
+  //role
+  public static readonly UPDATE_USER_CLAIM_OF_USER = ConstantValuesService.BASE_URL + '/UserClaim/UpdateUserClaimOfUser';
+
   constructor() {
   }
 

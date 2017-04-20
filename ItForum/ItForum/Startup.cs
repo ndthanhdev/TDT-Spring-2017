@@ -67,6 +67,8 @@ namespace ItForum
 
             services.AddMapperServices();
 
+            services.AddUserClaimServices();
+
             services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
