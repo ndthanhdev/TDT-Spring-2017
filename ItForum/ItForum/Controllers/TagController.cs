@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using ItForum.Controllers.DTO;
 using ItForum.Controllers.DTO.TagController;
@@ -32,7 +34,7 @@ namespace ItForum.Controllers
             var payload = new Payload();
             if (!TagServices.IsDataCorrect(tag))
                 payload.StatusCode = (int) TagCreateCode.Incorrect;
-            else if (await _services.IsTagExisted(tag))
+            else if (await _services.IsTagExisted(tag.Name))
                 payload.StatusCode = (int) TagCreateCode.Existed;
             else
                 payload.Data = JsonConvert.SerializeObject(await _services.CreateTag(tag), Formatting.Indented);
@@ -50,7 +52,7 @@ namespace ItForum.Controllers
                 // user not exist
                 payload.StatusCode = (int) TagAddUserTagCode.UserNotExist;
             }
-            else if (await _services.GetTagById(data.TagName) == null)
+            else if (await _services.GetTagByName(data.TagName) == null)
             {
                 // tag doesn't exist
                 payload.StatusCode = (int) TagAddUserTagCode.TagNotExist;
@@ -64,6 +66,7 @@ namespace ItForum.Controllers
 
             return Json(payload);
         }
+
 
         [HttpGet]
         public async Task<IActionResult> GetAllTag()
@@ -80,8 +83,34 @@ namespace ItForum.Controllers
         [Route("{id}")]
         public async Task<IActionResult> GetTagById(string id)
         {
-            Payload payload = new Payload {Data = await _services.GetTagById(id)};
+            Payload payload = new Payload {Data = await _services.GetTagByName(id)};
             payload.StatusCode = payload.Data == null ? GetTagByIdCode.NotExist : GetTagByIdCode.Ok;
+            return Json(payload);
+        }
+
+        [Authorize(RegisteredPolicys.Adminstrator)]
+        public async Task<IActionResult> UpdateUserTagOfUser([FromBody] User data)
+        {
+            Payload payload= new Payload();
+
+            var tasks= data.UserTags.Select(ut => _services.IsTagExisted(ut.TagName));
+
+            var enumerable = tasks as Task<bool>[] ?? tasks.ToArray();
+            await Task.WhenAll(enumerable);
+            if (enumerable.Any(task => task.Result == false))
+            {
+                payload.StatusCode = UpdateUserTagOfUserCode.TagNotExist;
+                return Json(payload);
+            }
+
+            if (await _userServices.GetUserByIdAsync(data.UserId) == null)
+            {
+                payload.StatusCode = UpdateUserTagOfUserCode.UserNotExist;
+                return Json(payload);
+            }
+
+            await _services.UpdateUserTags(data);
+
             return Json(payload);
         }
     }

@@ -1,4 +1,27 @@
-<app-nav-bar [isAuthorized]="isAuthorized" [userName]="profile?.fullName" [isVerify]="profile?.isVerified"
+<app-nav-bar [isAuthorized]="isAuthorized" [userId]="profile?.userId" [userName]="profile?.fullName" [isVerify]="profile?.isVerified"
              [isAdmin]="isAdmin" [isMod]="isMod"></app-nav-bar>
 <router-outlet></router-outlet>
-<app-footer></app-footer>
+<footer class="p-3">
+  <div class="container">
+    <hr>
+    <div class="row">
+      <div class="col-md-4">
+        <span class="copyright">Copyright © TDT IT Forum 2017</span>
+      </div>
+      <div class="col-md-4">
+        <ul class="list-inline social-buttons">
+          <li class="list-inline-item"><a href="https://www.facebook.com/it.tdt.edu.vn"><i class="fa fa-facebook fa-2x"></i></a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <ul class="list-inline quicklinks">
+          <li class="list-inline-item"><a href="#">Privacy Policy</a>
+          </li>
+          <li class="list-inline-item"><a href="#">Terms of Use</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,6 +1,6 @@
 <section *ngIf="!isBusy" class="padding-nav-bar">
   <div class=" container d-flex flex-wrap">
-    <div *ngFor="let category of categories" class="card m-1" style="width: 20rem;">
+    <div *ngFor="let category of categories" class="card m-1" style="width: 15rem;">
       <div class="card-block">
         <h4 class="card-title truncate">{{category.name}}</h4>
         <a [routerLink]="category.name" routerLinkActive="active" class="btn btn-primary">Browse</a>

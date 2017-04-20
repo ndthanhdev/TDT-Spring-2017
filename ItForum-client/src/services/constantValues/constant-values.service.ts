@@ -21,6 +21,7 @@ export class ConstantValuesService {
   public static readonly GET_ALL_TAG = ConstantValuesService.BASE_URL + '/tag/getalltag';
   public static readonly GET_TAG_BY_ID = ConstantValuesService.BASE_URL + '/tag/GetTagById/';
   public static readonly ADD_TAG = ConstantValuesService.BASE_URL + '/tag/create';
+  public static readonly UPDATE_USERTAG_OF_USER = ConstantValuesService.BASE_URL + '/tag/UpdateUserTagOfUser';
 
   // container
   public static readonly GET_CONTAINERS_IN_TAG = ConstantValuesService.BASE_URL + '/container/GetContainersInTag/';

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ReceivedPayload} from '../../dto/receivedPayload.dto';
 import {RequestService} from '../request/request.service';
-import {ConstantValuesService} from '../constantValues/constant-values.service';
+import {ConstantValuesService, RegisteredRoles} from '../constantValues/constant-values.service';
 import {LoginModel} from '../../models/login.model';
 import {RegisterModel} from '../../models/register.model';
 import {Subject} from 'rxjs/Subject';
@@ -47,6 +47,19 @@ export class UserService {
 
   getJwt(): any {
     return this.jwtHelper.decodeToken(localStorage.getItem(ConstantValuesService.JWT_TOKEN_NAME));
+  }
+
+  getRoles():string[]{
+    return this.getJwt()[ConstantValuesService.JWT_ROLE];
+  }
+
+  isAdmin(): boolean {
+    let jwt = this.getJwt();
+    return jwt[ConstantValuesService.JWT_ROLE].indexOf(RegisteredRoles.Adminstrator) !== -1;
+  }
+
+  isMod(): boolean {
+    return this.getJwt()[ConstantValuesService.JWT_ROLE].indexOf(RegisteredRoles.Moderator) !== -1;
   }
 
 }

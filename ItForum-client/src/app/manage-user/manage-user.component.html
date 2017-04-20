@@ -15,12 +15,12 @@
         [rowHeight]="'auto'"
         [limit]="50"
         [loadingIndicator]="isLoading">
-        <ngx-datatable-column name="Username">
+        <ngx-datatable-column name="Username" >
           <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
             <span (click)="sort()">{{column.name}}</span>
           </ng-template>
-          <ng-template let-value="value" ngx-datatable-cell-template>
-            <strong>{{value}}</strong>
+          <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+            <a [routerLink]="['/profile',row.userId]">{{value}}</a>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="FullName">
@@ -49,6 +49,12 @@
             </button>
           </ng-template>
         </ngx-datatable-column>
+        <!--<ngx-datatable-column name="Profile">-->
+          <!--<ng-template ngx-datatable-header-template><span>{{column.name}}</span></ng-template>-->
+          <!--<ng-template let-value="value" ngx-datatable-cell-template let-row="row">-->
+            <!--<a type="button" class="btn btn-info" [routerLink]="['/profile',row.userId]">Profile</a>-->
+          <!--</ng-template>-->
+        <!--</ngx-datatable-column>-->
       </ngx-datatable>
     </div>
   </div>

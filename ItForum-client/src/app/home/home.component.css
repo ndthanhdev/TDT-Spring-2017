@@ -50,3 +50,12 @@ header .intro-text .intro-heading {
     margin-bottom: 50px;
   }
 }
+
+* {
+  text-align: center;
+}
+
+img {
+  width: 16em;
+  height: 16em;
+}

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ItForum.Models;
 using Microsoft.EntityFrameworkCore;
@@ -26,9 +27,9 @@ namespace ItForum.Services
             return null;
         }
 
-        public async Task<bool> IsTagExisted(Tag tag)
+        public async Task<bool> IsTagExisted(string tagName)
         {
-            return await _db.Tags.FirstOrDefaultAsync(t => t.Equals(tag)) != null;
+            return await _db.Tags.FirstOrDefaultAsync(t => t.Name == tagName) != null;
         }
 
         public static bool IsDataCorrect(Tag tag)
@@ -41,7 +42,7 @@ namespace ItForum.Services
             return await _db.UserTags.FirstOrDefaultAsync(ut => ut.UserId == userId && ut.TagName == tagId) != null;
         }
 
-        public async Task<Tag> GetTagById(string tagId)
+        public async Task<Tag> GetTagByName(string tagId)
         {
             return await _db.Tags.FirstOrDefaultAsync(t => t.Name == tagId);
         }
@@ -61,6 +62,14 @@ namespace ItForum.Services
         public async Task<List<Tag>> GetAllTags()
         {
             return await _db.Tags.ToListAsync();
+        }
+
+        public async Task UpdateUserTags(User user)
+        {
+            _db.UserTags.RemoveRange(_db.UserTags.Where(ut => ut.UserId == user.UserId));
+            await _db.SaveChangesAsync();
+            await _db.UserTags.AddRangeAsync(user.UserTags);
+            await _db.SaveChangesAsync();
         }
     }
 

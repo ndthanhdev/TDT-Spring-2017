@@ -44,7 +44,7 @@ namespace ItForum.Services
 
             // check tag exist
             var tagTasks = container.ContainerTags
-                ?.Select(containerContainerTag => _tagServices.GetTagById(containerContainerTag.TagName))
+                ?.Select(containerContainerTag => _tagServices.GetTagByName(containerContainerTag.TagName))
                 .ToList();
             if (tagTasks == null || tagTasks.Count == 0)
                 return false;

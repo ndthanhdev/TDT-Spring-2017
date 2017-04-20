@@ -108,6 +108,7 @@ namespace ItForum.Services
         {
             await Task.Yield();
             var user = await _db.Users.Include(u => u.UserTags)
+                .Include(u=>u.UserClaims)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(u => u.UserId == userId);
             user.PasswordHash = "";

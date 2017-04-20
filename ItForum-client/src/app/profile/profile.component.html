@@ -1,3 +1,85 @@
-<p>
-  profile works!
-</p>
+<section class="padding-nav-bar d-flex justify-content-center">
+  <div class="card w-50">
+    <div class="card-header">{{model?.fullName}}</div>
+    <div class="card-block">
+      <div class="row">
+        <div class="col-3" align="center">
+          <i class="fa fa-user-circle-o fa-5x" aria-hidden="true"></i>
+        </div>
+        <div class=" col-9">
+          <table class="table table-user-information">
+            <tbody>
+            <tr>
+              <td>Username:</td>
+              <td>{{model?.username}}</td>
+            </tr>
+            <tr>
+              <td>Faculty:</td>
+              <td>{{model?.faculty}}</td>
+            </tr>
+            <tr>
+              <td>Admission Year:</td>
+              <td>{{model?.admissionYear}}</td>
+            </tr>
+
+
+            <tr>
+              <td>Verified:</td>
+              <td>{{model?.isVerified}}</td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td><a href="mailto:{{model?.email}}">{{model?.email}}</a></td>
+            </tr>
+            <tr>
+              <td>Phone Number:</td>
+              <td>{{model?.phone}}</td>
+            </tr>
+
+            <tr>
+              <td>Roles:</td>
+              <td>Kathmandu,Nepal</td>
+            </tr>
+
+            <tr>
+              <td>Manage Tags</td>
+              <td>
+                <div class="d-inline-flex flex-wrap">
+                  <md-chip-list *ngIf="isAdmin" [selectable]="true">
+                    <md-chip *ngFor="let ut of model?.userTags" (click)="removeTag(ut.tagName);" class="mx-2">
+                      {{ut.tagName}}
+                    </md-chip>
+                  </md-chip-list>
+                  <md-chip-list *ngIf="!isAdmin" [selectable]="true">
+                    <md-chip *ngFor="let ut of model?.userTags" class="mx-2">
+                      {{ut.tagName}}
+                    </md-chip>
+                  </md-chip-list>
+                  <div *ngIf="isAdmin">
+                    <md-input-container>
+                      <input mdInput placeholder="Type and enter to add tag." [mdAutocomplete]="auto" #tagInput
+                             [formControl]="formC"
+                             (keyup.enter)="addTag(tagInput.value);"
+                             (input)="tagInput.value=$event.target.value.toLowerCase()">
+                    </md-input-container>
+                    <md-autocomplete #auto="mdAutocomplete">
+                      <md-option *ngFor="let tag of filteredTags| async" [value]="tag.name">
+                        {{tag.name}}
+                      </md-option>
+                    </md-autocomplete>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+          <button class="btn btn-primary my-3" (click)="save()"
+                  [disabled]="isBusy">
+            Save&nbsp;<i class="fa fa-spinner fa-spin" *ngIf="isBusy"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

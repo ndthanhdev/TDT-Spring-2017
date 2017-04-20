@@ -13,7 +13,7 @@ import {User} from '../models/user.model';
 export class AppComponent implements OnInit {
 
   isAuthorized: boolean;
-  profile = new User('', '123', '', '', 1997, '', '', false, []);
+  profile = new User('', '', '', '', 1997, '', '', false, []);
 
   isAdmin: boolean;
   isMod: boolean;

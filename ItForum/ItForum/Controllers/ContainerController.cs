@@ -67,7 +67,7 @@ namespace ItForum.Controllers
         public async Task<IActionResult> GetContainersInTag(string id)
         {
             Payload payload = new Payload();
-            if (await _tagServices.GetTagById(id) == null)
+            if (await _tagServices.GetTagByName(id) == null)
             {
                 payload.StatusCode = GetContainersInTagResponseCode.TagNotExist;
                 return Json(payload);

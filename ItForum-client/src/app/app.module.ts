@@ -12,7 +12,7 @@ import {Ng2PageScrollModule} from 'ng2-page-scroll';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {JwtHelper} from 'angular2-jwt';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
-import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
+import {FroalaEditorModule, FroalaViewModule} from 'angular2-froala-wysiwyg';
 
 import {AppRoutingModule} from '../modules/app-routing/app-routing.module';
 import {AuthHttpModule} from '../modules/auth-http/auth-http.module';
@@ -24,8 +24,6 @@ import {RequestService} from '../services/request/request.service';
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
-import {TeamComponent} from './team/team.component';
-import {FooterComponent} from './footer/footer.component';
 import {RegisterComponent} from './register/register.component';
 import {AlertComponent} from './alert/alert.component';
 import {LoginComponent} from './login/login.component';
@@ -36,13 +34,13 @@ import {ManageTagComponent} from './manage-tag/manage-tag.component';
 import {VerifyPostComponent} from './verify-post/verify-post.component';
 import {AdminService} from "../services/admin/admin.service";
 import {AuthRequestService} from "../services/authRequest/auth-request.service";
-import { AddTagComponent } from './add-tag/add-tag.component';
+import {AddTagComponent} from './add-tag/add-tag.component';
 import {TagService} from "../services/tag/tag.service";
-import { TagComponent } from './tag/tag.component';
-import { TagDetailComponent } from './tag-detail/tag-detail.component';
+import {TagComponent} from './tag/tag.component';
+import {TagDetailComponent} from './tag-detail/tag-detail.component';
 import {ContainerService} from "../services/container/container.service";
-import { AddPostComponent } from './add-post/add-post.component';
-import { ContainerDetailComponent } from './container-detail/container-detail.component';
+import {AddPostComponent} from './add-post/add-post.component';
+import {ContainerDetailComponent} from './container-detail/container-detail.component';
 
 
 @NgModule({
@@ -50,8 +48,6 @@ import { ContainerDetailComponent } from './container-detail/container-detail.co
     AppComponent,
     HomeComponent,
     NavBarComponent,
-    TeamComponent,
-    FooterComponent,
     RegisterComponent,
     AlertComponent,
     LoginComponent,

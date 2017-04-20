@@ -18,6 +18,9 @@ export class NavBarComponent implements OnInit, OnDestroy {
   userName: string;
 
   @Input()
+  userId: string;
+
+  @Input()
   isVerify: boolean;
 
   @Input()
