@@ -18,7 +18,7 @@ local platform = display.newImageRect( "platform.png", 360, 50 )
 platform.x = display.contentCenterX
 platform.y = display.contentHeight
 
-local missle = display.newImageRect( "falcon9.png", 20, 200 )
+local missle = display.newImageRect( "falcon9.png", 21, 200 )
 missle.x = display.contentCenterX
 missle.y = 0
 
@@ -41,15 +41,27 @@ physics.addBody( platform, "static", {bounce=0,friction=1} )
 physics.addBody( missle, "dynamic", {bounce=0,friction=1,  box={halfWidth=10, halfHeight =100, angle=0}} )
 
 local function pushMissleLeft()
-    missle:applyLinearImpulse( -0.01, 0, missle.x, missle.y-75 )
+    local leftX,leftY =  missle:localToContent(-10,-75)
+    local rightX,rightY =  missle:localToContent(10,-75)
+    missle:applyLinearImpulse( (leftX-rightX)/13000, (leftY-rightY)/13000, leftX, leftY )
 end
 
 local function pushMissleRight()
-    missle:applyLinearImpulse( 0.01, 0, missle.x, missle.y-75 )
+    local leftX,leftY =  missle:localToContent(-10,-75)
+    local rightX,rightY =  missle:localToContent(10,-75)
+    missle:applyLinearImpulse( (rightX-leftX)/13000, (rightY-leftY)/13000, leftX, leftY )
 end
 
 local function pushMissleUp()
-    missle:applyLinearImpulse( 0, -0.02, missle.x, missle.y+100 )
+    local topX,topY =  missle:localToContent(0,-100)
+    local bottomX,bottomY =  missle:localToContent(0,100)
+    
+    -- local c1 = display.newCircle(missle.x,missle.y,2)
+    -- local c2 =display.newCircle(cx,cy,2)
+    -- c1:setFillColor( 1 )
+    -- c2:setFillColor( 0 )
+    print(topX,topY,bottomX,bottomY)
+    missle:applyLinearImpulse( (topX-bottomX)/13000, (topY-bottomY)/13000, bottomX, bottomY )
 end
 
 local function onLocalCollision( self, event )
