@@ -21,6 +21,7 @@ platform.y = display.contentHeight
 local missle = display.newImageRect( "falcon9.png", 21, 200 )
 missle.x = display.contentCenterX
 missle.y = 0
+missle.rotation=math.random( -15,15 )
 
 local btnLeft = display.newImageRect("button-left.png",50,50);
 btnLeft.x=25
@@ -55,11 +56,6 @@ end
 local function pushMissleUp()
     local topX,topY =  missle:localToContent(0,-100)
     local bottomX,bottomY =  missle:localToContent(0,100)
-    
-    -- local c1 = display.newCircle(missle.x,missle.y,2)
-    -- local c2 =display.newCircle(cx,cy,2)
-    -- c1:setFillColor( 1 )
-    -- c2:setFillColor( 0 )
     print(topX,topY,bottomX,bottomY)
     missle:applyLinearImpulse( (topX-bottomX)/13000, (topY-bottomY)/13000, bottomX, bottomY )
 end
@@ -69,10 +65,8 @@ local function onLocalCollision( self, event )
         display.newText( "explosion", display.contentCenterX, display.contentCenterY, native.systemFont, 28 )
         local explosion = display.newImageRect( "explosion.png", 160, 70 )
         explosion.x = missle.x
-        explosion.y = missle.y
+        explosion.y = missle.y        
     end
-    -- print( "force: " .. event.force )
-    -- print("rotation: " .. missle.rotation)
 end
 
 
