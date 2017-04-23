@@ -19,8 +19,8 @@ namespace ItForum.Services
 
         public async Task<List<Post>> GetPostInContainer(string containerId)
         {
-            var container = await _data.Containers.Include(c => c.Post)
-                .FirstOrDefaultAsync(c => c.ContainerId == containerId);
+            var container = await _data.Topics.Include(c => c.Post)
+                .FirstOrDefaultAsync(c => c.TopicId == containerId);
             return container == null ? null : new List<Post>(container.Posts);
         }
 

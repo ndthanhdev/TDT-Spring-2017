@@ -17,7 +17,7 @@ namespace ItForum.Models
 
         public string Description { get; set; }
 
-        public List<ContainerTag> ContainerTags { get; set; }
+        public List<TopicTag> ContainerTags { get; set; }
 
         public List<UserTag> UserTags { get; set; }
 

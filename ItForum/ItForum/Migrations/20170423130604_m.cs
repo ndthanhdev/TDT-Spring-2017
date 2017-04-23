@@ -84,21 +84,73 @@ namespace ItForum.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ContainerTags",
+                name: "CommentPoints",
                 columns: table => new
                 {
-                    ContainerId = table.Column<string>(nullable: false),
-                    TagName = table.Column<string>(nullable: false)
+                    CommentId = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ContainerTags", x => new { x.ContainerId, x.TagName });
+                    table.PrimaryKey("PK_CommentPoints", x => new { x.CommentId, x.UserId });
                     table.ForeignKey(
-                        name: "FK_ContainerTags_Tags_TagName",
-                        column: x => x.TagName,
-                        principalTable: "Tags",
-                        principalColumn: "Name",
+                        name: "FK_CommentPoints_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    CommentId = table.Column<string>(nullable: false),
+                    Content = table.Column<string>(nullable: true),
+                    PostId = table.Column<string>(nullable: false),
+                    PublishDate = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.CommentId);
+                    table.ForeignKey(
+                        name: "FK_Comments_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PostPoints",
+                columns: table => new
+                {
+                    PostId = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PostPoints", x => new { x.PostId, x.UserId });
+                    table.ForeignKey(
+                        name: "FK_PostPoints_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Topics",
+                columns: table => new
+                {
+                    TopicId = table.Column<string>(nullable: false),
+                    PostId = table.Column<string>(nullable: false),
+                    Title = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Topics", x => x.TopicId);
                 });
 
             migrationBuilder.CreateTable(
@@ -116,6 +168,12 @@ namespace ItForum.Migrations
                 {
                     table.PrimaryKey("PK_Posts", x => x.PostId);
                     table.ForeignKey(
+                        name: "FK_Posts_Topics_ContainerId",
+                        column: x => x.ContainerId,
+                        principalTable: "Topics",
+                        principalColumn: "TopicId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Posts_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
@@ -124,72 +182,26 @@ namespace ItForum.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comments",
+                name: "ContainerTags",
                 columns: table => new
                 {
-                    CommentId = table.Column<string>(nullable: false),
-                    Content = table.Column<string>(nullable: true),
-                    PostId = table.Column<string>(nullable: false),
-                    PublishDate = table.Column<DateTime>(nullable: false),
-                    UserId = table.Column<string>(nullable: false)
+                    TopicId = table.Column<string>(nullable: false),
+                    TagName = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Comments", x => x.CommentId);
+                    table.PrimaryKey("PK_ContainerTags", x => new { x.TopicId, x.TagName });
                     table.ForeignKey(
-                        name: "FK_Comments_Posts_PostId",
-                        column: x => x.PostId,
-                        principalTable: "Posts",
-                        principalColumn: "PostId",
+                        name: "FK_ContainerTags_Tags_TagName",
+                        column: x => x.TagName,
+                        principalTable: "Tags",
+                        principalColumn: "Name",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Comments_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Containers",
-                columns: table => new
-                {
-                    ContainerId = table.Column<string>(nullable: false),
-                    PostId = table.Column<string>(nullable: false),
-                    Title = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Containers", x => x.ContainerId);
-                    table.ForeignKey(
-                        name: "FK_Containers_Posts_PostId",
-                        column: x => x.PostId,
-                        principalTable: "Posts",
-                        principalColumn: "PostId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Points",
-                columns: table => new
-                {
-                    PostId = table.Column<string>(nullable: false),
-                    UserId = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Points", x => new { x.PostId, x.UserId });
-                    table.ForeignKey(
-                        name: "FK_Points_Posts_PostId",
-                        column: x => x.PostId,
-                        principalTable: "Posts",
-                        principalColumn: "PostId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Points_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
+                        name: "FK_ContainerTags_Topics_TopicId",
+                        column: x => x.TopicId,
+                        principalTable: "Topics",
+                        principalColumn: "TopicId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -204,18 +216,8 @@ namespace ItForum.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Containers_PostId",
-                table: "Containers",
-                column: "PostId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ContainerTags_TagName",
-                table: "ContainerTags",
-                column: "TagName");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Points_UserId",
-                table: "Points",
+                name: "IX_CommentPoints_UserId",
+                table: "CommentPoints",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -229,6 +231,21 @@ namespace ItForum.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PostPoints_UserId",
+                table: "PostPoints",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Topics_PostId",
+                table: "Topics",
+                column: "PostId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ContainerTags_TagName",
+                table: "ContainerTags",
+                column: "TagName");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserClaims_UserId",
                 table: "UserClaims",
                 column: "UserId");
@@ -239,36 +256,52 @@ namespace ItForum.Migrations
                 column: "TagName");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_ContainerTags_Containers_ContainerId",
-                table: "ContainerTags",
-                column: "ContainerId",
-                principalTable: "Containers",
-                principalColumn: "ContainerId",
+                name: "FK_CommentPoints_Comments_CommentId",
+                table: "CommentPoints",
+                column: "CommentId",
+                principalTable: "Comments",
+                principalColumn: "CommentId",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Posts_Containers_ContainerId",
-                table: "Posts",
-                column: "ContainerId",
-                principalTable: "Containers",
-                principalColumn: "ContainerId",
-                onDelete: ReferentialAction.Restrict);
+                name: "FK_Comments_Posts_PostId",
+                table: "Comments",
+                column: "PostId",
+                principalTable: "Posts",
+                principalColumn: "PostId",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_PostPoints_Posts_PostId",
+                table: "PostPoints",
+                column: "PostId",
+                principalTable: "Posts",
+                principalColumn: "PostId",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Topics_Posts_PostId",
+                table: "Topics",
+                column: "PostId",
+                principalTable: "Posts",
+                principalColumn: "PostId",
+                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Containers_Posts_PostId",
-                table: "Containers");
+                name: "FK_Topics_Posts_PostId",
+                table: "Topics");
 
             migrationBuilder.DropTable(
-                name: "Comments");
+                name: "CommentPoints");
+
+            migrationBuilder.DropTable(
+                name: "PostPoints");
 
             migrationBuilder.DropTable(
                 name: "ContainerTags");
-
-            migrationBuilder.DropTable(
-                name: "Points");
 
             migrationBuilder.DropTable(
                 name: "UserClaims");
@@ -277,13 +310,16 @@ namespace ItForum.Migrations
                 name: "UserTags");
 
             migrationBuilder.DropTable(
+                name: "Comments");
+
+            migrationBuilder.DropTable(
                 name: "Tags");
 
             migrationBuilder.DropTable(
                 name: "Posts");
 
             migrationBuilder.DropTable(
-                name: "Containers");
+                name: "Topics");
 
             migrationBuilder.DropTable(
                 name: "Users");

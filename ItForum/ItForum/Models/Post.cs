@@ -19,11 +19,11 @@ namespace ItForum.Models
         public string ContainerId { get; set; }
 
         [ForeignKey(nameof(ContainerId))]
-        public Container Container { get; set; }
+        public Topic Topic { get; set; }
 
         public bool IsVerified { get; set; }
 
-        public List<Point> Points { get; set; }
+        public List<PostPoint> Points { get; set; }
 
         public List<Comment> Comments { get; set; }
 

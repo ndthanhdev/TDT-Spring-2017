@@ -23,7 +23,6 @@ import {RequestService} from '../services/request/request.service';
 
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
-import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {RegisterComponent} from './register/register.component';
 import {AlertComponent} from './alert/alert.component';
 import {LoginComponent} from './login/login.component';
@@ -43,13 +42,13 @@ import {AddPostComponent} from './add-post/add-post.component';
 import {ContainerDetailComponent} from './container-detail/container-detail.component';
 import {RoleService} from "../services/role/role.service";
 import { TopicDetailComponent } from './topic-detail/topic-detail.component';
+import { TopicComponent } from './topic/topic.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NavBarComponent,
     RegisterComponent,
     AlertComponent,
     LoginComponent,
@@ -62,7 +61,8 @@ import { TopicDetailComponent } from './topic-detail/topic-detail.component';
     TagDetailComponent,
     AddPostComponent,
     ContainerDetailComponent,
-    TopicDetailComponent
+    TopicDetailComponent,
+    TopicComponent
   ],
   imports: [
     BrowserModule,

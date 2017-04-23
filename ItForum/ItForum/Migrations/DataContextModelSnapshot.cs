@@ -39,47 +39,17 @@ namespace ItForum.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("ItForum.Models.Container", b =>
+            modelBuilder.Entity("ItForum.Models.CommentPoint", b =>
                 {
-                    b.Property<string>("ContainerId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("PostId")
-                        .IsRequired();
-
-                    b.Property<string>("Title");
-
-                    b.HasKey("ContainerId");
-
-                    b.HasIndex("PostId");
-
-                    b.ToTable("Containers");
-                });
-
-            modelBuilder.Entity("ItForum.Models.ContainerTag", b =>
-                {
-                    b.Property<string>("ContainerId");
-
-                    b.Property<string>("TagName");
-
-                    b.HasKey("ContainerId", "TagName");
-
-                    b.HasIndex("TagName");
-
-                    b.ToTable("ContainerTags");
-                });
-
-            modelBuilder.Entity("ItForum.Models.Point", b =>
-                {
-                    b.Property<string>("PostId");
+                    b.Property<string>("CommentId");
 
                     b.Property<string>("UserId");
 
-                    b.HasKey("PostId", "UserId");
+                    b.HasKey("CommentId", "UserId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Points");
+                    b.ToTable("CommentPoints");
                 });
 
             modelBuilder.Entity("ItForum.Models.Post", b =>
@@ -106,6 +76,19 @@ namespace ItForum.Migrations
                     b.ToTable("Posts");
                 });
 
+            modelBuilder.Entity("ItForum.Models.PostPoint", b =>
+                {
+                    b.Property<string>("PostId");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("PostId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("PostPoints");
+                });
+
             modelBuilder.Entity("ItForum.Models.Tag", b =>
                 {
                     b.Property<string>("Name")
@@ -116,6 +99,36 @@ namespace ItForum.Migrations
                     b.HasKey("Name");
 
                     b.ToTable("Tags");
+                });
+
+            modelBuilder.Entity("ItForum.Models.Topic", b =>
+                {
+                    b.Property<string>("TopicId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("PostId")
+                        .IsRequired();
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("TopicId");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("Topics");
+                });
+
+            modelBuilder.Entity("ItForum.Models.TopicTag", b =>
+                {
+                    b.Property<string>("TopicId");
+
+                    b.Property<string>("TagName");
+
+                    b.HasKey("TopicId", "TagName");
+
+                    b.HasIndex("TagName");
+
+                    b.ToTable("ContainerTags");
                 });
 
             modelBuilder.Entity("ItForum.Models.User", b =>
@@ -188,28 +201,31 @@ namespace ItForum.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("ItForum.Models.Container", b =>
+            modelBuilder.Entity("ItForum.Models.CommentPoint", b =>
                 {
-                    b.HasOne("ItForum.Models.Post", "Post")
+                    b.HasOne("ItForum.Models.Comment", "Post")
                         .WithMany()
-                        .HasForeignKey("PostId")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ItForum.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("ItForum.Models.ContainerTag", b =>
+            modelBuilder.Entity("ItForum.Models.Post", b =>
                 {
-                    b.HasOne("ItForum.Models.Container", "Container")
-                        .WithMany("ContainerTags")
-                        .HasForeignKey("ContainerId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("ItForum.Models.Topic", "Topic")
+                        .WithMany("Posts")
+                        .HasForeignKey("ContainerId");
 
-                    b.HasOne("ItForum.Models.Tag", "Tag")
-                        .WithMany("ContainerTags")
-                        .HasForeignKey("TagName")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("ItForum.Models.User", "User")
+                        .WithMany("Posts")
+                        .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("ItForum.Models.Point", b =>
+            modelBuilder.Entity("ItForum.Models.PostPoint", b =>
                 {
                     b.HasOne("ItForum.Models.Post", "Post")
                         .WithMany("Points")
@@ -222,15 +238,25 @@ namespace ItForum.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("ItForum.Models.Post", b =>
+            modelBuilder.Entity("ItForum.Models.Topic", b =>
                 {
-                    b.HasOne("ItForum.Models.Container", "Container")
-                        .WithMany("Posts")
-                        .HasForeignKey("ContainerId");
+                    b.HasOne("ItForum.Models.Post", "Post")
+                        .WithMany()
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
 
-                    b.HasOne("ItForum.Models.User", "User")
-                        .WithMany("Posts")
-                        .HasForeignKey("UserId");
+            modelBuilder.Entity("ItForum.Models.TopicTag", b =>
+                {
+                    b.HasOne("ItForum.Models.Tag", "Tag")
+                        .WithMany("ContainerTags")
+                        .HasForeignKey("TagName")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ItForum.Models.Topic", "Topic")
+                        .WithMany("TopicTags")
+                        .HasForeignKey("TopicId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ItForum.Models.UserClaim", b =>

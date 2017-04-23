@@ -14,12 +14,12 @@ namespace ItForum.Controllers
 {
     public class PostsController : Controller
     {
-        private readonly ContainerServices _containerServices;
+        private readonly TopicServices _topicServices;
         private readonly PostServices _postServices;
 
-        public PostsController(ContainerServices containerServices, PostServices postServices)
+        public PostsController(TopicServices topicServices, PostServices postServices)
         {
-            _containerServices = containerServices;
+            _topicServices = topicServices;
             _postServices = postServices;
         }
 
@@ -33,7 +33,7 @@ namespace ItForum.Controllers
                 payload.StatusCode = AddPostResponseCode.PostInvalid;
                 return Json(payload);
             }
-            if (await _containerServices.GetContainerById(post.ContainerId) == null)
+            if (await _topicServices.GetTopicById(post.ContainerId) == null)
             {
                 payload.StatusCode = AddPostResponseCode.ContainerNotExist;
                 return Json(payload);
@@ -47,7 +47,7 @@ namespace ItForum.Controllers
         public async Task<IActionResult> GetPostInContainer(string containerId)
         {
             var payload = new Payload();
-            if (await _containerServices.GetContainerById(containerId) == null)
+            if (await _topicServices.GetTopicById(containerId) == null)
             {
                 payload.StatusCode = GetPostInContainerResponseCode.ContainerNotExist;
                 return Json(payload);

@@ -2,12 +2,12 @@
 
 namespace ItForum.Models
 {
-    public class ContainerTag
+    public class TopicTag
     {
-        public string ContainerId { get; set; }
+        public string TopicId { get; set; }
 
-        [ForeignKey(nameof(ContainerId))]
-        public Container Container { get; set; }
+        [ForeignKey(nameof(TopicId))]
+        public Topic Topic { get; set; }
 
         public string TagName { get; set; }
 

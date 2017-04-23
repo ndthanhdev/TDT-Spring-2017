@@ -2,7 +2,7 @@
 
 namespace ItForum.Models
 {
-    public class Point
+    public class PostPoint
     {
         public string UserId { get; set; }
 

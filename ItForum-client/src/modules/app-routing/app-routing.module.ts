@@ -14,6 +14,7 @@ import {TagDetailComponent} from "../../app/tag-detail/tag-detail.component";
 import {AddPostComponent} from "../../app/add-post/add-post.component";
 import {ContainerDetailComponent} from "../../app/container-detail/container-detail.component";
 import {TopicDetailComponent} from "../../app/topic-detail/topic-detail.component";
+import {TopicComponent} from "../../app/topic/topic.component";
 
 
 const appRoutes: Routes = [
@@ -22,15 +23,15 @@ const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'profile/:id', component: ProfileComponent},
-  {path: 'tag', component: TagComponent},
   {path: 'manage-user', component: ManageUserComponent},
   {path: 'manage-tag', component: ManageTagComponent},
   {path: 'manage-tag/add', component: AddTagComponent},
   {path: 'verify-post', component: VerifyPostComponent},
+  {path: 'tag', component: TagComponent},
   {path: 'tag/:id', component: TagDetailComponent},
   {path: 'add-post', component: AddPostComponent},
-  {path: 'container-detail/:id', component: ContainerDetailComponent},
-  {path: 'topic-detail', component: TopicDetailComponent},
+  {path: 'topic', component: TopicComponent},
+  {path: 'topic/:id', component: TopicDetailComponent},
 ];
 
 @NgModule({
