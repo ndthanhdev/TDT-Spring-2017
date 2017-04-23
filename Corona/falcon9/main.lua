@@ -11,11 +11,13 @@ local isPushLeft=false;
 local isPushRight = false;
 local power=0;
 
-local background = display.newImageRect( "background.png", 360, 570 )
+
+
+background = display.newImageRect( "background.png", 360, 570 )
 background.x = display.contentCenterX
 background.y = display.contentCenterY
 
-local platform = display.newImageRect( "platform.png", 360, 50 )
+platform = display.newImageRect( "platform.png", 360, 50 )
 platform.x = display.contentCenterX
 platform.y = display.contentHeight
 
@@ -36,19 +38,19 @@ local sequences_missle = {
     },
     {
         name = "lowPower",
-        frames = {7,5},
+        frames = {5,7},
         time = 50,
         loopCount = 0
     },
     {
         name = "normalPower",
-        frames = {3,1},
+        frames = {1,3},
         time = 50,
         loopCount = 0
     },
     {
         name = "highPower",
-        frames = {8,6},
+        frames = {6,8},
         time = 50,
         loopCount = 0
     },
@@ -60,63 +62,85 @@ local sequences_missle = {
     }
 }
 
-local sprite_missle = display.newSprite( sheet_missle, sequences_missle )
+function newGame()
+    if(group~=nil) then
+        group:removeSelf()
+    end
+    group = display.newGroup()
 
-sprite_missle.x=display.contentCenterX
-sprite_missle.y=0
-sprite_missle.rotation=math.random( -15, 15 )
-sprite_missle:setSequence("off")
-sprite_missle:play()
+    sprite_missle = display.newSprite( group, sheet_missle, sequences_missle )
+    sprite_missle.x=display.contentCenterX
+    sprite_missle.y=0
+    sprite_missle.rotation=math.random( -20, 20 )
+    sprite_missle:setSequence("off")
+    sprite_missle:play()
 
-local physics = require( "physics" )
-physics.start()
+    physics = require( "physics" )
+    physics.start()
 
-physics.addBody( platform, "static", {bounce=0,friction=1} )
-physics.addBody( sprite_missle, "dynamic", {bounce=0,friction=1,  shape={-20,-87.5, 20,-87.5, 20,47.5, -20,47.5}} )
+    physics.addBody( platform, "static", {bounce=0,friction=1} )
+    physics.addBody( sprite_missle, "dynamic", {bounce=0,friction=1,  shape={-20,-87.5, 20,-87.5, 20,47.5, -20,47.5}} )
+
+    sprite_missle.postCollision  = onLocalCollision
+    collisionListener = sprite_missle:addEventListener( "postCollision" )
+end
 
 
 
-local btnLeft = display.newImageRect("button-left.png",50,50);
+
+
+btnLeft = display.newImageRect("button-left.png",50,50);
 btnLeft.x=25
 btnLeft.y = display.contentHeight
 
-local btnRight = display.newImageRect("button-right.png",50,50);
+btnRight = display.newImageRect("button-right.png",50,50);
 btnRight.x=display.contentWidth-25
 btnRight.y = display.contentHeight
 
-local btnUp = display.newImageRect("button-up.png",50,50);
+btnUp = display.newImageRect("button-up.png",50,50);
 btnUp.x=display.contentCenterX
 btnUp.y = display.contentHeight
 
-local function pushMissleLeft()
+function pushMissleLeft()
     local leftX,leftY =  sprite_missle:localToContent(-1,-80)
     local rightX,rightY =  sprite_missle:localToContent(1,-80)
-    sprite_missle:applyLinearImpulse( (leftX-rightX)/2/100, (leftY-rightY)/2/100, leftX, leftY )
+    sprite_missle:applyLinearImpulse( (leftX-rightX)/2/200, (leftY-rightY)/2/200, leftX, leftY )
 end
 
-local function pushMissleRight()
+function pushMissleRight()
     local leftX,leftY =  sprite_missle:localToContent(-1,-80)
     local rightX,rightY =  sprite_missle:localToContent(1,-80)
-    sprite_missle:applyLinearImpulse( (rightX-leftX)/2/100, (rightY-leftY)/2/100, rightX, rightY )
+    sprite_missle:applyLinearImpulse( (rightX-leftX)/2/200, (rightY-leftY)/2/200, rightX, rightY )
 end
 
-local function pushMissleUp()
+function pushMissleUp()
     local topX,topY =  sprite_missle:localToContent(0,-100)
     local bottomX,bottomY =  sprite_missle:localToContent(0,100)
-    sprite_missle:applyLinearImpulse( (topX-bottomX)/175/7, (topY-bottomY)/175/7, bottomX, bottomY )
+    sprite_missle:applyLinearImpulse( (topX-bottomX)/175/11, (topY-bottomY)/175/11, bottomX, bottomY )
 end
 
-local function onLocalCollision( self, event )
-    if (event.force > 0.1 or  sprite_missle.rotation > 7) then
-        display.newText( "explosion", display.contentCenterX, display.contentCenterY, native.systemFont, 28 )
-        local explosion = display.newImageRect( "explosion.png", 160, 70 )
-        explosion.x = sprite_missle.x
-        explosion.y = sprite_missle.y        
+function explosion()
+    display.newText( group, "explosion", display.contentCenterX, display.contentCenterY, native.systemFont, 28 )
+    local explosion = display.newImageRect(group, "explosion.png", 160, 70 )
+    explosion.x = sprite_missle.x
+    explosion.y = sprite_missle.y
+    if(not isLoading) then
+        timer.performWithDelay( 1500, loadNewGame )   
+        isLoading = true          
+    end        
+end
+
+function onLocalCollision( self, event )
+    if (event.force > 0.05 or  sprite_missle.rotation > math.pi) then
+        explosion()
+    else
+        display.newText( group, "you win", display.contentCenterX, display.contentCenterY, native.systemFont, 28 )
     end
+    sprite_missle:removeEventListener( "postCollision", collisionListener )
 end
 
 
-local function myTouchListener( event ) 
+function myTouchListener( event ) 
     if ( event.phase == "began" ) then
         if(event.target==btnUp) then 
             isPushUp=true
@@ -148,12 +172,37 @@ btnUp:addEventListener( "touch", myTouchListener )
 btnLeft:addEventListener( "touch", myTouchListener )
 btnRight:addEventListener( "touch", myTouchListener )
 
-sprite_missle.postCollision  = onLocalCollision
-sprite_missle:addEventListener( "postCollision" )
+function myKeyListener( event ) 
+    if ( event.phase == "down" ) then
+        if(event.keyName=="up") then      
+            isPushUp=true
+        end
+        if(event.keyName=="left") then 
+            isPushLeft=true
+        end
+        if(event.keyName=="right") then 
+            isPushRight=true
+        end
+    elseif ( event.phase == "up" ) then
+        if(event.keyName=="up") then 
+            isPushUp=false
+            power=0
+            sprite_missle:setSequence("off")
+            sprite_missle:play()
+        end
+        if(event.keyName=="left") then 
+            isPushLeft=false
+        end
+        if(event.keyName=="right") then 
+            isPushRight=false
+        end
+    end    
+    return true  -- Prevents tap/touch propagation to underlying objects
+end
 
+Runtime:addEventListener( "key", myKeyListener )
 
-
-local function tick( event )
+function tick( event )
     if(isPushUp) then 
         pushMissleUp()
         if(power>9) then
@@ -189,7 +238,19 @@ local function tick( event )
     if(isPushLeft) then 
         pushMissleLeft()
     end
+    local missleX,missleY = sprite_missle:localToContent(0,0)
+    if(missleY > display.contentHeight) then
+        explosion()
+    end
+
     timer.performWithDelay( 100, tick )
 end
 
+newGame()
+
 timer.performWithDelay( 100, tick )
+
+function loadNewGame( event )    
+    newGame() 
+    isLoading = false   
+end
