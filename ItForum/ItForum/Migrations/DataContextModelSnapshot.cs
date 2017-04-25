@@ -228,7 +228,7 @@ namespace ItForum.Migrations
             modelBuilder.Entity("ItForum.Models.PostPoint", b =>
                 {
                     b.HasOne("ItForum.Models.Post", "Post")
-                        .WithMany("Points")
+                        .WithMany("PostPoints")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade);
 

@@ -23,7 +23,7 @@ namespace ItForum.Models
 
         public bool IsVerified { get; set; }
 
-        public List<PostPoint> Points { get; set; }
+        public List<PostPoint> PostPoints { get; set; }
 
         public List<Comment> Comments { get; set; }
 

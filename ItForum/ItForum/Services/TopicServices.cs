@@ -62,8 +62,10 @@ namespace ItForum.Services
 
         public async Task<Topic> GetTopicById(string containterId)
         {
-            return await _db.Topics.Include(c=>c.Post)
-                .Include(c=>c.Post.Points)
+            return await _db.Topics.Include(t=>t.Post)
+                .ThenInclude(p=>p.PostPoints)
+                .Include(t=>t.Post.Comments)
+                .ThenInclude(c=>c.CommentPoints)
                 .FirstOrDefaultAsync(c => c.TopicId == containterId);
         }
 

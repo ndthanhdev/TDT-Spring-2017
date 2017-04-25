@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ItForum.Controllers.DTO;
-using ItForum.Controllers.DTO.ContainerController;
+using ItForum.Controllers.DTO.TopicController;
 using ItForum.Models;
 using ItForum.Services;
 using ItForum.Services.Jwt;
@@ -77,13 +77,19 @@ namespace ItForum.Controllers
             return Json(payload);
         }
 
-        //[HttpGet]
-        //[Route("{id}")]
-        //public async Task<IActionResult> GetTopic(string id)
-        //{
-        //    Payload payload = new Payload();
-
-        //}
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetTopic(string id)
+        {
+            Payload payload = new Payload();
+            payload.Data = await _topicServices.GetTopicById(id);
+            payload.StatusCode = GetTopicCode.Ok;
+            if (payload.Data == null)
+            {
+                payload.StatusCode = GetTopicCode.NotExist;
+            }
+            return Json(payload);
+        }
 
     }
 }

@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ItForum.Controllers.DTO.ContainerController
+namespace ItForum.Controllers.DTO.TopicController
 {
-    public class GetContainersInTagResponseCode
+    public class GetAllContainerResponseCode
     {
         public static readonly int Ok = 0;
-        public static readonly int TagNotExist = 1;
     }
 }
