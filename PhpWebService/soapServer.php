@@ -7,7 +7,7 @@ class server
     }
 
 
-    public function getStudentName($id_array)
+    public function addWeatherData($id_array)
     {
         return "123";
     }
