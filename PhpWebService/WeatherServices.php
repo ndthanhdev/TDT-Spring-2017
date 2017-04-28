@@ -7,7 +7,7 @@
  * Time: 8:44 PM
  */
 
-include_once __DIR__ . "/Connection.php";
+include_once $_SERVER["DOCUMENT_ROOT"] . "/Connection.php";
 
 class WeatherServices
 {
@@ -60,7 +60,7 @@ class WeatherServices
         $stm->execute();
         $rows = array();
         while ($row = $stm->fetch()) {
-            $result[] = $row;
+            $rows[] = $row;
         }
         $n = count($rows);
         if ($n > 0) {
@@ -76,8 +76,8 @@ class WeatherServices
             $result["Temperature"] = $temperature / $n;
             $result["Humidity"] = $humidity / $n;
         } else {
-            $result["Temperature"] = 'n/a';
-            $result["Humidity"] = 'n/a';
+            $result["Temperature"] = 'na';
+            $result["Humidity"] = 'na';
         }
         return $result;
     }

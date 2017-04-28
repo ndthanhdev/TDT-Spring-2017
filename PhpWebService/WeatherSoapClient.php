@@ -4,8 +4,8 @@ class WeatherSoapClient extends SoapClient
 {
     public function __construct()
     {
-        $param = array('location' => "http://localhost/soap/WeatherSoapServer.php",
-            'uri' => "http://localhost/soap/WeatherSoapServer.php",
+        $param = array('location' => "http://localhost/WeatherSoapServer.php",
+            'uri' => "http://localhost/WeatherSoapServer.php",
             'trace' => 1);
         parent::__construct(null, $param);
     }

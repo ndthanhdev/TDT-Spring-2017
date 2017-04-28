@@ -6,10 +6,6 @@ class server
 {
     var $service;
 
-//    public static function authenticate(){
-//        throw new SoapFault("",401);
-//    }
-
     public function __construct()
     {
         $this->service = new WeatherServices();

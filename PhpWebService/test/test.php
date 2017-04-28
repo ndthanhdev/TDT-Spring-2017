@@ -5,7 +5,7 @@
  * Date: 4/26/2017
  * Time: 9:41 PM
  */
-include_once __DIR__."/WeatherServices.php";
+include_once __DIR__ . "/WeatherServices.php";
 
 $data =array();
 $data["Time"]=date(DATE_RFC3339);
