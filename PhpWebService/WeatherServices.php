@@ -23,7 +23,7 @@ class WeatherServices
             if (!isset($data["Temperature"])
                 || !isset($data["Humidity"])
             ) {
-                return 1;
+                return $data;
             }
             $stm = $this->connection->prepare("INSERT INTO Data VALUES(?,?,?)");
             $stm->execute(array(date(DATE_RFC3339), $data["Temperature"], $data["Humidity"]));
@@ -75,6 +75,7 @@ class WeatherServices
             $result = array();
             $result["Temperature"] = $temperature / $n;
             $result["Humidity"] = $humidity / $n;
+            $result["Time"] = "Next";
         } else {
             $result["Temperature"] = 'na';
             $result["Humidity"] = 'na';

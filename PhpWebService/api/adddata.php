@@ -8,7 +8,14 @@
 include_once $_SERVER["DOCUMENT_ROOT"] . "/WeatherSoapClient.php";
 include_once $_SERVER["DOCUMENT_ROOT"] . "/ResponseGenerate.php";
 
-if (isset($_POST["Temperature"]) && isset($_POST["Humidity"])) {
-    generateResponse($mySoapClient->addData(array("Temperature" => $_POST["Temperature"],
-        "Humidity" => $_POST["Humidity"])));
+
+header('Access-Control-Allow-Origin: *');
+
+header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+
+header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Accept, Origin, Authorization");
+
+$data = json_decode(file_get_contents('php://input'), true);
+if (isset($data["Temperature"]) && isset($data["Humidity"])) {
+    generateResponse($mySoapClient->addData($data));
 }

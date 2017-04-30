@@ -12,7 +12,7 @@ class WeatherSoapClient extends SoapClient
 
     public function addData($data)
     {
-        return $this->__soapCall('addData', $data);
+        return $this->__soapCall('addData', array($data));
     }
 
     public function getAllData()

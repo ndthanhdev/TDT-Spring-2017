@@ -1,0 +1,50 @@
+<div class="container">
+    <md-tab-group>
+        <md-tab label="Center">
+            <div class="d-flex flex-column justify-content-center" style="min-height: 75vh;">
+                <div class="justify-content-center">
+                    <form #addForm="ngForm">
+                        <md-input-container>
+                            <input mdInput
+                                   placeholder="Temperature"
+                                   type="number"
+                                   id="inputT"
+                                   name="Temperature"
+                                   required
+                                   ngModel>
+                            <span md-suffix>&#8451;</span>
+                        </md-input-container>
+                        <br>
+                        <md-input-container>
+                            <input mdInput
+                                   placeholder="Humidity"
+                                   type="number"
+                                   id="inputH"
+                                   name="Humidity"
+                                   pattern="(?:100|[1-9]?[0-9])"
+                                   required
+                                   ngModel>
+                            <span md-suffix>&#37;</span>
+                        </md-input-container>
+                        <button md-button type="submit" [disabled]="!addForm.form.valid||isBusy"
+                                (click)="add(addForm.value)">Add <i *ngIf="isBusy" class="fa fa-spinner fa-spin"></i>
+                        </button>
+                    </form>
+                </div>
+                <ngx-datatable
+                        class="material striped w-100 m-3"
+                        [rows]="rows"
+                        [columns]="columns"
+                        [columnMode]="'force'"
+                        [limit]="10"
+                        [footerHeight]="50"
+                        [loadingIndicator]="isBusy"></ngx-datatable>
+            </div>
+        </md-tab>
+        <md-tab label="User">
+            <div class="d-flex flex-column justify-content-center" style="min-height: 75vh;">
+                <p-chart class="m-1" type="line" [data]="chartData"></p-chart>
+            </div>
+        </md-tab>
+    </md-tab-group>
+</div>
