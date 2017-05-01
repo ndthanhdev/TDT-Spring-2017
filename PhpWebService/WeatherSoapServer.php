@@ -32,3 +32,4 @@ $param = array('uri' => "soap/WeatherSoapServer.php");
 $server = new SoapServer(NULL, $param);
 $server->setClass('server');
 $server->handle();
+
