@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ItForum.Models;
 using Microsoft.EntityFrameworkCore;
@@ -44,7 +45,31 @@ namespace ItForum.Services
             await _data.SaveChangesAsync();
             return post;
         }
+
+        public async Task<Post> GetPostById(string postId)
+        {
+            return await _data.Posts.FirstOrDefaultAsync(p => p.PostId == postId);
+        }
+
+        public async Task VerifyPost(string postId)
+        {
+            var post = await GetPostById(postId);
+            post.IsVerified = true;
+            await _data.SaveChangesAsync();
+        }
+
+        public async Task<List<Post>> GetUnverifiedPosts(List<Tag> manageTags)
+        {
+            var topicIds = await _data.TopicTags.Include(tt => tt.Topic)
+                 .ThenInclude(t => t.Posts)
+                 .Where(tt => manageTags.Exists(t => t.Name == tt.TagName))
+                 .Select(tt => tt.TopicId)
+                 .ToListAsync();
+
+            return await _data.Posts.Where(p => topicIds.Contains(p.ContainerId) && !p.IsVerified).ToListAsync();
+        }
     }
+
     public static class PostServicesExtensions
     {
         public static void AddPostServices(this IServiceCollection builder)

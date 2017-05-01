@@ -16,11 +16,13 @@ namespace ItForum.Controllers
     {
         private readonly TopicServices _topicServices;
         private readonly PostServices _postServices;
+        private readonly UserServices _userServices;
 
-        public PostsController(TopicServices topicServices, PostServices postServices)
+        public PostsController(TopicServices topicServices, PostServices postServices, UserServices userServices)
         {
             _topicServices = topicServices;
             _postServices = postServices;
+            _userServices = userServices;
         }
 
         [HttpPost]
@@ -57,5 +59,52 @@ namespace ItForum.Controllers
             return Json(payload);
         }
 
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="postId"></param>
+        /// <returns>OK,NotExist</returns>
+        [Route("{postId}")]
+        public async Task<IActionResult> VerifyPost(string postId)
+        {
+            var payload = new Payload();
+            var post = await _postServices.GetPostById(postId);
+            if (post == null)
+            {
+                payload.StatusCode = 1;
+                return Json(payload);
+            }
+            await _postServices.VerifyPost(postId);
+            payload.StatusCode = 0;
+            return Json(payload);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="postId"></param>
+        /// <returns>Ok</returns>
+        [Authorize(RegisteredPolicys.Moderator)]
+        public async Task<IActionResult> GetUnVerifyPost()
+        {
+            var payload = new Payload();
+            var tags = await _userServices.GetManageTags(User.Identity.Name);
+            if (tags == null)
+            {
+                payload.StatusCode = 1;
+                return Json(payload);
+            }
+            if (tags.Count == 0)
+            {
+                payload.StatusCode = 2;
+                return Json(payload);
+            }
+            var post = await _postServices.GetUnverifiedPosts(tags);
+            payload.Data = post;
+            payload.StatusCode = 0;
+            return Json(payload);
+        }
     }
 }

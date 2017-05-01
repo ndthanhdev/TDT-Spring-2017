@@ -165,6 +165,13 @@ namespace ItForum.Services
         {
             return StudentIdPattern.IsMatch(studentId);
         }
+
+        public async Task<List<Tag>> GetManageTags(string userId)
+        {
+            return await _db.Tags.Include(tag => tag.UserTags)
+                .Where(tag => tag.UserTags.Exists(ut=>ut.UserId==userId))
+                .ToListAsync();
+        }
     }
 
 
