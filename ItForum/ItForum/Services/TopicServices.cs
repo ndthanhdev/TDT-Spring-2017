@@ -28,12 +28,20 @@ namespace ItForum.Services
             return containers;
         }
 
+        /// <summary>
+        /// get topics which is verified
+        /// </summary>
+        /// <param name="tagName"></param>
+        /// <returns></returns>
         public async Task<List<Topic>> GetTopicsInTag(string tagName)
         {
-            var containerIds = await _db.ContainerTags.Where(ct => ct.TagName == tagName).Select(ct => ct.TopicId).ToListAsync();
-            if (containerIds == null || containerIds.Count == 0)
+            var topicIds = await _db.TopicTags.Where(ct => ct.TagName == tagName).Select(ct => ct.TopicId).ToListAsync();
+            if (topicIds == null || topicIds.Count == 0)
                 return null;
-            return await _db.Topics.Include(c=>c.TopicTags).Where(c => containerIds.Contains(c.TopicId)).ToListAsync();
+            return await _db.Topics.Include(topic => topic.TopicTags)
+                .Include(topic => topic.Post)
+                .Where(topic => topic.Post.IsVerified && topicIds.Contains(topic.TopicId))
+                .ToListAsync();
         }
 
         public async Task<bool> IsTopicValid(Topic topic)
@@ -62,10 +70,10 @@ namespace ItForum.Services
 
         public async Task<Topic> GetTopicById(string containterId)
         {
-            return await _db.Topics.Include(t=>t.Post)
-                .ThenInclude(p=>p.PostPoints)
-                .Include(t=>t.Post.Comments)
-                .ThenInclude(c=>c.CommentPoints)
+            return await _db.Topics.Include(t => t.Post)
+                .ThenInclude(p => p.PostPoints)
+                .Include(t => t.Post.Comments)
+                .ThenInclude(c => c.CommentPoints)
                 .FirstOrDefaultAsync(c => c.TopicId == containterId);
         }
 

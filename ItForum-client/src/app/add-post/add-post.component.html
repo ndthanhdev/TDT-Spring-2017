@@ -11,7 +11,7 @@
       <div>
         <div class="d-inline-flex flex-wrap">
           <md-chip-list [selectable]="true" id="tagList">
-            <md-chip *ngFor="let ct of model.containerTags" (click)="removeTag(ct.tagName);" class="mx-2">{{ct.tagName}}
+            <md-chip *ngFor="let ct of model.topicTags" (click)="removeTag(ct.tagName);" class="mx-2">{{ct.tagName}}
             </md-chip>
           </md-chip-list>
 
@@ -38,7 +38,7 @@
 
     <br>
     <button class="btn btn-primary my-3" (click)="add()"
-            [disabled]="!form.form.valid||isBusy||model.containerTags.length===0">
+            [disabled]="!form.form.valid||isBusy||model.topicTags.length===0">
       Add&nbsp;<i class="fa fa-spinner fa-spin" *ngIf="isBusy"></i>
     </button>
   </form>

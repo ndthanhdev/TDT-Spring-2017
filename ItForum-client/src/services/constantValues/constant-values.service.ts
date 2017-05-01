@@ -23,9 +23,9 @@ export class ConstantValuesService {
   public static readonly ADD_TAG = ConstantValuesService.BASE_URL + '/tag/create';
   public static readonly UPDATE_USERTAG_OF_USER = ConstantValuesService.BASE_URL + '/tag/UpdateUserTagOfUser';
 
-  // container
-  public static readonly GET_CONTAINERS_IN_TAG = ConstantValuesService.BASE_URL + '/container/GetContainersInTag/';
-  public static readonly CREATE_CONTAINERS = ConstantValuesService.BASE_URL + '/container/Create';
+  // topic
+  public static readonly GET_TOPICS_IN_TAG = ConstantValuesService.BASE_URL + '/topic/GetTopicsInTag/';
+  public static readonly CREATE_TOPIC = ConstantValuesService.BASE_URL + '/topic/Create';
 
   //role
   public static readonly UPDATE_USER_CLAIM_OF_USER = ConstantValuesService.BASE_URL + '/UserClaim/UpdateUserClaimOfUser';

@@ -46,6 +46,7 @@ namespace ItForum.Controllers
                 payload.StatusCode = CreateResponseCode.InvalidContainer;
                 return Json(payload);
             }
+            topic.Post.IsVerified = false;
             payload.Data = (await _topicServices.CreateTopic(topic)).TopicId;
             payload.StatusCode = CreateResponseCode.Ok;
             return Json(payload);

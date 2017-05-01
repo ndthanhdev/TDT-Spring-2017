@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ContainerService} from "../../services/container/container.service";
+import {TopicService} from "../../services/topic/topic.service";
 import {Container} from "@angular/compiler/src/i18n/i18n_ast";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {AlertService} from "../../services/alert/alert.service";
@@ -19,7 +19,7 @@ export class TagDetailComponent implements OnInit, OnDestroy {
   rows: Container[];
   tag: Tag;
 
-  constructor(private route: ActivatedRoute, private router: Router, private containerService: ContainerService,private tagService:TagService, private alert: AlertService) {
+  constructor(private route: ActivatedRoute, private router: Router, private containerService: TopicService, private tagService:TagService, private alert: AlertService) {
 
   }
 

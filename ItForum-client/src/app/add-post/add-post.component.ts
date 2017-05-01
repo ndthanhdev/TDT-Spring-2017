@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {Container} from "../../models/container.model";
+import {Topic} from "../../models/topic.model";
 import {Post} from "../../models/post.model";
-import {ContainerService} from "../../services/container/container.service";
+import {TopicService} from "../../services/topic/topic.service";
 import {UserService} from "../../services/user/user.service";
 import {ConstantValuesService} from "../../services/constantValues/constant-values.service";
 import {Tag} from "../../models/tag.model";
 import {TagService} from "../../services/tag/tag.service";
 import {FormControl} from "@angular/forms";
 import {AlertService} from "../../services/alert/alert.service";
-import {ContainerTag} from "../../models/container-tag.model";
+import {TopicTag} from "../../models/topic-tag.model";
 import {Router} from "@angular/router";
 
 @Component({
@@ -19,13 +19,13 @@ import {Router} from "@angular/router";
 export class AddPostComponent implements OnInit {
 
   isBusy: boolean;
-  model: Container;
+  model: Topic;
   tags: Tag[];
 
   formC: FormControl;
   filteredTags: any;
 
-  constructor(private containerService: ContainerService,
+  constructor(private containerService: TopicService,
               private userService: UserService,
               private tagService: TagService,
               public alert: AlertService,
@@ -37,7 +37,7 @@ export class AddPostComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.model = new Container(null, '', null, new Post(this.userService.getJwt()[ConstantValuesService.JWT_USERNAME]));
+    this.model = new Topic(null, '', null, new Post(this.userService.getJwt()[ConstantValuesService.JWT_USERNAME]));
     this.reload();
   }
 
@@ -49,13 +49,13 @@ export class AddPostComponent implements OnInit {
   addTag(tagName: string) {
     for (let tag of this.tags) {
       if (tag.name === tagName) {
-        for (let ct of this.model.containerTags) {
+        for (let ct of this.model.topicTags) {
           if (ct.tagName === tagName) {
             this.alert.openSnackbar(`${tag.name} was added`);
             return;
           }
         }
-        this.model.containerTags.push(new ContainerTag(tag.name));
+        this.model.topicTags.push(new TopicTag(tag.name));
         return;
       }
     }
@@ -63,7 +63,7 @@ export class AddPostComponent implements OnInit {
   }
 
   removeTag(tagName: string) {
-    this.model.containerTags = this.model.containerTags.filter((value, index, array) => value.tagName !== tagName);
+    this.model.topicTags = this.model.topicTags.filter((value, index, array) => value.tagName !== tagName);
   }
 
   async reload(): Promise<void> {
@@ -93,7 +93,7 @@ export class AddPostComponent implements OnInit {
         this.alert.openDialog('Invalid post');
       }
       else if (payload.statusCode === 2) {
-        this.alert.openDialog('Invalid container');
+        this.alert.openDialog('Invalid topic');
       }
       else {
         this.alert.openDialog('unknown code');

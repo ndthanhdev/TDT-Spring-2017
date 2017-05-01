@@ -28,7 +28,7 @@ namespace ItForum
         // Mapping two one to many
         public DbSet<UserTag> UserTags { get; set; }
 
-        public DbSet<TopicTag> ContainerTags { get; set; }
+        public DbSet<TopicTag> TopicTags { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -42,7 +42,7 @@ namespace ItForum
 
             // many-to-many Topic and Tag
             modelBuilder.Entity<TopicTag>()
-                .HasKey(model => new { ContainerId = model.TopicId, model.TagName });
+                .HasKey(model => new { TopicId = model.TopicId, model.TagName });
 
             // many-to-many User and Tag
             modelBuilder.Entity<UserTag>()

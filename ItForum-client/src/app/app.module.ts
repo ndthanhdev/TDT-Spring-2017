@@ -37,7 +37,7 @@ import {AddTagComponent} from './add-tag/add-tag.component';
 import {TagService} from "../services/tag/tag.service";
 import {TagComponent} from './tag/tag.component';
 import {TagDetailComponent} from './tag-detail/tag-detail.component';
-import {ContainerService} from "../services/container/container.service";
+import {TopicService} from "../services/topic/topic.service";
 import {AddPostComponent} from './add-post/add-post.component';
 import {ContainerDetailComponent} from './container-detail/container-detail.component';
 import {RoleService} from "../services/role/role.service";
@@ -98,7 +98,7 @@ import { TopicComponent } from './topic/topic.component';
     UserService,
     AdminService,
     TagService,
-    ContainerService,
+    TopicService,
     RoleService
   ],
   bootstrap: [AppComponent],

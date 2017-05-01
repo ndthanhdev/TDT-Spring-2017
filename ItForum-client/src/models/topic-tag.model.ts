@@ -1,8 +1,8 @@
 /**
  * Created by duyth on 4/19/2017.
  */
-export class ContainerTag {
-  public containerId: string;
+export class TopicTag {
+  public topicId: string;
   public tagName: string;
 
 
