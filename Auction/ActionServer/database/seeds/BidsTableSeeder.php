@@ -21,16 +21,21 @@ class BidsTableSeeder extends Seeder
             $user = $this->getRandomUser();
             if ($item->bids->count() > 0) {
                 $bid = $this->getHighestBid($item);
+                $createdAt = $faker->dateTimeBetween($bid->created_at, $item->ending_time);
                 factory(Bid::class)->create([
-                    'bid_amount' => $faker->numberBetween(1, 1000)*1000 + $bid->bid_amount,
-                    'time' => $faker->dateTimeBetween($bid->time, $item->ending_time),
+                    'bid_amount' => $faker->numberBetween(1, 1000) * 1000 + $bid->bid_amount,
+                    'created_at' => $createdAt,
+                    'updated_at' => $createdAt,
                     'user_id' => $user->id,
                     'item_id' => $item->id
                 ]);
+
             } else {
+                $createdAt = $faker->dateTimeThisMonth($max = $item->ending_time);
                 factory(Bid::class)->create([
                     'bid_amount' => $item->starting_price,
-                    'time' => $faker->dateTimeBetween('-10 days', $item->ending_time),
+                    'created_at' => $createdAt,
+                    'updated_at' => $createdAt,
                     'user_id' => $user->id,
                     'item_id' => $item->id
                 ]);

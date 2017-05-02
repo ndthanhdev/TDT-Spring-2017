@@ -5,8 +5,8 @@ $factory->define(\App\Entities\Item::class, function (Faker\Generator $faker) {
         'name' => $faker->name(),
         'description' => $faker->text(),
         'image' => $faker->name(),
-        'ending_time' => $faker->dateTimeBetween($startDate = 'now', $endDate = 'now + 2days'),
-        'starting_price' => $faker->numberBetween(1, 1000)*1000,
+        'ending_time' => $faker->dateTimeThisMonth($max = 'now + 3days'),
+        'starting_price' => $faker->numberBetween(1, 1000) * 1000,
         'user_id' => $faker->numberBetween(1, config('factory.USER_AMOUNT'))
 
     ];

@@ -38,7 +38,7 @@ class CreateAllTable extends Migration
         Schema::create('bids', function (Blueprint $table) {
             $table->increments('id');
             $table->double('bid_amount');
-            $table->dateTime('time');
+            $table->timestamps();
 
 //            relations
             $table->unsignedInteger('user_id');
@@ -50,8 +50,9 @@ class CreateAllTable extends Migration
 
         Schema::create('notifications', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('content');
-            $table->boolean('is_new');
+            $table->boolean('read');
+            $table->enum('type',['win','down']);
+            $table->timestamps();
 
 //            relations
             $table->unsignedInteger('user_id');
