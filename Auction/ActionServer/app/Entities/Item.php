@@ -13,7 +13,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
-    protected $fillable = [];
 
     public $timestamps = false;
+
+    public function bids(){
+        return $this->hasMany('App\Entities\Bid');
+    }
 }

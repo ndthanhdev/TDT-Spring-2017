@@ -27,7 +27,7 @@ namespace OrderFoodApi.Controllers
             }
             else if (await GetKhachHangBySdt(data.Sdt) == null)
             {
-                return BadRequest("Khach hang khong ton tai");
+                return NotFound("Khach hang khong ton tai");
             }
             else
             {
@@ -81,19 +81,16 @@ namespace OrderFoodApi.Controllers
         {
             if(await _db.QuanLys.FirstOrDefaultAsync(ql=>ql.QuanLyId==data.QuanLy.QuanLyId && ql.Password == data.QuanLy.Password) == null)
             {
-                return BadRequest("Khong co quyen");
+                return Unauthorized();
             }
             var donHangInDb = await _db.DonHangs.FirstOrDefaultAsync(dh => dh.DonHangId == data.DonHangId);
             if (donHangInDb == null)
             {
-                return BadRequest("Don hang khong ton tai");
+                return NotFound("Don hang khong ton tai");
             }
-            else
-            {
-                donHangInDb.TinhTrangDonHang = data.TinhTrangMoi;
-                await _db.SaveChangesAsync();
-                return Json(donHangInDb);
-            }
+            donHangInDb.TinhTrangDonHang = data.TinhTrangMoi;
+            await _db.SaveChangesAsync();
+            return Json(donHangInDb);
         }
 
         private async Task<KhachHang> GetKhachHangBySdt(string sdt)

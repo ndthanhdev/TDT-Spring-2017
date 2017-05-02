@@ -34,32 +34,33 @@ namespace OrderFoodApi.Controllers
             {
                 return BadRequest("Ten danh muc da ton tai");
             }
-            else
+            var danhMuc = new DanhMuc()
             {
-                var danhMuc = new DanhMuc()
-                {
-                    TenDanhMuc = data.TenDanhMuc,
-                    Hinh = data.Hinh
-                };
-                await _db.DanhMucs.AddAsync(danhMuc);
-                await _db.SaveChangesAsync();
-                return Json(danhMuc);
-            }
+                TenDanhMuc = data.TenDanhMuc,
+                Hinh = data.Hinh
+            };
+            await _db.DanhMucs.AddAsync(danhMuc);
+            await _db.SaveChangesAsync();
+            return Json(danhMuc);
         }
 
         [HttpPost]
         public async Task<IActionResult> UpdateDanhMuc(DanhMuUpdateDanhMucData data)
         {
-            var danhMucIndb = await _db.DanhMucs.FirstOrDefaultAsync(dm)
-            if (await _db.DanhMucs.FirstOrDefaultAsync(dm => dm.DanhMucId == data.DanhMucId) == null)
+            var danhMucIndb = await _db.DanhMucs.FirstOrDefaultAsync(dm => dm.DanhMucId == data.DanhMucId);
+            if ((await _db.DanhMucs.FirstOrDefaultAsync(dm => dm.DanhMucId == data.DanhMucId)) == null)
             {
                 return BadRequest("Ten danh muc khong ton tai");
             }
-            else
+            if (await _db.QuanLys.FirstOrDefaultAsync(
+                    ql => ql.QuanLyId == data.QuanLy.QuanLyId && ql.Password == data.QuanLy.Password) == null)
             {
-                await _db.SaveChangesAsync();
-                return Json(danhMuc);
+                return Unauthorized();
             }
+            danhMucIndb.Hinh = data.Hinh;
+            danhMucIndb.TenDanhMuc = data.TenDanhMuc;
+            await _db.SaveChangesAsync();
+            return Json(danhMucIndb);
         }
 
 
