@@ -13,8 +13,7 @@ class CreateAllTable extends Migration
      */
     public function up()
     {
-        Schema:
-        create('users', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('email');
             $table->string('password');
@@ -23,7 +22,7 @@ class CreateAllTable extends Migration
             $table->text('address');
         });
 
-        create('items', function (Blueprint $table) {
+        Schema::create('items', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('description');
@@ -36,9 +35,9 @@ class CreateAllTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
         });
 
-        create('bids', function (Blueprint $table) {
+        Schema::create('bids', function (Blueprint $table) {
             $table->increments('id');
-            $table->double('price');
+            $table->double('bid_amount');
             $table->dateTime('time');
 
 //            relations
@@ -49,7 +48,7 @@ class CreateAllTable extends Migration
             $table->foreign('item_id')->references('id')->on('items');
         });
 
-        create('notifications', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->increments('id');
             $table->text('content');
             $table->boolean('is_new');
@@ -61,9 +60,6 @@ class CreateAllTable extends Migration
             $table->unsignedInteger('item_id');
             $table->foreign('item_id')->references('id')->on('items');
         });
-
-
-
     }
 
     /**
@@ -73,6 +69,9 @@ class CreateAllTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('notifications');
+        Schema::dropIfExists('bids');
+        Schema::dropIfExists('items');
+        Schema::dropIfExists('users');
     }
 }
