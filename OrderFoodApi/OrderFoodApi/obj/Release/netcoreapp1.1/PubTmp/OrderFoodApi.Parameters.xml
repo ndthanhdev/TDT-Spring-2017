@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
   <parameter name="IIS Web Application Name" description="" value="api-orderfood" tags="IisApp">
-    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\thanh\\CodeZone\\OrderFoodApi\\OrderFoodApi\\obj\\Release\\netcoreapp1\.1\\PubTmp\\Out\\$" />
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\duyth\\Documents\\GitHub\\TDT-Spring-2017\\OrderFoodApi\\OrderFoodApi\\obj\\Release\\netcoreapp1\.1\\PubTmp\\Out\\$" />
   </parameter>
 </parameters>

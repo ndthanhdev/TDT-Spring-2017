@@ -15,11 +15,13 @@ class CreateAllTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('email');
+            $table->string('username');
             $table->string('password');
+            $table->string('email');
             $table->date('dob');
             $table->string('full_name');
             $table->text('address');
+            $table->text('avatar');
         });
 
         Schema::create('items', function (Blueprint $table) {

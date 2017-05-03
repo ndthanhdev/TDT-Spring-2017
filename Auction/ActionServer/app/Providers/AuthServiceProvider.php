@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Entities\Item;
+use App\Policies\ItemPolicy;
 use App\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -30,9 +32,11 @@ class AuthServiceProvider extends ServiceProvider
         // should return either a User instance or null. You're free to obtain
         // the User instance via an API token or any other method necessary.
 
+        Gate::policy(Item::class, ItemPolicy::class);
+
         $this->app['auth']->viaRequest('api', function ($request) {
-            if ($request->input('api_token')) {
-                return User::where('api_token', $request->input('api_token'))->first();
+            if ($request->input('username')) {
+                return User::where('username', $request->input('username'))->first();
             }
         });
     }

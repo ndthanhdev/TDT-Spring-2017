@@ -12,7 +12,7 @@ namespace OrderFoodApi.Controllers
 {
     public class DonHangController : Controller
     {
-        OrderFoodContext _db;
+        readonly OrderFoodContext _db;
         public DonHangController(OrderFoodContext db)
         {
             _db = db;
@@ -74,6 +74,12 @@ namespace OrderFoodApi.Controllers
         public async Task<IActionResult> GetDonHang(int id)
         {
             return Json(await _db.DonHangs.Include(dh => dh.ChiTietDonHangs).FirstOrDefaultAsync(dh => dh.DonHangId == id));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetDonHangs(string id)
+        {
+            return Json(await _db.DonHangs.Include(dh => dh.ChiTietDonHangs).Where(dh => dh.Sdt == id).ToListAsync());
         }
 
         [HttpPost]

@@ -14,3 +14,16 @@
 $app->get('/', function () use ($app) {
     return $app->version();
 });
+
+$app->group(['prefix' => 'auth'], function () use ($app) {
+    $app->post('login',['as' => 'auth.LOGIN','uses'=>'AuthController@login'] );
+    $app->get('register', ['as' => 'auth.REGISTER','uses'=>'AuthController@register']);
+});
+
+$app->get('users/{id}',['as'=>'user.SHOW','uses'=>'UserController@show']);
+
+$app->get('users/{id}/items',['as'=>'users/{id}/items.GET','uses'=>'ItemController@getItemsOfUser']);
+
+$app->get('users/{id}/',['as'=>'users/{id}/items.GET','uses'=>'ItemController@getItemsOfUser']);
+
+$app->get('test/{id}',['as'=>'test/{id}','uses'=>'AuthController@test']);

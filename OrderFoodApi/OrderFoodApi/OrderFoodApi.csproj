@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Properties\PublishProfiles\api-orderfood - FTP.pubxml" />
+    <None Remove="Properties\PublishProfiles\api-orderfood - Web Deploy.pubxml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="wwwroot\Db.db" />
   </ItemGroup>
   <ItemGroup>
@@ -30,6 +35,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\SharedObject\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
 </Project>
