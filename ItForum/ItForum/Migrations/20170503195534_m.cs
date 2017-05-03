@@ -158,18 +158,18 @@ namespace ItForum.Migrations
                 columns: table => new
                 {
                     PostId = table.Column<string>(nullable: false),
-                    ContainerId = table.Column<string>(nullable: true),
                     Content = table.Column<string>(nullable: true),
                     IsVerified = table.Column<bool>(nullable: false),
                     PublishDate = table.Column<DateTime>(nullable: false),
+                    TopicId = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Posts", x => x.PostId);
                     table.ForeignKey(
-                        name: "FK_Posts_Topics_ContainerId",
-                        column: x => x.ContainerId,
+                        name: "FK_Posts_Topics_TopicId",
+                        column: x => x.TopicId,
                         principalTable: "Topics",
                         principalColumn: "TopicId",
                         onDelete: ReferentialAction.Restrict);
@@ -221,9 +221,9 @@ namespace ItForum.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_ContainerId",
+                name: "IX_Posts_TopicId",
                 table: "Posts",
-                column: "ContainerId");
+                column: "TopicId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Posts_UserId",

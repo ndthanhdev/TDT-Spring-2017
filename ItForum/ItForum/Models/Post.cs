@@ -16,9 +16,9 @@ namespace ItForum.Models
         [ForeignKey(nameof(UserId))]
         public User User { get; set; }
 
-        public string ContainerId { get; set; }
+        public string TopicId { get; set; }
 
-        [ForeignKey(nameof(ContainerId))]
+        [ForeignKey(nameof(TopicId))]
         public Topic Topic { get; set; }
 
         public bool IsVerified { get; set; }

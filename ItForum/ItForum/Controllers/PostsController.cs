@@ -35,7 +35,7 @@ namespace ItForum.Controllers
                 payload.StatusCode = AddPostResponseCode.PostInvalid;
                 return Json(payload);
             }
-            if (await _topicServices.GetTopicById(post.ContainerId) == null)
+            if (await _topicServices.GetTopicById(post.TopicId) == null)
             {
                 payload.StatusCode = AddPostResponseCode.ContainerNotExist;
                 return Json(payload);
@@ -45,8 +45,9 @@ namespace ItForum.Controllers
             return Json(payload);
         }
 
+        [HttpGet]
         [Route("{containerId}")]
-        public async Task<IActionResult> GetPostInContainer(string containerId)
+        public async Task<IActionResult> GetPostInTopic(string containerId)
         {
             var payload = new Payload();
             if (await _topicServices.GetTopicById(containerId) == null)
@@ -54,7 +55,7 @@ namespace ItForum.Controllers
                 payload.StatusCode = GetPostInContainerResponseCode.ContainerNotExist;
                 return Json(payload);
             }
-            payload.Data = await _postServices.GetPostInContainer(containerId);
+            payload.Data = await _postServices.GetPostInTopic(containerId);
             payload.StatusCode = GetPostInContainerResponseCode.Ok;
             return Json(payload);
         }
@@ -66,6 +67,7 @@ namespace ItForum.Controllers
         /// </summary>
         /// <param name="postId"></param>
         /// <returns>OK,NotExist</returns>
+        [HttpGet]
         [Route("{postId}")]
         public async Task<IActionResult> VerifyPost(string postId)
         {
@@ -86,6 +88,7 @@ namespace ItForum.Controllers
         /// </summary>
         /// <param name="postId"></param>
         /// <returns>Ok</returns>
+        [HttpGet]
         [Authorize(RegisteredPolicys.Moderator)]
         public async Task<IActionResult> GetUnVerifyPost()
         {
@@ -106,5 +109,32 @@ namespace ItForum.Controllers
             payload.StatusCode = 0;
             return Json(payload);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="post"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Authorize(RegisteredPolicys.Moderator)]
+        public async Task<IActionResult> UpdatePost(Post post)
+        {
+            var payload = new Payload();
+            await _postServices.UpdatePost(post);
+            payload.StatusCode = 0;
+            return Json(payload);
+        }
+
+        [HttpGet]
+        [Route("{postId}")]
+        [Authorize(RegisteredPolicys.User)]
+        public async Task<IActionResult> LikePost(string postId)
+        {
+            Payload payload = new Payload();
+            await _postServices.LikePost(postId, User.Identity.Name);
+            payload.StatusCode = 0;
+            return Json(payload);
+        }
+
     }
 }

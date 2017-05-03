@@ -81,7 +81,7 @@ namespace ItForum.Services
         {
             await _db.Posts.AddAsync(post);
             await _db.SaveChangesAsync();
-            return await GetTopicById(post.ContainerId);
+            return await GetTopicById(post.TopicId);
         }
     }
 

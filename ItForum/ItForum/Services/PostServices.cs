@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ItForum.Models;
@@ -18,7 +19,7 @@ namespace ItForum.Services
             _userServices = userServices;
         }
 
-        public async Task<List<Post>> GetPostInContainer(string containerId)
+        public async Task<List<Post>> GetPostInTopic(string containerId)
         {
             var container = await _data.Topics.Include(c => c.Post)
                 .FirstOrDefaultAsync(c => c.TopicId == containerId);
@@ -66,7 +67,35 @@ namespace ItForum.Services
                  .Select(tt => tt.TopicId)
                  .ToListAsync();
 
-            return await _data.Posts.Where(p => topicIds.Contains(p.ContainerId) && !p.IsVerified).ToListAsync();
+            return await _data.Posts.Where(p => topicIds.Contains(p.TopicId) && !p.IsVerified).ToListAsync();
+        }
+
+        public async Task<Post> UpdatePost(Post post)
+        {
+            var innerPost = await _data.Posts.FirstOrDefaultAsync(p => p.PostId == post.PostId);
+            innerPost.Content = post.Content;
+            innerPost.PublishDate=DateTime.Now;
+            await _data.SaveChangesAsync();
+            return innerPost;
+        }
+
+        public async Task LikePost(string postId,string userId)
+        {
+            var innerPoint =
+                await _data.PostPoints.FirstOrDefaultAsync(pp => pp.PostId == postId && pp.UserId == userId);
+            if (innerPoint == null)
+            {
+                await _data.PostPoints.AddAsync(new PostPoint()
+                {
+                    PostId = postId,
+                    UserId = userId
+                });
+            }
+            else
+            {
+                _data.PostPoints.Remove(innerPoint);
+            }
+            await _data.SaveChangesAsync();
         }
     }
 

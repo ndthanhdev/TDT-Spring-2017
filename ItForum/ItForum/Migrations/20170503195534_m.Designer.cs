@@ -8,7 +8,7 @@ using ItForum;
 namespace ItForum.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20170501190241_m")]
+    [Migration("20170503195534_m")]
     partial class m
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,19 +58,19 @@ namespace ItForum.Migrations
                     b.Property<string>("PostId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ContainerId");
-
                     b.Property<string>("Content");
 
                     b.Property<bool>("IsVerified");
 
                     b.Property<DateTime>("PublishDate");
 
+                    b.Property<string>("TopicId");
+
                     b.Property<string>("UserId");
 
                     b.HasKey("PostId");
 
-                    b.HasIndex("ContainerId");
+                    b.HasIndex("TopicId");
 
                     b.HasIndex("UserId");
 
@@ -219,7 +219,7 @@ namespace ItForum.Migrations
                 {
                     b.HasOne("ItForum.Models.Topic", "Topic")
                         .WithMany("Posts")
-                        .HasForeignKey("ContainerId");
+                        .HasForeignKey("TopicId");
 
                     b.HasOne("ItForum.Models.User", "User")
                         .WithMany("Posts")
@@ -250,7 +250,7 @@ namespace ItForum.Migrations
             modelBuilder.Entity("ItForum.Models.TopicTag", b =>
                 {
                     b.HasOne("ItForum.Models.Tag", "Tag")
-                        .WithMany("ContainerTags")
+                        .WithMany("TopicTags")
                         .HasForeignKey("TagName")
                         .OnDelete(DeleteBehavior.Cascade);
 
