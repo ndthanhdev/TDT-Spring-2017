@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace OrderFoodApi.Entity
         public string Hinh { get; set; }
 
         public int DanhMucId { get; set; }
+
+        [JsonIgnore]
         public DanhMuc DanhMuc { get; set; }
 
 

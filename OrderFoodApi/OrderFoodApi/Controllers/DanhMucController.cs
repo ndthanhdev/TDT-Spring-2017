@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OrderFoodApi.Controllers
 {
+    [Route("[controller]/[action]")]
     public class DanhMucController : Controller
     {
         private readonly OrderFoodContext _db;

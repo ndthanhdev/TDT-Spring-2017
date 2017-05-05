@@ -9,7 +9,7 @@ using OrderFoodApi.Entity;
 
 namespace OrderFoodApi.Controllers
 {
-    [Produces("application/json")]
+    [Route("[controller]/[action]")]
     public class MonAnController : Controller
     {
         private readonly OrderFoodContext _context;
@@ -21,9 +21,9 @@ namespace OrderFoodApi.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public JsonResult GetMonAns(int id)
+        public async Task<IActionResult> GetMonAns(int id)
         {
-            var danhMuc = _context.DanhMucs.Include(dm => dm.MonAns).FirstOrDefault(dm => dm.DanhMucId == id);
+            var danhMuc = await _context.DanhMucs.Include(dm => dm.MonAns).FirstOrDefaultAsync(dm => dm.DanhMucId == id);
             return Json(danhMuc.MonAns);
         }
 

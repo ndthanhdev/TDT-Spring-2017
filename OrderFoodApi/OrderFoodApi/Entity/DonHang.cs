@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace OrderFoodApi.Entity
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DonHangId { get; set; }
 
+        [JsonIgnore]
         [ForeignKey(nameof(Sdt))]
         public KhachHang KhachHang { get; set; }
 
@@ -18,6 +20,7 @@ namespace OrderFoodApi.Entity
 
         public TinhTrangDonHang TinhTrangDonHang { get; set; }
 
+        [JsonIgnore]
         public List<ChiTietDonHang> ChiTietDonHangs { get; set; }
     }
 }

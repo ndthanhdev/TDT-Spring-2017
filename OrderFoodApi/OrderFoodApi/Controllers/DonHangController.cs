@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OrderFoodApi.Controllers
 {
+    [Route("[controller]/[action]")]
     public class DonHangController : Controller
     {
         readonly OrderFoodContext _db;

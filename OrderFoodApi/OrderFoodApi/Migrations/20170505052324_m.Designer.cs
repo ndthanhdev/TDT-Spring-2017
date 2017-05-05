@@ -9,7 +9,7 @@ using OrderFoodApi.Entity;
 namespace OrderFoodApi.Migrations
 {
     [DbContext(typeof(OrderFoodContext))]
-    [Migration("20170505013531_m")]
+    [Migration("20170505052324_m")]
     partial class m
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

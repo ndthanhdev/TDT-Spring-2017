@@ -9,7 +9,7 @@ using OrderFoodApi.Entity;
 
 namespace OrderFoodApi.Controllers
 {
-    [Produces("application/json")]
+    [Route("[controller]/[action]")]
     public class KhachHangController : Controller
     {
         OrderFoodContext _db;

@@ -12,7 +12,7 @@ C:\Users\duyth\Documents\GitHub\TDT-Spring-2017\OrderFoodApi\OrderFoodApi\bin\De
 C:\Users\duyth\Documents\GitHub\TDT-Spring-2017\OrderFoodApi\OrderFoodApi\bin\Debug\netcoreapp1.1\OrderFoodApi.runtimeconfig.dev.json
 C:\Users\duyth\Documents\GitHub\TDT-Spring-2017\OrderFoodApi\OrderFoodApi\bin\Debug\netcoreapp1.1\OrderFoodApi.dll
 C:\Users\duyth\Documents\GitHub\TDT-Spring-2017\OrderFoodApi\OrderFoodApi\bin\Debug\netcoreapp1.1\OrderFoodApi.pdb
+C:\Users\duyth\Documents\GitHub\TDT-Spring-2017\OrderFoodApi\OrderFoodApi\obj\Debug\netcoreapp1.1\OrderFoodApi.csprojResolveAssemblyReference.cache
 C:\Users\duyth\Documents\GitHub\TDT-Spring-2017\OrderFoodApi\OrderFoodApi\obj\Debug\netcoreapp1.1\OrderFoodApi.AssemblyInfo.cs
 C:\Users\duyth\Documents\GitHub\TDT-Spring-2017\OrderFoodApi\OrderFoodApi\obj\Debug\netcoreapp1.1\OrderFoodApi.dll
 C:\Users\duyth\Documents\GitHub\TDT-Spring-2017\OrderFoodApi\OrderFoodApi\obj\Debug\netcoreapp1.1\OrderFoodApi.pdb
-C:\Users\duyth\Documents\GitHub\TDT-Spring-2017\OrderFoodApi\OrderFoodApi\obj\Debug\netcoreapp1.1\OrderFoodApi.csprojResolveAssemblyReference.cache
