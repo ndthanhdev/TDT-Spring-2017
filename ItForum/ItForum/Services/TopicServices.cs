@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ItForum.Models;
@@ -63,22 +64,45 @@ namespace ItForum.Services
 
         public async Task<Topic> CreateTopic(Topic topic)
         {
-            await _db.Topics.AddAsync(topic);
-            await _db.SaveChangesAsync();
-            return topic;
+            try
+            {
+                var post = topic.Post;
+                topic.Post = null;
+
+                await _db.Posts.AddAsync(post);
+                await _db.SaveChangesAsync();
+                topic.PostId = post.PostId;
+                await _db.Topics.AddAsync(topic);
+                post.TopicId = topic.TopicId;
+                await _db.SaveChangesAsync();
+                
+
+                
+                //await _db.SaveChangesAsync();
+                //topic.Posts.Add(post);
+                //await _db.SaveChangesAsync();
+                //await _db.SaveChangesAsync();
+                return topic;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<Topic> GetTopicById(string containterId)
         {
-            return await _db.Topics.Include(t => t.Post)
+            return await _db.Topics.Include(t => t.Posts)
                 .ThenInclude(p => p.PostPoints)
                 .Include(t => t.Post.Comments)
                 .ThenInclude(c => c.CommentPoints)
+                .Include(t=>t.TopicTags)
                 .FirstOrDefaultAsync(c => c.TopicId == containterId);
         }
 
         public async Task<Topic> AddPost(Post post)
         {
+            post.PublishDate=DateTime.Now;
             await _db.Posts.AddAsync(post);
             await _db.SaveChangesAsync();
             return await GetTopicById(post.TopicId);

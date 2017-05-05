@@ -28,7 +28,7 @@ namespace OrderFoodApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddDanhMuc(DanhMucAddDanhMucData data)
+        public async Task<IActionResult> AddDanhMuc([FromBody] DanhMucAddDanhMucData data)
         {
             if (await _db.DanhMucs.FirstOrDefaultAsync(dm => dm.TenDanhMuc == data.TenDanhMuc) != null)
             {
@@ -45,7 +45,7 @@ namespace OrderFoodApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateDanhMuc(DanhMuUpdateDanhMucData data)
+        public async Task<IActionResult> UpdateDanhMuc([FromBody] DanhMuUpdateDanhMucData data)
         {
             var danhMucIndb = await _db.DanhMucs.FirstOrDefaultAsync(dm => dm.DanhMucId == data.DanhMucId);
             if ((await _db.DanhMucs.FirstOrDefaultAsync(dm => dm.DanhMucId == data.DanhMucId)) == null)

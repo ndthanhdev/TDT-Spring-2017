@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using OrderFoodApi.Entity;
 using Microsoft.EntityFrameworkCore;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using OrderFoodApi.Entity;
 
 namespace OrderFoodApi.Controllers
 {
+    [Produces("application/json")]
     public class KhachHangController : Controller
     {
         OrderFoodContext _db;
@@ -19,6 +19,7 @@ namespace OrderFoodApi.Controllers
         }
 
         [HttpGet]
+        [Route("{id}")]
         public async Task<IActionResult> GetKhachHang(string id)
         {
             return Json(await GetKhachHangBySdt(id));
@@ -65,8 +66,8 @@ namespace OrderFoodApi.Controllers
         private bool IsKhachHangCorrect(KhachHang khachHang)
         {
             return !(string.IsNullOrWhiteSpace(khachHang.Sdt)
-                || string.IsNullOrWhiteSpace(khachHang.Ten)
-                || string.IsNullOrWhiteSpace(khachHang.DiaChi));
+                     || string.IsNullOrWhiteSpace(khachHang.Ten)
+                     || string.IsNullOrWhiteSpace(khachHang.DiaChi));
         }
 
         private async Task<KhachHang> GetKhachHangBySdt(string sdt)

@@ -108,7 +108,7 @@ namespace ItForum.Services
         {
             await Task.Yield();
             var user = await _db.Users.Include(u => u.UserTags)
-                .Include(u=>u.UserClaims)
+                .Include(u => u.UserClaims)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(u => u.UserId == userId);
             user.PasswordHash = "";
@@ -168,8 +168,7 @@ namespace ItForum.Services
 
         public async Task<List<Tag>> GetManageTags(string userId)
         {
-            return await _db.Tags.Include(tag => tag.UserTags)
-                .Where(tag => tag.UserTags.Exists(ut=>ut.UserId==userId))
+            return await _db.UserTags.Include(ut => ut.Tag).Where(ut => ut.UserId == userId).Select(ut => ut.Tag)
                 .ToListAsync();
         }
     }

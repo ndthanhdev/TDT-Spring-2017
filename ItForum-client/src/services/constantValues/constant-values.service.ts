@@ -26,9 +26,14 @@ export class ConstantValuesService {
   // topic
   public static readonly GET_TOPICS_IN_TAG = ConstantValuesService.BASE_URL + '/topic/GetTopicsInTag/';
   public static readonly CREATE_TOPIC = ConstantValuesService.BASE_URL + '/topic/Create';
+  public static readonly GET_TOPIC = ConstantValuesService.BASE_URL + '/topic/GetTopic/';
 
   //role
   public static readonly UPDATE_USER_CLAIM_OF_USER = ConstantValuesService.BASE_URL + '/UserClaim/UpdateUserClaimOfUser';
+
+  //post
+  public static readonly GET_UNVERIFYPOST =ConstantValuesService.BASE_URL + '/posts/GetUnVerifyPost';
+  public static readonly VERIFY_POST =ConstantValuesService.BASE_URL + '/posts/VerifyPost';
 
   constructor() {
   }

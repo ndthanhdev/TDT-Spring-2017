@@ -1,0 +1,24 @@
+<div class="d-flex justify-content-end m-1">
+  <div class="card w-100">
+    <div class="card-header d-inline-flex justify-content-between">
+      <span>{{user?.fullName}}</span>
+      <!--<div>-->
+      <!--<button *ngIf="editable" class="btn btn-outline-danger m-1">Delete</button>-->
+      <!--<button *ngIf="editable" class="btn btn-outline-primary m-1">Edit</button>-->
+      <!--</div>-->
+    </div>
+    <div class="card-block">
+      <div [froalaView]="model?.content"></div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-secondary btn-sm" [disabled]="!interactive" (click)="like()">
+        <i class="fa float-right fa-heart-o" aria-hidden="true"
+           *ngIf="!isLiked">{{model?.postPoints.length}}</i>
+        <i class="fa fa-heart float-right" *ngIf="isLiked" aria-hidden="true">{{model?.postPoints?.length}}</i>
+      </button>
+      <button class="btn btn-secondary btn-sm" [disabled]="!interactive" (click)="addComment()"><i class="fa fa-reply" aria-hidden="true">&nbsp;{{model?.comments?.length}}</i>
+      </button>
+    </div>
+  </div>
+</div>
+<app-comment *ngFor="let comment of model?.comments" [commentId]="comment.commentId"></app-comment>

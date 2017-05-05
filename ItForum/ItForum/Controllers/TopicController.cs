@@ -83,7 +83,9 @@ namespace ItForum.Controllers
         public async Task<IActionResult> GetTopic(string id)
         {
             Payload payload = new Payload();
-            payload.Data = await _topicServices.GetTopicById(id);
+            var topic = await _topicServices.GetTopicById(id);
+            topic.Posts= topic.Posts.OrderBy(p => p.PublishDate).ToList();
+            payload.Data = topic;
             payload.StatusCode = GetTopicCode.Ok;
             if (payload.Data == null)
             {

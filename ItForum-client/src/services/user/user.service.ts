@@ -62,4 +62,8 @@ export class UserService {
     return this.getJwt()[ConstantValuesService.JWT_ROLE].indexOf(RegisteredRoles.Moderator) !== -1;
   }
 
+  isUser(): boolean {
+    return this.getJwt()[ConstantValuesService.JWT_ROLE].indexOf(RegisteredRoles.User) !== -1;
+  }
+
 }

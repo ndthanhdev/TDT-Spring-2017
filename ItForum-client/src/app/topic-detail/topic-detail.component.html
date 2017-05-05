@@ -1,112 +1,128 @@
-<section class="padding-nav-bar container d-flex flex-column">
+<section *ngIf="!isLoading" class="padding-nav-bar container d-flex flex-column">
 
-  <h3>Hello world</h3>
+  <h3>{{topic?.title}}</h3>
   <md-chip-list>
-    <md-chip>c#</md-chip>
-    <md-chip>js</md-chip>
-    <md-chip>ts</md-chip>
+    <md-chip *ngFor="let topicTag of topic?.topicTags">{{topicTag.tagName}}</md-chip>
   </md-chip-list>
   <div class="d-flex flex-column m-3">
-
-    <div class="d-flex justify-content-end m-1">
-      <div class="card w-100">
-        <div class="card-header">Adminstrator</div>
-        <div class="card-block">
-          <div [froalaView]>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure
-            laudantium
-            vitae, praesentium optio, sapiente distinctio illo?
-          </div>
-        </div>
-        <div class="card-footer">
-          <button class="btn btn-secondary btn-sm"><i class="fa fa-heart float-right" aria-hidden="true">&nbsp;1</i>
-          </button>
-          <button class="btn btn-secondary btn-sm"><i class="fa fa-reply" aria-hidden="true">&nbsp;2</i></button>
-        </div>
-      </div>
-    </div>
-
-    <div class="d-flex justify-content-end m-1">
-      <div class="card w-75">
-        <div class="card-header">Adminstrator</div>
-        <div class="card-block">
-          <div [froalaView]>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure
-            laudantium
-            vitae, praesentium optio, sapiente distinctio illo?
-          </div>
-        </div>
-        <div class="card-footer">
-          <button class="btn btn-secondary btn-sm"><i class="fa fa-heart-o float-right" aria-hidden="true">&nbsp;0</i>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="d-flex justify-content-end m-1">
-      <div class="card w-75">
-        <div class="card-header">Adminstrator</div>
-        <div class="card-block">
-          <div [froalaView]>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure
-            laudantium
-            vitae, praesentium optio, sapiente distinctio illo?
-          </div>
-        </div>
-        <div class="card-footer">
-          <button class="btn btn-secondary btn-sm"><i class="fa fa-heart float-right" aria-hidden="true">&nbsp;1</i>
-          </button>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="d-flex justify-content-end m-2">
-    <div class="card w-100">
-      <div class="card-header">user</div>
-      <div class="card-block">
-        <div [froalaView]>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium
-          vitae, praesentium optio, sapiente distinctio illo?
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="d-flex justify-content-end m-2">
-    <div class="card w-100">
-      <div class="card-header">user</div>
-      <div class="card-block">
-        <div [froalaView]>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium
-          vitae, praesentium optio, sapiente distinctio illo?
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="d-flex justify-content-end m-2">
-    <div class="card w-100">
-      <div class="card-header">user</div>
-      <div class="card-block">
-        <div [froalaView]>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium
-          vitae, praesentium optio, sapiente distinctio illo?
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="d-flex justify-content-end m-2">
-    <div class="card w-100">
-      <div class="card-header">user</div>
-      <div class="card-block">
-        <div [froalaView]>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium
-          vitae, praesentium optio, sapiente distinctio illo?
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="d-flex justify-content-end m-2">
-    <div class="card w-100">
-      <div class="card-header">user</div>
-      <div class="card-block">
-        <div [froalaView]>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium
-          vitae, praesentium optio, sapiente distinctio illo?
-        </div>
-      </div>
-    </div>
+    <app-post *ngFor="let post of topic?.posts" [model]="post"></app-post>
+    <button class="btn btn-outline-primary" (click)="answer()">Answer</button>
   </div>
 </section>
+<section *ngIf="isLoading" class="padding-nav-bar d-flex flex-column justify-content-center">
+  <div class="d-flex justify-content-center">
+    <md-spinner></md-spinner>
+  </div>
+</section>
+<!--<section class="padding-nav-bar container d-flex flex-column">-->
+
+  <!--<h3>Hello world</h3>-->
+  <!--<md-chip-list>-->
+    <!--<md-chip>c#</md-chip>-->
+    <!--<md-chip>js</md-chip>-->
+    <!--<md-chip>ts</md-chip>-->
+  <!--</md-chip-list>-->
+  <!--<div class="d-flex flex-column m-3">-->
+
+    <!--<div class="d-flex justify-content-end m-1">-->
+      <!--<div class="card w-100">-->
+        <!--<div class="card-header">Adminstrator</div>-->
+        <!--<div class="card-block">-->
+          <!--<div [froalaView]>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure-->
+            <!--laudantium-->
+            <!--vitae, praesentium optio, sapiente distinctio illo?-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="card-footer">-->
+          <!--<button class="btn btn-secondary btn-sm"><i class="fa fa-heart float-right" aria-hidden="true">&nbsp;1</i>-->
+          <!--</button>-->
+          <!--<button class="btn btn-secondary btn-sm"><i class="fa fa-reply" aria-hidden="true">&nbsp;2</i></button>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="d-flex justify-content-end m-1">-->
+      <!--<div class="card w-75">-->
+        <!--<div class="card-header">Adminstrator</div>-->
+        <!--<div class="card-block">-->
+          <!--<div [froalaView]>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure-->
+            <!--laudantium-->
+            <!--vitae, praesentium optio, sapiente distinctio illo?-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="card-footer">-->
+          <!--<button class="btn btn-secondary btn-sm"><i class="fa fa-heart-o float-right" aria-hidden="true">&nbsp;0</i>-->
+          <!--</button>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="d-flex justify-content-end m-1">-->
+      <!--<div class="card w-75">-->
+        <!--<div class="card-header">Adminstrator</div>-->
+        <!--<div class="card-block">-->
+          <!--<div [froalaView]>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure-->
+            <!--laudantium-->
+            <!--vitae, praesentium optio, sapiente distinctio illo?-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="card-footer">-->
+          <!--<button class="btn btn-secondary btn-sm"><i class="fa fa-heart float-right" aria-hidden="true">&nbsp;1</i>-->
+          <!--</button>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+  <!--</div>-->
+
+  <!--<div class="d-flex justify-content-end m-2">-->
+    <!--<div class="card w-100">-->
+      <!--<div class="card-header">user</div>-->
+      <!--<div class="card-block">-->
+        <!--<div [froalaView]>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium-->
+          <!--vitae, praesentium optio, sapiente distinctio illo?-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="d-flex justify-content-end m-2">-->
+    <!--<div class="card w-100">-->
+      <!--<div class="card-header">user</div>-->
+      <!--<div class="card-block">-->
+        <!--<div [froalaView]>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium-->
+          <!--vitae, praesentium optio, sapiente distinctio illo?-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="d-flex justify-content-end m-2">-->
+    <!--<div class="card w-100">-->
+      <!--<div class="card-header">user</div>-->
+      <!--<div class="card-block">-->
+        <!--<div [froalaView]>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium-->
+          <!--vitae, praesentium optio, sapiente distinctio illo?-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="d-flex justify-content-end m-2">-->
+    <!--<div class="card w-100">-->
+      <!--<div class="card-header">user</div>-->
+      <!--<div class="card-block">-->
+        <!--<div [froalaView]>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium-->
+          <!--vitae, praesentium optio, sapiente distinctio illo?-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="d-flex justify-content-end m-2">-->
+    <!--<div class="card w-100">-->
+      <!--<div class="card-header">user</div>-->
+      <!--<div class="card-block">-->
+        <!--<div [froalaView]>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium-->
+          <!--vitae, praesentium optio, sapiente distinctio illo?-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</section>-->

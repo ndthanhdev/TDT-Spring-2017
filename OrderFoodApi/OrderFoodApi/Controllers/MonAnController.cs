@@ -20,6 +20,7 @@ namespace OrderFoodApi.Controllers
         }
 
         [HttpGet]
+        [Route("{id}")]
         public JsonResult GetMonAns(int id)
         {
             var danhMuc = _context.DanhMucs.Include(dm => dm.MonAns).FirstOrDefault(dm => dm.DanhMucId == id);
@@ -27,7 +28,7 @@ namespace OrderFoodApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddMonAn(AddMonAnData data)
+        public async Task<IActionResult> AddMonAn([FromBody] AddMonAnData data)
         {
             if (await _context.QuanLys.FirstOrDefaultAsync(
                     ql => ql.QuanLyId == data.QuanLy.QuanLyId && ql.Password == data.QuanLy.Password) == null)

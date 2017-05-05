@@ -11,12 +11,12 @@ namespace OrderFoodApi.Entity
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DonHangId { get; set; }
 
-        public TinhTrangDonHang TinhTrangDonHang { get; set; }
-
         [ForeignKey(nameof(Sdt))]
         public KhachHang KhachHang { get; set; }
 
         public string Sdt { get; set; }
+
+        public TinhTrangDonHang TinhTrangDonHang { get; set; }
 
         public List<ChiTietDonHang> ChiTietDonHangs { get; set; }
     }

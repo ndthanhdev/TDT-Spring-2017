@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ItForum.Controllers
 {
+    [Route("[controller]/[action]")]
     public class PostsController : Controller
     {
         private readonly TopicServices _topicServices;
@@ -27,7 +28,7 @@ namespace ItForum.Controllers
 
         [HttpPost]
         [Authorize(RegisteredPolicys.User)]
-        public async Task<IActionResult> AddPost(Post post)
+        public async Task<IActionResult> AddPost([FromBody] Post post)
         {
             var payload = new Payload();
             if (!await _postServices.IsPostValid(post))
@@ -114,12 +115,17 @@ namespace ItForum.Controllers
         /// 
         /// </summary>
         /// <param name="post"></param>
-        /// <returns></returns>
+        /// <returns>Ok,Unauth</returns>
         [HttpPost]
         [Authorize(RegisteredPolicys.Moderator)]
         public async Task<IActionResult> UpdatePost(Post post)
         {
             var payload = new Payload();
+            if (post.UserId != User.Identity.Name)
+            {
+                payload.StatusCode = 1;
+                return Json(payload);
+            }
             await _postServices.UpdatePost(post);
             payload.StatusCode = 0;
             return Json(payload);
@@ -132,6 +138,16 @@ namespace ItForum.Controllers
         {
             Payload payload = new Payload();
             await _postServices.LikePost(postId, User.Identity.Name);
+            payload.StatusCode = 0;
+            return Json(payload);
+        }
+
+        [HttpGet]
+        [Route("{postId}")]
+        public async Task<IActionResult> GetPostPoints(string postId)
+        {
+            Payload payload = new Payload();
+            payload.Data= await _postServices.GetPostPoints(postId);
             payload.StatusCode = 0;
             return Json(payload);
         }

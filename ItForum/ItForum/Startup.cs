@@ -63,6 +63,8 @@ namespace ItForum
 
             services.AddTopicServices();
 
+            services.AddCommentServices();
+
             services.AddCors();
 
             services.AddMapperServices();

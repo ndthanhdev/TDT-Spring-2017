@@ -87,7 +87,7 @@ export class AddPostComponent implements OnInit {
     try {
       let payload = await this.containerService.createContainer(this.model);
       if (payload.statusCode === 0) {
-        this.router.navigate(['/manage-tag']);
+        this.router.navigate(['/']);
       }
       else if (payload.statusCode === 1) {
         this.alert.openDialog('Invalid post');

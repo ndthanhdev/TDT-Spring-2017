@@ -8,7 +8,7 @@ using ItForum;
 namespace ItForum.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20170503195534_m")]
+    [Migration("20170504084112_m")]
     partial class m
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

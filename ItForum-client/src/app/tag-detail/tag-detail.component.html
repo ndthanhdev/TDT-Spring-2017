@@ -17,7 +17,7 @@
           <span (click)="sort()">Topics</span>
         </ng-template>
         <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-          <a class="link-disabled" [routerLink]="['/topic-detail',row.topicId]">{{value}}</a>
+          <a class="link-disabled" [routerLink]="['/topic',row.topicId]">{{value}}</a>
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>

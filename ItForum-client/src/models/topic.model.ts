@@ -12,6 +12,8 @@ export class Topic {
 
   public post:Post;
 
+  public posts:Post[];
+
   public topicTags:TopicTag[];
 
   constructor(postId: string, title: string, topicId: string, post: Post) {

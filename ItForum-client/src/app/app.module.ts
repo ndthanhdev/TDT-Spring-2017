@@ -43,6 +43,11 @@ import {ContainerDetailComponent} from './container-detail/container-detail.comp
 import {RoleService} from "../services/role/role.service";
 import { TopicDetailComponent } from './topic-detail/topic-detail.component';
 import { TopicComponent } from './topic/topic.component';
+import { PostComponent } from './post/post.component';
+import { CommentComponent } from './comment/comment.component';
+import {PostService} from "../services/post/post.service";
+import { ReplyComponent } from './reply/reply.component';
+import {CommentService} from "services/comment/comment.service";
 
 
 @NgModule({
@@ -62,7 +67,10 @@ import { TopicComponent } from './topic/topic.component';
     AddPostComponent,
     ContainerDetailComponent,
     TopicDetailComponent,
-    TopicComponent
+    TopicComponent,
+    PostComponent,
+    CommentComponent,
+    ReplyComponent
   ],
   imports: [
     BrowserModule,
@@ -99,10 +107,12 @@ import { TopicComponent } from './topic/topic.component';
     AdminService,
     TagService,
     TopicService,
-    RoleService
+    RoleService,
+    PostService,
+    CommentService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AlertComponent]
+  entryComponents: [AlertComponent,ReplyComponent]
 })
 export class AppModule {
 }

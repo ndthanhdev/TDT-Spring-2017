@@ -1,0 +1,15 @@
+<div class="d-flex justify-content-end m-1">
+  <div class="card w-75">
+    <div class="card-header">Adminstrator</div>
+    <div class="card-block">
+      <div [froalaView]="model?.content"></div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-secondary btn-sm" [disabled]="!interactive" (click)="like()">
+        <i class="fa float-right fa-heart-o" aria-hidden="true"
+           *ngIf="!isLiked">{{model?.commentPoints?.length}}</i>
+        <i class="fa fa-heart float-right" *ngIf="isLiked" aria-hidden="true">{{model?.commentPoints?.length}}</i>
+      </button>
+    </div>
+  </div>
+</div>

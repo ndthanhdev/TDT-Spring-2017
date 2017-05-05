@@ -25,10 +25,6 @@ namespace OrderFoodApi.Controllers
             {
                 return BadRequest("Qua it");
             }
-            else if (await GetKhachHangBySdt(data.Sdt) == null)
-            {
-                return NotFound("Khach hang khong ton tai");
-            }
             else
             {
                 var donHang = new DonHang()
@@ -71,12 +67,14 @@ namespace OrderFoodApi.Controllers
         }
 
         [HttpGet]
+        [Route("{id}")]
         public async Task<IActionResult> GetDonHang(int id)
         {
             return Json(await _db.DonHangs.Include(dh => dh.ChiTietDonHangs).FirstOrDefaultAsync(dh => dh.DonHangId == id));
         }
 
         [HttpGet]
+        [Route("{id}")]
         public async Task<IActionResult> GetDonHangs(string id)
         {
             return Json(await _db.DonHangs.Include(dh => dh.ChiTietDonHangs).Where(dh => dh.Sdt == id).ToListAsync());
@@ -97,11 +95,6 @@ namespace OrderFoodApi.Controllers
             donHangInDb.TinhTrangDonHang = data.TinhTrangMoi;
             await _db.SaveChangesAsync();
             return Json(donHangInDb);
-        }
-
-        private async Task<KhachHang> GetKhachHangBySdt(string sdt)
-        {
-            return await _db.KhachHangs.FirstOrDefaultAsync(kh => kh.Sdt == sdt);
         }
 
         private async Task<MonAn> GetMonAnById(int id)

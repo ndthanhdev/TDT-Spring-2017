@@ -42,6 +42,8 @@ namespace ItForum.Services
 
         public async Task<Post> AddPostTask(Post post)
         {
+            post.IsVerified = false;
+            post.PublishDate=DateTime.Now;
             await _data.Posts.AddAsync(post);
             await _data.SaveChangesAsync();
             return post;
@@ -96,6 +98,11 @@ namespace ItForum.Services
                 _data.PostPoints.Remove(innerPoint);
             }
             await _data.SaveChangesAsync();
+        }
+
+        public async Task<List<PostPoint>> GetPostPoints(string postId)
+        {
+            return await _data.PostPoints.Where(pp => pp.PostId == postId).ToListAsync();
         }
     }
 

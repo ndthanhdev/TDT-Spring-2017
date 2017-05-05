@@ -13,7 +13,7 @@ namespace ItForum.Models
 
         public string PostId { get; set; }
 
-        [Required]
+
         [ForeignKey(nameof(PostId))]
         public Post Post { get; set; }
 

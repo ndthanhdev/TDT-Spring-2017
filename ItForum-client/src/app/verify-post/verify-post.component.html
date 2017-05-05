@@ -1,3 +1,35 @@
-<p>
-  verify-post works!
-</p>
+<section *ngIf="!isLoading&&posts?.length>0" class="padding-nav-bar container d-flex flex-column ">
+  <div *ngFor="let post of posts" class="d-flex justify-content-end m-1">
+    <div class="card w-100">
+      <div class="card-header d-inline-flex justify-content-between">
+        <span>{{post.userId}}</span>
+        <div>
+          <button class="btn m-1"
+                  [ngClass]="{'btn-success':post.isVerified,'btn-outline-success':!post.isVerified}"
+                  (click)="verifyPost(post)"
+                  [disabled]="post?.isVerifying">Verify <i class="fa fa-spinner fa-spin" *ngIf="post?.isVerifying"></i>
+          </button>
+        </div>
+      </div>
+      <div class="card-block">
+        <div [froalaView]="post?.content"></div>
+      </div>
+      <div class="card-footer">
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section *ngIf="posts?.length===0" class="padding-nav-bar d-flex flex-column justify-content-center">
+  <div class="d-flex justify-content-center">
+    <span>enjoy your free time</span>
+  </div>
+</section>
+
+<section *ngIf="isLoading" class="padding-nav-bar d-flex flex-column justify-content-center">
+  <div class="d-flex justify-content-center">
+    <md-spinner></md-spinner>
+  </div>
+</section>
+
