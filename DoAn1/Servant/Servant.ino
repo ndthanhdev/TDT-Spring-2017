@@ -12,56 +12,65 @@
 #define DIR 2
 #define PHOTO_RESISTOR 7
 
-#define TX 12
-#define RX 11
+#define RX 8
+#define TX 9
+
 
 
 SoftwareSerial commandTransporter(RX, TX);
 
+Stream *inputStream;
+
 void setup()
 {
-	prepareMotor();
-	preparePhotoresistor();
-	commandTransporter.begin(BAUD);
+	setupMotor();
+	setupPhotoresistor();
 
-	//Serial.begin(9600);
+	Serial.begin(BAUD);
+
+	// if release
+	commandTransporter.begin(BAUD);
+	inputStream = &commandTransporter;
+
+	// if debug	
+	//inputStream = &Serial;
+	
+	
 }
 
 void loop()
 {
-	if (commandTransporter.available())
+	if (inputStream->available())
 	{
-		releasePayload(commandTransporter.parseInt());
+		Serial.println("Recieved command");
+		releasePayload(inputStream->parseInt());
 	}
-	//if (Serial.available())
-	//{
-	//	releasePayload(Serial.parseInt());
-	//}
 }
 
-void prepareMotor() {
+void setupMotor() {
 	pinMode(STEP, OUTPUT);
 	pinMode(DIR, OUTPUT);
 	pinMode(ENABLE, OUTPUT);
-	digitalWrite(ENABLE, HIGH);
+
+	disableMotor();
 }
 
-void doHalfRevolution() {
+void doQuarterRevolution() {
 	int x;
-	for (x = 0; x < 100; x++)
+	for (x = 0; x < 50; x++)
 	{
-		digitalWrite(3, HIGH);
-		delayMicroseconds(500);
-		digitalWrite(3, LOW);
-		delayMicroseconds(500);
+		digitalWrite(STEP, HIGH);
+		delayMicroseconds(1000);
+		digitalWrite(STEP, LOW);
+		delayMicroseconds(1000);
 	}
 }
 
-void preparePhotoresistor() {
+void setupPhotoresistor() {
 	pinMode(PHOTO_RESISTOR, INPUT);
 }
 
-bool isPayloadCrossed(int waitTime = 2000) {
+bool isPayloadCrossed(int waitTime = 250) {
 	int debounce = 0;
 	long current = millis();
 	while (millis() - current < waitTime) {
@@ -73,15 +82,24 @@ bool isPayloadCrossed(int waitTime = 2000) {
 }
 
 void releasePayload(int n) {
-	digitalWrite(ENABLE, LOW);	// enable motor
+	enableMotor();
 	while (n > 0)
 	{
 		while (!isPayloadCrossed()) {
-			doHalfRevolution();
+			doQuarterRevolution();
 		}
 		n--;
+		Serial.println("Released 1 package");
+		delay(1000); // wait for package pass
 	}
-	digitalWrite(ENABLE, HIGH);	// disable motor
+	disableMotor();
+}
+
+void enableMotor() {
+	digitalWrite(ENABLE, LOW);
+}
+void disableMotor() {
+	digitalWrite(ENABLE, HIGH);
 }
 
 

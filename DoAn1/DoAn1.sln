@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.26430.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Servant", "Servant\Servant.vcxproj", "{C5F80730-F44F-4478-BDAE-6634EFC2CA88}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Master", "Master\Master.vcxproj", "{822D24D0-DC1F-45D1-B67A-2A52E3B3C028}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mqtt_basic", "..\..\..\Arduino\My Examples\mqtt_basic\mqtt_basic.vcxproj", "{7041C23A-6FCB-4096-8FFA-24060638A257}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stepper_motor", "stepper_motor\stepper_motor.vcxproj", "{5D8C5FD4-88D7-4472-91A1-71E6F03316F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{7041C23A-6FCB-4096-8FFA-24060638A257}.Debug|x86.Build.0 = Debug|Win32
 		{7041C23A-6FCB-4096-8FFA-24060638A257}.Release|x86.ActiveCfg = Release|Win32
 		{7041C23A-6FCB-4096-8FFA-24060638A257}.Release|x86.Build.0 = Release|Win32
+		{5D8C5FD4-88D7-4472-91A1-71E6F03316F8}.Debug|x86.ActiveCfg = Debug|Win32
+		{5D8C5FD4-88D7-4472-91A1-71E6F03316F8}.Debug|x86.Build.0 = Debug|Win32
+		{5D8C5FD4-88D7-4472-91A1-71E6F03316F8}.Release|x86.ActiveCfg = Release|Win32
+		{5D8C5FD4-88D7-4472-91A1-71E6F03316F8}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
