@@ -20,6 +20,7 @@ byte mac[] = { 0xDE, 0xED, 0xBA, 0xFE, 0xFE, 0xED };
 IPAddress server(10, 35, 19, 22);
 
 SoftwareSerial commandTransporter(RX, TX);
+
 EthernetClient ethClient;
 PubSubClient client(ethClient);
 
@@ -32,9 +33,7 @@ void setup() {
 
 	commandTransporter.begin(BAUD);	
 
-	////client.setServer("broker.hivemq.com", 1883);
 	client.setServer("test.mosquitto.org", 1883);
-	//client.setServer(server, 1883);	
 
 	client.setCallback(callback);
 
@@ -52,6 +51,7 @@ void loop() {
 	client.loop();
 }
 
+
 void callback(char* topic, byte* payload, unsigned int length) {
 	Serial.print("Message arrived [");
 	Serial.print(topic);
@@ -66,7 +66,7 @@ void reconnect() {
 	while (!client.connected()) {
 		Serial.print("Attempting MQTT connection...");
 		// Attempt to connect
-		if (client.connect("arduinoClient321")) {
+		if (client.connect("arduinoClient")) {
 			Serial.println("connected");
 			// Once connected, publish an announcement...
 			client.publish("a", "hello server");

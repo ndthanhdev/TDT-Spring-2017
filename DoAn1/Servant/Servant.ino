@@ -1,4 +1,4 @@
-/*
+﻿/*
  Name:		Servant.ino
  Created:	3/27/2017 8:43:08 PM
  Author:	duyth
@@ -6,14 +6,17 @@
 
 #include <SoftwareSerial.h>
 
-#define BAUD (9600)
-#define ENABLE 4
-#define STEP 3
-#define DIR 2
-#define PHOTO_RESISTOR 7
+#define BAUD (9600)	
 
-#define RX 8
-#define TX 9
+//	DRV8825
+#define ENABLE 4	
+#define STEP 3	
+#define DIR 2	
+
+#define PHOTO_RESISTOR 7	//	chân DO của quang trở
+
+#define RX 8	//
+#define TX 9	//
 
 
 
@@ -98,6 +101,7 @@ void releasePayload(int n) {
 void enableMotor() {
 	digitalWrite(ENABLE, LOW);
 }
+
 void disableMotor() {
 	digitalWrite(ENABLE, HIGH);
 }
